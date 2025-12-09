@@ -1,21 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AIDrift : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private float driftTurnSpeed = 3f;   // how slowly/loosely the AI turns (drift feel)
+    [SerializeField] private float maxRotationAngle = 45f; // how much the AI can lean into the turn
     [SerializeField] private Transform target;
-    private NavMeshAgent navMeshAgent;
+    private NavMeshAgent agent;
+
     void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;   // IMPORTANT — we rotate manually
     }
 
-    // Update is called once per frame
     void Update()
     {
-        navMeshAgent.SetDestination(target.transform.position);
+        agent.SetDestination(target.transform.position);
+        // If AI is not moving, no rotation needed
+        if (agent.desiredVelocity.sqrMagnitude < 0.001f)
+            return;
+
+        // Direction NavMesh wants to go
+        Vector3 desiredDir = agent.desiredVelocity.normalized;
+
+        // Find the angle difference between current forward and desired direction
+        float angle = Vector3.SignedAngle(transform.forward, desiredDir, Vector3.up);
+
+        // Clamp the rotation angle for a drifting feel (car leans but does not snap)
+        angle = Mathf.Clamp(angle, -maxRotationAngle, maxRotationAngle);
+
+        // Smooth drifting-style rotation
+        Quaternion targetRot = Quaternion.Euler(0, transform.eulerAngles.y + angle, 0);
+
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRot,
+            driftTurnSpeed * Time.deltaTime
+        );
     }
 }

@@ -50,9 +50,9 @@ public class CarDriverAI : MonoBehaviour {
             float angleToDir = Vector3.SignedAngle(transform.forward, dirToMovePosition, Vector3.up);
 
             if (angleToDir > 0) {
-                turnAmount = 1f;
+                turnAmount = 3f;
             } else {
-                turnAmount = -1f;
+                turnAmount = -3f;
             }
         } else {
             // Reached target
