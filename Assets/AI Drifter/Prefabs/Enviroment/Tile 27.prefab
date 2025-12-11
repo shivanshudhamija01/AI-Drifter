@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 6444924707029835139}
   - component: {fileID: 6444924707029835136}
   - component: {fileID: 6444924707029835137}
+  - component: {fileID: 3778030809359593837}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6444924707029835142
 Transform:
@@ -98,6 +99,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3778030809359593837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444924707029835143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &6444924707178830056
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,12 +124,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6444924707178830059}
+  - component: {fileID: 3099946240042801482}
   m_Layer: 0
   m_Name: Tile 27
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6444924707178830059
 Transform:
@@ -133,6 +151,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3099946240042801482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444924707178830056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &6444924705628317548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -144,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wooden winter house 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6978614032680440048, guid: 5550f54276c3c2341a0a96cc984a1003,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7751491905200392778, guid: 5550f54276c3c2341a0a96cc984a1003,
         type: 3}
@@ -208,6 +260,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6444924705628317548}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4155129906245941148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6978614032680440048, guid: 5550f54276c3c2341a0a96cc984a1003,
+    type: 3}
+  m_PrefabInstance: {fileID: 6444924705628317548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &204866450342586345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155129906245941148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &6444924706586557424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,6 +293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Box_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080713936756012783, guid: 580d7f4570047ff4a83bd6e83df50ab4,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8894510512177654869, guid: 580d7f4570047ff4a83bd6e83df50ab4,
         type: 3}
@@ -288,6 +367,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6444924706586557424}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2978161782337113375 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8080713936756012783, guid: 580d7f4570047ff4a83bd6e83df50ab4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6444924706586557424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6201035992320872729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2978161782337113375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &6444924707527656960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -299,6 +400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wooden winter house 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402961434674142435, guid: b080d431fd04fbc469648da7f4beb944,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 9211691151566784089, guid: b080d431fd04fbc469648da7f4beb944,
         type: 3}
@@ -363,3 +469,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6444924707527656960}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3309486262265322211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8402961434674142435, guid: b080d431fd04fbc469648da7f4beb944,
+    type: 3}
+  m_PrefabInstance: {fileID: 6444924707527656960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8378945269021039637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3309486262265322211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

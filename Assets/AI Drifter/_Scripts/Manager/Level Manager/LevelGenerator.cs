@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -69,6 +70,12 @@ private int[,] matrix = {
                 obj.transform.SetParent(Enviroment);
             }
         }
+        NavMeshSurface navMeshSurface = Enviroment.GetComponent<NavMeshSurface>();
+        if(navMeshSurface!=null)
+        {
+            navMeshSurface.RemoveData();
+        }
+        navMeshSurface.BuildNavMesh();
     }
     [ContextMenu("Clear Ground")]
     void ClearGround()

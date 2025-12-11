@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469452253923018340}
+  - component: {fileID: 8310912738953318360}
   m_Layer: 0
   m_Name: Tile 19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &469452253923018340
 Transform:
@@ -35,6 +36,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8310912738953318360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836461744079314025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &4364701078766157102
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,12 +77,13 @@ GameObject:
   - component: {fileID: 8086888027092975988}
   - component: {fileID: 2485459556671805098}
   - component: {fileID: 8661034507608012204}
+  - component: {fileID: 8086783366905087442}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2172890955877984457
 Transform:
@@ -133,6 +164,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8086783366905087442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364701078766157102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &4595203226952739777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,8 +267,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Truck_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6419671262868507204, guid: 0364cb90f8382f840bcbb80c4970ccae,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0364cb90f8382f840bcbb80c4970ccae, type: 3}
+--- !u!1 &7409039300264763781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6419671262868507204, guid: 0364cb90f8382f840bcbb80c4970ccae,
+    type: 3}
+  m_PrefabInstance: {fileID: 4595203226952739777}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6477060054491766005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409039300264763781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!4 &7897591162691713855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5934778579920343294, guid: 0364cb90f8382f840bcbb80c4970ccae,
@@ -239,6 +313,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pickup_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4760081433214567601, guid: d754c2ea8f00ac642b74fa7820389a10,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 5279595881897631243, guid: d754c2ea8f00ac642b74fa7820389a10,
         type: 3}
@@ -323,6 +402,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6525180172529190760}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1765741029684249561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4760081433214567601, guid: d754c2ea8f00ac642b74fa7820389a10,
+    type: 3}
+  m_PrefabInstance: {fileID: 6525180172529190760}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7949694201806188556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765741029684249561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &7555373492844762192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -334,6 +435,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main_Truck_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207002681667545729, guid: ea409d27120635c428dc888c789a3371,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8840269029895090235, guid: ea409d27120635c428dc888c789a3371,
         type: 3}
@@ -418,3 +524,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7555373492844762192}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1819231451067121361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8207002681667545729, guid: ea409d27120635c428dc888c789a3371,
+    type: 3}
+  m_PrefabInstance: {fileID: 7555373492844762192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4420268464904465576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819231451067121361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
