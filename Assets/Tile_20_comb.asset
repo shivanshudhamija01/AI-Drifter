@@ -1,0 +1,266 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 499468296, guid: cab42632cbdacc94f9b261da366ec4c4, type: 3}
+  m_Name: Tile_20_comb
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.03125
+      width: 0.21875
+      height: 0.4375
+    srcObjName: Visual
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 14c0c7e9614e49841a89a49e8c140cbf, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.28125
+      y: 0.03125
+      width: 0.21875
+      height: 0.46875
+    srcObjName: axis
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0.010000005
+      width: 1
+      height: 0.99
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: e78b8793af151544d9c0cb8003eab822, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.53125
+      width: 0.1875
+      height: 0.4375
+    srcObjName: body
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.124999985
+      y: 0
+      width: 0.75000006
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 14c0c7e9614e49841a89a49e8c140cbf, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.78125
+      y: 0.03125
+      width: 0.046875
+      height: 0.46875
+    srcObjName: body
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.4154006
+      y: 0.039328113
+      width: 0.23157755
+      height: 0.9411305
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -3846018093981099296, guid: 50149908522b11f49a538aa8fda766f4,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.015625
+      y: 0.03125
+      width: 0.234375
+      height: 0.46875
+    srcObjName: f wheel.002
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0.011088124
+      width: 0.9926263
+      height: 0.977348
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -6922793697723135513, guid: 50149908522b11f49a538aa8fda766f4,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.015625
+      y: 0.03125
+      width: 0.234375
+      height: 0.46875
+    srcObjName: f wheel.002
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0.011088124
+      width: 0.9926263
+      height: 0.977348
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -6629797300637803691, guid: 50149908522b11f49a538aa8fda766f4,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.015625
+      y: 0.71875
+      width: 0.03125
+      height: 0.0625
+    srcObjName: f wheel.002
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.10199627
+      y: 0.10199627
+      width: 0.29600745
+      height: 0.29600763
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 4874126678125670354, guid: 50149908522b11f49a538aa8fda766f4,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.015625
+      y: 0.5625
+      width: 0.046875
+      height: 0.09375
+    srcObjName: wheel.001
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.13767554
+      y: 0.13767552
+      width: 0.22464894
+      height: 0.22464162
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: f9931443a2a2c4f99b6af790c788613f, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    - {fileID: 2100000, guid: 14c0c7e9614e49841a89a49e8c140cbf, type: 2}
+    - {fileID: 2100000, guid: e78b8793af151544d9c0cb8003eab822, type: 2}
+    - {fileID: -3846018093981099296, guid: 50149908522b11f49a538aa8fda766f4, type: 3}
+    - {fileID: -6629797300637803691, guid: 50149908522b11f49a538aa8fda766f4, type: 3}
+    - {fileID: -6922793697723135513, guid: 50149908522b11f49a538aa8fda766f4, type: 3}
+    - {fileID: 4874126678125670354, guid: 50149908522b11f49a538aa8fda766f4, type: 3}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 1
