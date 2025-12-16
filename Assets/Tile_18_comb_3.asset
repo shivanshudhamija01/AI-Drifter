@@ -1,0 +1,512 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 499468296, guid: cab42632cbdacc94f9b261da366ec4c4, type: 3}
+  m_Name: Tile_18_comb_3
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.7109375
+      width: 0.0546875
+      height: 0.109375
+    srcObjName: Visual
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -2310514774154243031, guid: da3841936fd28f54f8cd663c02e73176,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.1171875
+      width: 0.3359375
+      height: 0.578125
+    srcObjName: Ambulance
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: -1
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.020456195
+      y: -0.30586833
+      width: 0.33703673
+      height: 0.2926488
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -2310514774154243031, guid: 120217b2bf50e664b8bea0044346dc04,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.0078125
+      width: 0.66015625
+      height: 0.09375
+    srcObjName: Police
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: -1
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.027929276
+      y: -0.06253731
+      width: 0.6616013
+      height: 0.047989607
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -2310514774154243031, guid: 1ed9d13c6e473064abd1b4bd1833fc33,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.00390625
+      y: 0.0078125
+      width: 0.66015625
+      height: 0.09375
+    srcObjName: Fire_Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: -1
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.027929276
+      y: -0.06253731
+      width: 0.6616013
+      height: 0.047989607
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 90be8a7f3b30fc44e9a5003ed7dba622, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7265625
+      y: 0.0078125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: back window
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.5625
+      y: 0.3125
+      width: 0.25
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 90be8a7f3b30fc44e9a5003ed7dba622, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7265625
+      y: 0.0390625
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: exhaust
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.3125
+      y: 0.4375
+      width: 0.25
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 90be8a7f3b30fc44e9a5003ed7dba622, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.671875
+      y: 0.0078125
+      width: 0.046875
+      height: 0.046875
+    srcObjName: mirrors and handles
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.0625
+      y: 0.4375
+      width: 0.75
+      height: 0.5
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: daaea1a5a71d43942828e3a69348eccf, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.671875
+      y: 0.0703125
+      width: 0.046875
+      height: 0.015625
+    srcObjName: wheel classic
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.12499999
+      y: 0.62499994
+      width: 0.75
+      height: 0.25000012
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 3659940953751687051, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7265625
+      y: 0.0703125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.05705905
+      y: 0.8050982
+      width: 0.011323482
+      height: 0.019284248
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 5029210610703319244, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7421875
+      y: 0.0078125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.80705905
+      y: 0.6800982
+      width: 0
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 8884940142553567970, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7421875
+      y: 0.0390625
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.057059042
+      y: 0.30509818
+      width: 0.0073629096
+      height: 0.012803853
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 3055996272150503839, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7421875
+      y: 0.0703125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.55705905
+      y: 0.9300982
+      width: 0
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -535131839395333617, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7578125
+      y: 0.0078125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.80705905
+      y: 0.6800982
+      width: 0
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -492108395051690996, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7578125
+      y: 0.0390625
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.93205905
+      y: 0.5550982
+      width: 0.0079600215
+      height: 0.0010387897
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -478035346441924844, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7578125
+      y: 0.0703125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi wheel front left
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.93749994
+      y: 0.5675
+      width: 0.000000059604645
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -1537582836906275740, guid: 6ce3723299ae5417197bbb3c94bc8bea,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.7734375
+      y: 0.0078125
+      width: 0.0078125
+      height: 0.015625
+    srcObjName: Taxi wheel front left
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.06324017
+      y: 0.17991665
+      width: 0.0095834285
+      height: 0.011102974
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: da70592ffbb254dc88e076c547fc8eb0, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: daaea1a5a71d43942828e3a69348eccf, type: 2}
+    - {fileID: 2100000, guid: 90be8a7f3b30fc44e9a5003ed7dba622, type: 2}
+    - {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    - {fileID: 3659940953751687051, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: 5029210610703319244, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: 8884940142553567970, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: 3055996272150503839, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: -535131839395333617, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: -492108395051690996, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: -478035346441924844, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: -1537582836906275740, guid: 6ce3723299ae5417197bbb3c94bc8bea, type: 3}
+    - {fileID: -2310514774154243031, guid: 1ed9d13c6e473064abd1b4bd1833fc33, type: 3}
+    - {fileID: -2310514774154243031, guid: da3841936fd28f54f8cd663c02e73176, type: 3}
+    - {fileID: -2310514774154243031, guid: 120217b2bf50e664b8bea0044346dc04, type: 3}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 1

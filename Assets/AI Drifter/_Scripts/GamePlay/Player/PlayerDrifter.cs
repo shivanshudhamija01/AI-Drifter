@@ -106,7 +106,7 @@ public class PlayerDrifter : MonoBehaviour
     [Header("Wheel Visual Settings")]
     [SerializeField] private float wheelRadius = 0.35f;
     [SerializeField] private float maxSteerAngle = 30f;
-    [SerializeField] private int shootingDistance = 40;
+  
 
     private Vector3 MoveForce;
     private float steerInput;
