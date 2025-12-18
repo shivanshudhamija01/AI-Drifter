@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8880773829984250892}
+  - component: {fileID: 6829120566548975905}
+  - component: {fileID: 4396062738255454003}
   m_Layer: 0
   m_Name: Tile 24_Combined
   m_TagString: Untagged
@@ -32,6 +34,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6829120566548975905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103391979544229558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.883428, y: 13.011218, z: 6.387472}
+  m_Center: {x: 6.468515, y: 6.505609, z: -0.07117188}
+--- !u!65 &4396062738255454003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103391979544229558}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.403285, y: 7.502546, z: 7.6132765}
+  m_Center: {x: -6.0424447, y: 3.751273, z: 0.49676323}
 --- !u!1 &8801924968080450835
 GameObject:
   m_ObjectHideFlags: 0

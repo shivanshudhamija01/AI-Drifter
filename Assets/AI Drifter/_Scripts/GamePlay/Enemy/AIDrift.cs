@@ -62,12 +62,12 @@ public class AIDrift : MonoBehaviour
                 // chaosFreq = 10f;
                 // chaosStrength = 14f;
                 chaosFreq = 10f;
-                chaosStrength = 2f;
+                chaosStrength = 3f;
 
                 agent.speed = 40f;
-                agent.acceleration = 25f;
+                agent.acceleration = 50f;
                 agent.angularSpeed = 250f;
-                agent.obstacleAvoidanceType = ObstacleAvoidanceType.LowQualityObstacleAvoidance;
+                agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                 break;
 
             // =========================
@@ -80,8 +80,10 @@ public class AIDrift : MonoBehaviour
                 chaosFreq = 0f;
                 chaosStrength = 0f;
 
-                agent.speed = 30f;
-                agent.acceleration = 20f;
+                agent.speed = 35f;
+                agent.acceleration = 25f;
+                // agent.speed = 30f;
+                // agent.acceleration = 20f;
                 agent.angularSpeed = 150f;
                 agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                 break;
@@ -95,7 +97,9 @@ public class AIDrift : MonoBehaviour
                 chaosStrength = 0f;
 
                 agent.speed = 30f;
-                agent.acceleration = 20f;
+                agent.acceleration = 30f;
+                // agent.speed = 30f;
+                // agent.acceleration = 20f;
                 agent.angularSpeed = 150f;
                 agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                 isShootEnabled = true;

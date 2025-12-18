@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3295925694404639544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.24, y: 0, z: 9.74}
+  m_LocalPosition: {x: -8.24, y: 3, z: 9.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,6 +75,8 @@ GameObject:
   - component: {fileID: 138335986314564166}
   - component: {fileID: 9164409351499406002}
   - component: {fileID: 9181944891505398784}
+  - component: {fileID: 6901445153757588315}
+  - component: {fileID: 4777154927322743312}
   m_Layer: 0
   m_Name: MeshBaker_Cluster_0_mesh_mesh
   m_TagString: Untagged
@@ -147,3 +149,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6901445153757588315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6760277640576299328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.935978, y: 3.185039, z: 2.566048}
+  m_Center: {x: -6.512141, y: 1.5614784, z: 4.5879498}
+--- !u!135 &4777154927322743312
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6760277640576299328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.405428
+  m_Center: {x: -0.038083553, y: 1.0738473, z: -7.7}

@@ -11,15 +11,13 @@ GameObject:
   - component: {fileID: 2911399452416526275}
   - component: {fileID: 2911399452416526272}
   - component: {fileID: 2911399452416526273}
-  - component: {fileID: 2911399452416526287}
-  - component: {fileID: 2911399452416526286}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smart 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2911399452416526275
 Transform:
   m_ObjectHideFlags: 0
@@ -47,11 +45,11 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 2
   m_Speed: 30
-  m_Acceleration: 20
+  m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 150
-  m_StoppingDistance: 5
-  m_AutoTraverseOffMeshLink: 0
+  m_StoppingDistance: 4.5
+  m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2.5
@@ -72,37 +70,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 1
   target: {fileID: 0}
-  repathInterval: 0.1
+  repathInterval: 0
   gunTank: {fileID: 0}
   shootingPoint: {fileID: 0}
   shootInterval: 0
   gola: {fileID: 0}
   shootingDistance: 40
---- !u!114 &2911399452416526287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2911399452416526277}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fca7c6ea6b2be241844f325ebfca4c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2911399452416526286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2911399452416526277}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb59b9c1ad3c8e34999f1b2e07b5774f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPositionTranform: {fileID: 0}
 --- !u!1001 &4641185876059519121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,10 +138,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5620587945314049001, guid: 88a70dfd012274969b400c37cc2925b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3264367065899199821, guid: 88a70dfd012274969b400c37cc2925b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 88a70dfd012274969b400c37cc2925b0,
         type: 3}
       propertyPath: m_Name
       value: Police SUV
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a70dfd012274969b400c37cc2925b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285077008418569316, guid: 88a70dfd012274969b400c37cc2925b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7232934504385143020, guid: 88a70dfd012274969b400c37cc2925b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7331011961877570058, guid: 88a70dfd012274969b400c37cc2925b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88a70dfd012274969b400c37cc2925b0, type: 3}

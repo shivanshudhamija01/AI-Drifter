@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fa0eaa2ed924abfadfcc419bef4104, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  Enemies: []
+  smartAI: 1
+  madAI: 2
+  aggressiveAI: 1
+  SmartAI: []
+  MadAI: []
+  AggressiveAI: []
   Player: []
   Collectible: {fileID: 0}
-  collectibleCount: 0
+  collectibleCount: 5
   PowerUps: []
   PowerUpsCount: 0
   Timer: 0
-  mapType: 0

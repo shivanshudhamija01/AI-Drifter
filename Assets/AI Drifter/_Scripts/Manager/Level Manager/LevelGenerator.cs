@@ -8,51 +8,40 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tile;
     [SerializeField] private Transform Enviroment;
-
-// private int[,] matrix = {
-//     {30, 24, 25, 25, 26, 27, 28, 29, 30, 31, 24, 25, 26, 27, 28, 24, 24, 30, 31, 28},
-//     {24, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 24},
-//     {25, 22, 10, 16, 18, 13, 17, 06, 14, 22, 11, 20, 08, 19, 06, 12, 15, 09, 22, 24},
-//     {26, 22, 19, 07, 14, 11, 21, 10, 00, 22, 13, 08, 17, 15, 16, 01, 18, 20, 22, 28},
-//     {27, 22, 01, 15, 04, 05, 06, 19, 17, 22, 07, 14, 16, 00, 20, 21, 10, 08, 22, 29},
-//     {28, 22, 16, 17, 02, 03, 10, 06, 18, 22, 21, 01, 19, 11, 09, 06, 12, 15, 22, 25},
-//     {29, 22, 07, 00, 06, 17, 09, 11, 15, 22, 10, 06, 06, 08, 14, 12, 18, 21, 22, 27},
-//     {30, 22, 18, 06, 21, 14, 13, 07, 19, 22, 08, 17, 15, 16, 06, 09, 10, 06, 22, 26},
-//     {31, 22, 06, 18, 10, 15, 00, 12, 09, 22, 14, 13, 20, 06, 17, 19, 08, 16, 22, 24},
-//     {30, 23, 23, 23, 23, 23, 23, 23, 23, 06, 23, 23, 23, 23, 23, 23, 23, 23, 23, 28},
-//     {28, 22, 14, 09, 16, 12, 07, 20, 11, 22, 08, 11, 06, 17, 21, 15, 13, 18, 22, 30},
-//     {24, 22, 12, 13, 17, 00, 18, 01, 15, 22, 06, 10, 11, 14, 19, 07, 20, 06, 22, 31},
-//     {26, 22, 11, 14, 09, 19, 06, 16, 10, 22, 17, 15, 13, 18, 12, 20, 07, 01, 22, 30},
-//     {27, 22, 08, 12, 15, 07, 19, 21, 11, 22, 09, 18, 00, 10, 06, 06, 19, 13, 22, 29},
-//     {25, 22, 13, 01, 16, 18, 14, 09, 07, 22, 15, 21, 17, 12, 00, 04, 05, 19, 22, 28},
-//     {29, 22, 17, 10, 11, 06, 01, 00, 13, 22, 12, 07, 21, 06, 08, 02, 03, 14, 22, 27},
-//     {28, 22, 20, 13, 08, 12, 15, 18, 14, 22, 16, 09, 10, 17, 07, 01, 00, 11, 22, 26},
-//     {24, 22, 16, 21, 14, 10, 17, 13, 18, 22, 19, 06, 01, 07, 15, 11, 12, 20, 22, 25},
-//     {24, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 22, 24},
-//     {24, 24, 25, 25, 26, 27, 28, 29, 30, 31, 24, 25, 26, 27, 28, 24, 24, 30, 31, 26}
-// };
-    private int [,] matrix =
-    {
-    {30, 24, 25, 25, 26, 27, 28, 29, 30, 28},
-    {24, 23, 23, 23, 23, 23, 23, 23, 23, 24},
-    {25, 22, 11, 4, 15, 9, 17, 2, 22, 24},
-    {26, 22, 6, 18, 0, 14, 3, 16, 22, 28},
-    {27, 22, 10, 7, 19, 1, 13, 5, 22, 29},
-    {28, 22, 2, 16, 11, 8, 20, 4, 22, 25},
-    {29, 22, 15, 3, 9, 17, 6, 12, 22, 27},
-    {30, 22, 0, 21, 14, 5, 18, 10, 22, 26},
-    {24, 23, 23, 23, 23, 23, 23, 23, 22, 24},
-    {24, 24, 25, 25, 26, 27, 28, 29, 30, 26}
+    [SerializeField] private GameObject gola;
+    // private int [,] matrix =
+    // {
+    // {30, 24, 25, 25, 26, 27, 28, 29, 30, 28},
+    // {24, 23, 23, 23, 23, 23, 23, 23, 23, 24},
+    // {25, 22, 0, 0, 16, 0, 15, 0, 22, 24},
+    // {26, 22, 0, 11, 0, 0, 15, 0, 22, 28},
+    // {27, 22, 11, 0, 9, 0, 0, 9, 22, 29},
+    // {28, 22, 0, 0, 16, 6, 16, 0, 22, 25},
+    // {29, 22, 0, 0, 11, 12, 0, 0, 22, 27},
+    // {30, 22, 16, 0, 15, 0, 12, 0, 22, 26},
+    // {24, 23, 23, 23, 23, 23, 23, 23, 22, 24},
+    // {24, 24, 25, 25, 26, 27, 28, 29, 30, 26}
         
-    };
+    // };
+    private int[][] matrix;
     private List<GameObject> tileInCurrentScene = new List<GameObject>();
     private List<Transform> vacantTiles;
+    private List<GameObject> collectibleInScene;
+    private List<GameObject> powerUpsInScene;
+    private List<GameObject> playerInScene;
+    private Dictionary<GameObject,Transform> gameObjectToPosition;
     private string spawnPoint = "SpawnPoint";
-    int width = 30;
-    int height = 30;
+    private int width = 30;
+    private int height = 30;
+
+    void Awake()
+    {
+        vacantTiles = new List<Transform>();
+    }
     void Start()
     {
         // GenerateGround();
+        GetMapFromLevelLoader();
         Debug.Log(tile.Count);
     }
 
@@ -65,14 +54,13 @@ public class LevelGenerator : MonoBehaviour
             {
                 float spawnX = i * width;
                 float spawnZ = j * height;
-                Debug.Log("Width is : " + width + " " + "height is : "+height);
                 Vector3 spawnPos = new Vector3(spawnX,0,spawnZ);
 
-                GameObject obj = Instantiate(tile[matrix[i,j]],spawnPos,Quaternion.identity);
+                GameObject obj = Instantiate(tile[matrix[i][j]],spawnPos,Quaternion.identity);
                 Transform point = obj.transform.Find(spawnPoint);
                 if(point != null)
                 {
-                    Debug.Log("Point coordinates are : "+ point.position.x + " " + point.position.y + " " + point.position.z);
+                    vacantTiles.Add(point);
                 }
                 if(i==0)
                 {
@@ -96,7 +84,23 @@ public class LevelGenerator : MonoBehaviour
             navMeshSurface.RemoveData();
         }
         navMeshSurface.BuildNavMesh();
+        //GetMapFromLevelLoader();
     }
+
+    private void GetMapFromLevelLoader()
+    {
+        int[][] map = LevelDataLoader.Instance.GetLevelByName("Level 1");
+        // for(int i = 0;i<map.Length;i++)
+        // {
+        //     for(int j=0;j<map[0].Length;j++)
+        //     {
+        //         Debug.Log(map[i][j]);
+        //     }
+        // }
+        matrix = map;
+        GenerateGround();
+    }
+
     [ContextMenu("Clear Ground")]
     void ClearGround()
     {
@@ -116,10 +120,32 @@ public class LevelGenerator : MonoBehaviour
         // After spawning it , remove that spawn point from the list 
 
         // When it gets collected then put back this spawn point to the list back
+        collectibleInScene = SpawnPrefab(5,gola,gameObjectToPosition);
+        
     }
     void SpanwPowerUps()
     {
         // From the updated list , spawn the power ups in the scene and after 
+    }
+
+    public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject,Transform> objToPosition)
+    {
+        Debug.Log(vacantTiles.Count);
+        List<GameObject> objSpawnedInScene = new List<GameObject>();
+        int gap = Random.Range(1,vacantTiles.Count);
+        int startingIndex = Random.Range(2,vacantTiles.Count);
+        int totalvacantTiles = vacantTiles.Count;
+        for(int i=0;i<Count;i++)
+        {
+            int index = (startingIndex + i * gap) % totalvacantTiles;
+            Vector3 spawnPosition = vacantTiles[index].position;
+            GameObject temp = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            objSpawnedInScene.Add(temp);
+            vacantTiles.RemoveAt(index);
+        }
+        Debug.Log(vacantTiles.Count);
+        return objSpawnedInScene;
+
     }
 }
 
