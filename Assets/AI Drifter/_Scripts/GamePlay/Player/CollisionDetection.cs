@@ -35,69 +35,101 @@ public class CollisionDetection : MonoBehaviour
         DetectObstacle();
     }
 
-    void DetectObstacle()
-    {
-        Vector3 center = transform.position + Vector3.up * capsuleHeight * 0.5f;
+    // void DetectObstacle()
+    // {
+    //     Vector3 center = transform.position + Vector3.up * capsuleHeight * 0.5f;
 
-        Vector3 point1 = center + transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
-        Vector3 point2 = center - transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
+    //     Vector3 point1 = center + transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
+    //     Vector3 point2 = center - transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
 
-        ObstacleDetected = Physics.CapsuleCast(
-            point1,
-            point2,
-            capsuleRadius,
-            transform.forward,
-            out RaycastHit hit,
-            detectionDistance,
-            obstacleLayers,
-            QueryTriggerInteraction.Ignore
-        );
+    //     ObstacleDetected = Physics.CapsuleCast(
+    //         point1,
+    //         point2,
+    //         capsuleRadius,
+    //         transform.forward,
+    //         out RaycastHit hit,
+    //         detectionDistance,
+    //         obstacleLayers,
+    //         QueryTriggerInteraction.Ignore
+    //     );
 
-        if (!ObstacleDetected)
-            return;
+    //     if (!ObstacleDetected)
+    //         return;
 
-        Collider col = hit.collider;
-        if (col == null)
-        {
-            Debug.Log("col is null ");
-            return ;
-        }
+    //     Collider col = hit.collider;
+    //     if (col == null)
+    //     {
+    //         Debug.Log("col is null ");
+    //         return ;
+    //     }
         
+    //     if (hitCooldowns.TryGetValue(col, out float lastHitTime))
+    //     {
+    //         if (Time.time - lastHitTime < sameObjectCooldown)
+    //             return; 
+    //     }
+    //     hitCooldowns[col] = Time.time;
+    //     OnCapsuleCollisionEnter(hit);
+        
+    //     // Runtime ray (Game view)
+    //     if (drawDebug)
+    //     {
+    //         Color rayColor = ObstacleDetected ? Color.red : Color.green;
+    //         Debug.DrawRay(center, transform.forward * detectionDistance, rayColor);
+    //     }
+    // }
+    void DetectObstacle()
+{
+    Vector3 center = transform.position + Vector3.up * capsuleHeight * 0.5f;
+
+    Vector3 point1 = center + transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
+    Vector3 point2 = center - transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
+
+    Collider[] hits = Physics.OverlapCapsule(
+        point1,
+        point2,
+        capsuleRadius,
+        obstacleLayers,
+        QueryTriggerInteraction.Ignore
+    );
+
+    if (hits.Length == 0)
+        return;
+
+    foreach (Collider col in hits)
+    {
+        if (col == null) 
+            continue;
+
+        // ✅ KEEP YOUR HIT COOLDOWN LOGIC (UNCHANGED)
         if (hitCooldowns.TryGetValue(col, out float lastHitTime))
         {
             if (Time.time - lastHitTime < sameObjectCooldown)
-                return; 
+                continue;
         }
+
         hitCooldowns[col] = Time.time;
-        OnCapsuleCollisionEnter(hit);
-        
-        // Runtime ray (Game view)
-        if (drawDebug)
-        {
-            Color rayColor = ObstacleDetected ? Color.red : Color.green;
-            Debug.DrawRay(center, transform.forward * detectionDistance, rayColor);
-        }
+
+        // ✅ SAME HANDLER, SAME LOGIC
+        OnCapsuleCollisionEnter(col);
     }
-    void OnCapsuleCollisionEnter(RaycastHit hit)
+}
+
+    void OnCapsuleCollisionEnter(Collider hit)
     {
-        // Debug.Log($"Capsule ENTER: {hit.collider.name}");
-        // Here check for the different different types of tag used in the game scene
-        if(hit.collider.gameObject.CompareTag(Tag.COLLECTIBLE_HEALTH_TAG))
+        Collider col = hit;
+        if(col.TryGetComponent<ICollectible>(out var collectible))
         {
-            playerHealth.UpdateHealth(100);
+            collectible.OnCollected(gameObject);
+            return;
         }
-        else if(hit.collider.gameObject.CompareTag(Tag.ENEMY_TAG))
+        if(col.TryGetComponent<IDamage>(out var obstacleHit))
         {
-            playerHealth.UpdateHealth(Constants.ENEMY_CAR_HIT_IMPACT);
-        } 
-        else if(hit.collider.gameObject.CompareTag(Tag.GOLA_TAG))
-        {
-            playerHealth.UpdateHealth(Constants.BLAST_IMPACT);
+            playerHealth.UpdateHealth(obstacleHit.GetDamage());
+            return;
         }
-        else
-        {
-            playerHealth.UpdateHealth(-100);
-        }
+
+        playerHealth.UpdateHealth(-100);
     }
 
     // =========================

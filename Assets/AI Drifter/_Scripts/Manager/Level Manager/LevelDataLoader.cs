@@ -43,7 +43,7 @@ public class LevelDataLoader : MonoBehaviour
         int[][] level1 = GetLevel(0);
         if (level1 != null)
         {
-            Debug.Log("Level 1 first row: " + string.Join(", ", level1[0]));
+            // Debug.Log("Level 1 first row: " + string.Join(", ", level1[0]));
         }
     }
 
@@ -52,7 +52,7 @@ public class LevelDataLoader : MonoBehaviour
     {
         if (jsonFile == null)
         {
-            Debug.LogError("JSON file not assigned!");
+            // Debug.LogError("JSON file not assigned!");
             return;
         }
 
@@ -60,17 +60,17 @@ public class LevelDataLoader : MonoBehaviour
 
         if (levelCollection == null || levelCollection.levels == null)
         {
-            Debug.LogError("Failed to parse level JSON!");
+            // Debug.LogError("Failed to parse level JSON!");
             return;
         }
 
-        Debug.Log($"Loaded {levelCollection.levels.Count} levels");
+        // Debug.Log($"Loaded {levelCollection.levels.Count} levels");
         
         for(int i = 0; i < levelCollection.levels.Count; i++)
         {
             LevelData level = levelCollection.levels[i];
-            Debug.Log($"Level {i + 1}: {level.name}");
-            Debug.Log($"  Grid size: {level.rows} rows x {level.columns} columns");
+            // Debug.Log($"Level {i + 1}: {level.name}");
+            // Debug.Log($"  Grid size: {level.rows} rows x {level.columns} columns");
         }
     }
 
@@ -79,13 +79,13 @@ public class LevelDataLoader : MonoBehaviour
     {
         if (levelCollection == null)
         {
-            Debug.LogError("Level data not loaded!");
+            // Debug.LogError("Level data not loaded!");
             return null;
         }
 
         if (levelIndex < 0 || levelIndex >= levelCollection.levels.Count)
         {
-            Debug.LogError($"Invalid level index: {levelIndex}");
+            // Debug.LogError($"Invalid level index: {levelIndex}");
             return null;
         }
 
@@ -93,14 +93,14 @@ public class LevelDataLoader : MonoBehaviour
         
         if (level.data == null || level.data.Count == 0)
         {
-            Debug.LogError($"Level '{level.name}' has no data!");
+            // Debug.LogError($"Level '{level.name}' has no data!");
             return null;
         }
 
         // Convert 1D to 2D array
         int[][] levelArray = Convert1DTo2D(level.data, level.rows, level.columns);
 
-        Debug.Log($"Loaded '{level.name}' - Grid: {level.rows}x{level.columns}");
+        // Debug.Log($"Loaded '{level.name}' - Grid: {level.rows}x{level.columns}");
         return levelArray;
     }
 
@@ -109,7 +109,7 @@ public class LevelDataLoader : MonoBehaviour
     {
         if (levelCollection == null)
         {
-            Debug.LogError("Level data not loaded!");
+            // Debug.LogError("Level data not loaded!");
             return null;
         }
 
@@ -117,7 +117,7 @@ public class LevelDataLoader : MonoBehaviour
         
         if (level == null)
         {
-            Debug.LogError($"Level '{levelName}' not found!");
+            // Debug.LogError($"Level '{levelName}' not found!");
             return null;
         }
 
@@ -163,10 +163,10 @@ public class LevelDataLoader : MonoBehaviour
         int[][] level = GetLevel(levelIndex);
         if (level == null) return;
 
-        Debug.Log($"=== {GetLevelName(levelIndex)} ===");
+        // Debug.Log($"=== {GetLevelName(levelIndex)} ===");
         for (int row = 0; row < level.Length; row++)
         {
-            Debug.Log($"Row {row}: [{string.Join(", ", level[row])}]");
+            // Debug.Log($"Row {row}: [{string.Join(", ", level[row])}]");
         }
     }
 }

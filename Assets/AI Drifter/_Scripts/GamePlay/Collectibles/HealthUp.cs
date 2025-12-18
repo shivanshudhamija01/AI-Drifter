@@ -12,6 +12,11 @@ public class HealthUp : MonoBehaviour, ICollectible
     public void OnCollected(GameObject collector)
     {
         Debug.Log("Health Collected");
+        PlayerHealth health = collector.GetComponent<PlayerHealth>();
+        if(health != null)
+        {
+            health.UpdateHealth(100);
+        }
         Destroy(gameObject);
     }
 }

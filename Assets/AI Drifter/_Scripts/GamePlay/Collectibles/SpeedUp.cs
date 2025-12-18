@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpeedUp : MonoBehaviour, ICollectible
 {
+   [SerializeField] private float boostAmount = 5f;
+    [SerializeField] private float duration = 3f;
+
     public Enums.Collectibles GetCollectibleType()
     {
         return Enums.Collectibles.speedUp;
@@ -11,7 +14,21 @@ public class SpeedUp : MonoBehaviour, ICollectible
 
     public void OnCollected(GameObject collector)
     {
-        Debug.Log("Speed Up Collected");
+        PlayerDrifter drifter = collector.GetComponent<PlayerDrifter>();
+        if (drifter != null)
+        {
+            drifter.StartCoroutine(SpeedBoost(drifter));
+        }
+
         Destroy(gameObject);
+    }
+
+    IEnumerator SpeedBoost(PlayerDrifter drifter)
+    {
+        drifter.MoveSpeed += boostAmount;
+        drifter.MaxSpeed += boostAmount;
+        yield return new WaitForSeconds(duration);
+        drifter.MoveSpeed -= boostAmount;
+        drifter.MaxSpeed -= boostAmount;
     }
 }

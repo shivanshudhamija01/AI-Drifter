@@ -182,7 +182,7 @@ public class AIDrift : MonoBehaviour
         previousShoot += Time.deltaTime;
         Vector3 distance = transform.position - target.transform.position;
         float distanceMagnitude = distance.magnitude;
-        Debug.Log("Distance between target and enemy is : "+distanceMagnitude);
+        // Debug.Log("Distance between target and enemy is : "+distanceMagnitude);
         if(previousShoot > shootInterval && distanceMagnitude <= shootingDistance)  
         {
             previousShoot = 0;
