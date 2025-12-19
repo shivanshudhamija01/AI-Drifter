@@ -12,6 +12,11 @@ public class Blast : MonoBehaviour, ICollectible
     public void OnCollected(GameObject collector)
     {
         Debug.Log("Blast Collected");
+        PlayerHealth health = collector.GetComponent<PlayerHealth>();
+        if(health != null)
+        {
+            health.UpdateHealth(-50);
+        }
         Destroy(gameObject);
     }
 }

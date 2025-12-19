@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int health = 0;
+    private float health = 0;
     void Awake()
     {
         health = 100;
     }
 
-    public void UpdateHealth(int amount)
+    public void UpdateHealth(float amount)
     {
-        int updateHealth = health + amount;
+        float updateHealth = health + amount;
         updateHealth = Mathf.Clamp(updateHealth, 0 , 100);
 
         health = updateHealth;   
