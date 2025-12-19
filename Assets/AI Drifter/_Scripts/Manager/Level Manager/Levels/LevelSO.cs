@@ -24,7 +24,7 @@ public class LevelSO : ScriptableObject
     public int collectibleCount;
 
     // Types of power ups and their count
-    public List<CarSO> PowerUps;
+    public List<GameObject> PowerUps;
     public int PowerUpsCount;
 
     // Game Timer

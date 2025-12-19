@@ -9,20 +9,6 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> tile;
     [SerializeField] private Transform Enviroment;
     [SerializeField] private GameObject gola;
-    // private int [,] matrix =
-    // {
-    // {30, 24, 25, 25, 26, 27, 28, 29, 30, 28},
-    // {24, 23, 23, 23, 23, 23, 23, 23, 23, 24},
-    // {25, 22, 0, 0, 16, 0, 15, 0, 22, 24},
-    // {26, 22, 0, 11, 0, 0, 15, 0, 22, 28},
-    // {27, 22, 11, 0, 9, 0, 0, 9, 22, 29},
-    // {28, 22, 0, 0, 16, 6, 16, 0, 22, 25},
-    // {29, 22, 0, 0, 11, 12, 0, 0, 22, 27},
-    // {30, 22, 16, 0, 15, 0, 12, 0, 22, 26},
-    // {24, 23, 23, 23, 23, 23, 23, 23, 22, 24},
-    // {24, 24, 25, 25, 26, 27, 28, 29, 30, 26}
-        
-    // };
     private int[][] matrix;
     private List<GameObject> tileInCurrentScene = new List<GameObject>();
     private List<Transform> vacantTiles;
@@ -33,6 +19,18 @@ public class LevelGenerator : MonoBehaviour
     private string spawnPoint = "SpawnPoint";
     private int width = 30;
     private int height = 30;
+    [SerializeField] private GameObject collectiblePrefab;
+[SerializeField] private int collectiblePoolSize = 10;
+
+[SerializeField] private int maxCollectiblesInScene = 5;
+[SerializeField] private float minSpawnInterval = 3f;
+[SerializeField] private float maxSpawnInterval = 6f;
+[SerializeField] private float collectibleLifeTime = 8f;
+
+private Queue<GameObject> collectiblePool = new Queue<GameObject>();
+private List<GameObject> collectiblesInScene = new List<GameObject>();
+private Dictionary<GameObject, Transform> collectibleToSpawnPoint = new Dictionary<GameObject, Transform>();
+
 
     void Awake()
     {
@@ -42,6 +40,9 @@ public class LevelGenerator : MonoBehaviour
     {
         // GenerateGround();
         GetMapFromLevelLoader();
+        // SpawnScene();
+        InitCollectiblePool();
+        StartCoroutine(SpawnScene());
         Debug.Log(tile.Count);
     }
 
@@ -85,11 +86,12 @@ public class LevelGenerator : MonoBehaviour
         }
         navMeshSurface.BuildNavMesh();
         //GetMapFromLevelLoader();
+        StartCoroutine(SpawnCollectible());
     }
 
     private void GetMapFromLevelLoader()
     {
-        int[][] map = LevelDataLoader.Instance.GetLevelByName("Level 1");
+        int[][] map = LevelDataLoader.Instance.GetLevel(0);
         // for(int i = 0;i<map.Length;i++)
         // {
         //     for(int j=0;j<map[0].Length;j++)
@@ -114,15 +116,15 @@ public class LevelGenerator : MonoBehaviour
             }
         }
     }
-    void SpawnCollectible()
-    {
-        // Tranverse the count of collectible from the LevelSO and place it according to the spawning point 
-        // After spawning it , remove that spawn point from the list 
+    // void SpawnCollectible()
+    // {
+    //     // Tranverse the count of collectible from the LevelSO and place it according to the spawning point 
+    //     // After spawning it , remove that spawn point from the list 
 
-        // When it gets collected then put back this spawn point to the list back
-        collectibleInScene = SpawnPrefab(5,gola,gameObjectToPosition);
+    //     // When it gets collected then put back this spawn point to the list back
+    //     collectibleInScene = SpawnPrefab(5,gola,gameObjectToPosition);
         
-    }
+    // }
     void SpanwPowerUps()
     {
         // From the updated list , spawn the power ups in the scene and after 
@@ -147,6 +149,103 @@ public class LevelGenerator : MonoBehaviour
         return objSpawnedInScene;
 
     }
+
+
+    IEnumerator SpawnScene()
+    {
+        yield return null;
+    }
+    IEnumerator SpawnEnviroment()
+    {
+        // This is Done 
+        yield return null;
+    }
+    IEnumerator SpawnCollectible()
+    {
+        // Spawn collectibles 
+        // in a spawn collectible, i will write it like this , that
+        // in a cycle , will spawn the  
+        // yield return null;
+        while (true)
+    {
+        yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
+
+        if (vacantTiles.Count == 0)
+            continue;
+
+        if (collectiblesInScene.Count >= maxCollectiblesInScene)
+            continue;
+
+        if (collectiblePool.Count == 0)
+            continue;
+
+        int index = Random.Range(0, vacantTiles.Count);
+        Transform spawnPoint = vacantTiles[index];
+
+        GameObject collectible = collectiblePool.Dequeue();
+
+        collectible.transform.position = spawnPoint.position;
+        collectible.transform.rotation = Quaternion.identity;
+        collectible.SetActive(true);
+
+        collectiblesInScene.Add(collectible);
+        collectibleToSpawnPoint[collectible] = spawnPoint;
+
+        vacantTiles.RemoveAt(index);
+
+        StartCoroutine(DespawnCollectibleAfterTime(collectible));
+    }
+    }
+    void InitCollectiblePool()
+    {
+        for (int i = 0; i < collectiblePoolSize; i++)
+        {
+            GameObject obj = Instantiate(collectiblePrefab);
+            obj.SetActive(false);
+            collectiblePool.Enqueue(obj);
+        }
+    }
+    IEnumerator DespawnCollectibleAfterTime(GameObject collectible)
+    {
+        yield return new WaitForSeconds(collectibleLifeTime);
+
+        if (collectible == null || !collectible.activeSelf)
+            yield break;
+        ReturnCollectibleToPool(collectible);
+    }
+    public void ReturnCollectibleToPool(GameObject collectible)
+    {
+        if (!collectibleToSpawnPoint.TryGetValue(collectible, out Transform spawnPoint))
+            return;
+
+        collectible.SetActive(false);
+
+        vacantTiles.Add(spawnPoint);
+
+        collectiblesInScene.Remove(collectible);
+        collectibleToSpawnPoint.Remove(collectible);
+
+        if (!collectiblePool.Contains(collectible))
+            collectiblePool.Enqueue(collectible);
+    }
+    IEnumerator SpawnPowerUps()
+    {
+        yield return null;
+    }
+    IEnumerator SpawnPlayer()
+    {
+        // Spawn player is just a single task ,
+        // Traverse all the player from the level so, and after that check which player is selected 
+        // From the vacant tiles array , spawn the player 
+        yield return null;
+    }
+    IEnumerator SpawnEnemy()
+    {
+        // Spawn different - different types of enemies according to the Count in LevelSO;
+        // Store all these enemies in the list 
+        // 
+        yield return null;
+    }
 }
 
 // Level SO pass houga 
@@ -155,3 +254,11 @@ public class LevelGenerator : MonoBehaviour
 // Generate the power ups 
 // Generate the player 
 // Generate the enemies and set the target as player
+
+
+/*
+    Logic for Collectible Spawner 
+
+    // First spawn all the collectible and store it in a list
+    
+*/
