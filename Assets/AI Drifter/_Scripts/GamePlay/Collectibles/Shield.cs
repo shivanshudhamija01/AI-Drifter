@@ -14,6 +14,7 @@ public class Shield : MonoBehaviour, ICollectible
     {
         if(collector.TryGetComponent<CollisionDetection>(out CollisionDetection component))
         {
+            PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.shield);
             component.StartCoroutine(DisableCollisionDetection(component));
         }
         Destroy(gameObject);

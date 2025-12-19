@@ -17,6 +17,7 @@ public class SpeedUp : MonoBehaviour, ICollectible
         PlayerDrifter drifter = collector.GetComponent<PlayerDrifter>();
         if (drifter != null)
         {
+             PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.speedUp);
             drifter.StartCoroutine(SpeedBoost(drifter));
         }
 
