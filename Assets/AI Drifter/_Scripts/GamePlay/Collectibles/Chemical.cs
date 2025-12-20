@@ -13,9 +13,10 @@ public class Chemical : MonoBehaviour, ICollectible
 
     public void OnCollected(GameObject collector)
     {
-        PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.chemical);   
+        
         if(collector.TryGetComponent<PlayerHealth>(out PlayerHealth component))
         {
+            PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.chemical);   
             component.StartCoroutine(ChemicalEffect(component));
         }
 

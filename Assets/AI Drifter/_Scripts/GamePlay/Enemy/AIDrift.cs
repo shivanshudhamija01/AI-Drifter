@@ -14,7 +14,7 @@ public class AIDrift : MonoBehaviour
 {
     [Header("Core")]
     [SerializeField] private EnemyType enemyType;
-    [SerializeField] private Transform target;
+    public Transform target;
     [SerializeField] private float repathInterval = 0.2f;
     [SerializeField] private GameObject gunTank;
     [SerializeField] private Transform shootingPoint;

@@ -1,68 +1,86 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
+using Cinemachine;
+
 
 public class LevelGenerator : MonoBehaviour
 {
+    [Header("Virtual Camera")]
+    [SerializeField] private CinemachineVirtualCamera vCam;
+    
+    [Header("Level Generation")]
     [SerializeField] private List<GameObject> tile;
+    [SerializeField] private List<LevelSO> levels;
     [SerializeField] private Transform Enviroment;
-    [SerializeField] private GameObject gola;
+    [SerializeField] private string spawnPoint = "SpawnPoint";
+    [SerializeField] private int width = 30;
+    [SerializeField] private int height = 30;
+    [SerializeField] private int levelNumber = 0;
+
     private int[][] matrix;
     private List<GameObject> tileInCurrentScene = new List<GameObject>();
-    private List<Transform> vacantTiles;
-    private List<GameObject> collectibleInScene;
-    private List<GameObject> powerUpsInScene;
-    private List<GameObject> playerInScene;
-    private Dictionary<GameObject,Transform> gameObjectToPosition;
-    private string spawnPoint = "SpawnPoint";
-    private int width = 30;
-    private int height = 30;
-    [SerializeField] private GameObject collectiblePrefab;
-[SerializeField] private int collectiblePoolSize = 10;
+    private List<Transform> vacantTiles = new List<Transform>();
 
-[SerializeField] private int maxCollectiblesInScene = 5;
-[SerializeField] private float minSpawnInterval = 3f;
-[SerializeField] private float maxSpawnInterval = 6f;
-[SerializeField] private float collectibleLifeTime = 8f;
+    [Header("Collectible")]
+    [SerializeField] private GameObject collectible;
+    [SerializeField] private int collectibleCount;
 
-private Queue<GameObject> collectiblePool = new Queue<GameObject>();
-private List<GameObject> collectiblesInScene = new List<GameObject>();
-private Dictionary<GameObject, Transform> collectibleToSpawnPoint = new Dictionary<GameObject, Transform>();
+    [Header("PowerUps Wave Settings")]
+    [SerializeField] private List<GameObject> powerUpsList;
+    [SerializeField] private int powerUpsPerWave = 5;
+    [SerializeField] private float minLifeTime = 4f;
+    [SerializeField] private float maxLifeTime = 8f;
+    [SerializeField] private float respawnDelay = 10f;
 
+    // Pooling
+    private Queue<GameObject> powerUpsPool = new Queue<GameObject>();
+    private Dictionary<GameObject, Transform> gameObjectToSpawnPoint = new Dictionary<GameObject, Transform>();
+    private List<GameObject> powerUpsInScene = new List<GameObject>();
+    private int activePowerUpsCount;
+    
 
-    void Awake()
-    {
-        vacantTiles = new List<Transform>();
-    }
+    //--------------- GameObjects Active In Scene--------------- //
+    // Player
+    private GameObject playerInScene;
+    private Transform playerSpawnPoint;
+    //-----------------------------------------------------------//
+    // Enemy
+    private List<GameObject> enemiesInScene = new List<GameObject>();
+
+    #region  Temp
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject smartAIPrefab;
+    [SerializeField] private GameObject madAIPrefab;
+    [SerializeField] private GameObject aggressiveAIPrefab;
+    #endregion
     void Start()
     {
-        // GenerateGround();
-        GetMapFromLevelLoader();
-        // SpawnScene();
-        InitCollectiblePool();
+        InitPowerUpsPool();
+        // GetMapFromLevelLoader();
         StartCoroutine(SpawnScene());
-        Debug.Log(tile.Count);
+        StartCoroutine(PowerUpsWaveLoop());
+
     }
 
-    [ContextMenu("Generate Ground")]
+    #region Level Generation
+
+    void GetMapFromLevelLoader()
+    {
+        matrix = LevelDataLoader.Instance.GetLevel(levelNumber);
+        GenerateGround();
+    }
+    
     void GenerateGround()
     {
-        for(int i = 0 ; i < 10 ;i++)
+        for (int i = 0; i < matrix.Length; i++)
         {
-            for(int j = 0 ; j < 10 ; j++)
+            for (int j = 0; j < matrix[i].Length; j++)
             {
-                float spawnX = i * width;
-                float spawnZ = j * height;
-                Vector3 spawnPos = new Vector3(spawnX,0,spawnZ);
-
-                GameObject obj = Instantiate(tile[matrix[i][j]],spawnPos,Quaternion.identity);
-                Transform point = obj.transform.Find(spawnPoint);
-                if(point != null)
-                {
-                    vacantTiles.Add(point);
-                }
+                Vector3 spawnPos = new Vector3(i * width, 0, j * height);
+                GameObject obj = Instantiate(tile[matrix[i][j]], spawnPos, Quaternion.identity);
                 if(i==0)
                 {
                     obj.transform.rotation = Quaternion.Euler(0,-90,0);
@@ -75,62 +93,183 @@ private Dictionary<GameObject, Transform> collectibleToSpawnPoint = new Dictiona
                 {
                     obj.transform.rotation = Quaternion.Euler(0,90,0);
                 }
-                tileInCurrentScene.Add(obj);
+                Transform point = obj.transform.Find(spawnPoint);
+                if (point != null)
+                {
+                    if(i == (int)(matrix.Length / 2)  &&  j == (int)(matrix[i].Length/2))
+                    {
+                        // This point represent the center tile in a matrix
+                        playerSpawnPoint = point;
+                        // Dont need to add a spawn point in the list (Vacant tiles)
+                    }
+                    else
+                    {
+                        vacantTiles.Add(point);
+                    }
+                }
+
                 obj.transform.SetParent(Enviroment);
+                tileInCurrentScene.Add(obj);
             }
         }
-        NavMeshSurface navMeshSurface = Enviroment.GetComponent<NavMeshSurface>();
-        if(navMeshSurface!=null)
+
+        NavMeshSurface navMesh = Enviroment.GetComponent<NavMeshSurface>();
+        if (navMesh != null)
         {
-            navMeshSurface.RemoveData();
+            navMesh.RemoveData();
+            navMesh.BuildNavMesh();
         }
-        navMeshSurface.BuildNavMesh();
-        //GetMapFromLevelLoader();
-        StartCoroutine(SpawnCollectible());
     }
 
-    private void GetMapFromLevelLoader()
-    {
-        int[][] map = LevelDataLoader.Instance.GetLevel(0);
-        // for(int i = 0;i<map.Length;i++)
-        // {
-        //     for(int j=0;j<map[0].Length;j++)
-        //     {
-        //         Debug.Log(map[i][j]);
-        //     }
-        // }
-        matrix = map;
-        GenerateGround();
-    }
+    #endregion
 
-    [ContextMenu("Clear Ground")]
-    void ClearGround()
+    #region PowerUps Pool
+
+    void InitPowerUpsPool()
     {
-        for (int i = tileInCurrentScene.Count - 1; i >= 0; i--)
+        for (int i = 0; i < powerUpsList.Count; i++)
         {
-    // Add your specific condition here (e.g., check distance, health, etc.)
-            if (tileInCurrentScene[i] != null)
+            GameObject obj = Instantiate(powerUpsList[i]);
+            obj.SetActive(false);
+            powerUpsPool.Enqueue(obj);
+        }
+    }
+
+    #endregion
+
+    #region PowerUps Wave System
+
+    IEnumerator PowerUpsWaveLoop()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => vacantTiles.Count >= powerUpsPerWave);
+
+            SpawnPowerUpsWave();
+
+            yield return new WaitUntil(() => activePowerUpsCount == 0);
+
+            yield return new WaitForSeconds(respawnDelay);
+        }
+    }
+
+    void SpawnPowerUpsWave()
+    {
+        activePowerUpsCount = 0;
+
+        for (int i = 0; i < powerUpsPerWave; i++)
+        {
+            if (vacantTiles.Count == 0 || powerUpsPool.Count == 0)
+                break;
+
+            int tileIndex = Random.Range(0, vacantTiles.Count);
+            Transform spawnPoint = vacantTiles[tileIndex];
+
+            GameObject powerUp = powerUpsPool.Dequeue();
+            powerUp.transform.position = spawnPoint.position;
+            powerUp.transform.rotation = Quaternion.identity;
+            powerUp.SetActive(true);
+
+            vacantTiles.RemoveAt(tileIndex);
+
+            gameObjectToSpawnPoint.Add(powerUp, spawnPoint);
+            powerUpsInScene.Add(powerUp);
+
+            activePowerUpsCount++;
+
+            float lifeTime = Random.Range(minLifeTime, maxLifeTime);
+            StartCoroutine(DespawnPowerUpsAfterTime(powerUp, lifeTime));
+        }
+    }
+
+    IEnumerator DespawnPowerUpsAfterTime(GameObject powerUp, float lifeTime)
+    {
+        yield return new WaitForSeconds(lifeTime);
+
+        if (powerUp == null || !powerUp.activeSelf)
+            yield break;
+
+        ReturnPowerUpsToPool(powerUp);
+    }
+
+    public void ReturnPowerUpsToPool(GameObject powerUp)
+    {
+        if (!gameObjectToSpawnPoint.TryGetValue(powerUp, out Transform spawnPoint))
+            return;
+
+        powerUp.SetActive(false);
+
+        vacantTiles.Add(spawnPoint);
+        gameObjectToSpawnPoint.Remove(powerUp);
+        powerUpsInScene.Remove(powerUp);
+
+        powerUpsPool.Enqueue(powerUp);
+
+        activePowerUpsCount--;
+    }
+
+    #endregion
+
+    IEnumerator SpawnScene()
+    {
+        yield return StartCoroutine(SpawnEnviroment());
+        yield return StartCoroutine(SpawnPlayer());
+        yield return StartCoroutine(SpawnEnemy());
+    }
+    IEnumerator SpawnEnviroment()
+    {
+        GetMapFromLevelLoader();
+        Debug.Log("Spawn Enviroment");
+        yield return null;
+    }
+    IEnumerator SpawnPlayer()
+    {
+        // Take a center point and always try to spawn the player at the center of the enviroment 
+        playerInScene = Instantiate(playerPrefab,playerSpawnPoint.position, Quaternion.identity);
+        AssignCameraTarget(playerInScene.transform);
+        Debug.Log("Spawn Player");
+        yield return null;    
+    }   
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(10f);
+        // Smart AI
+        List<GameObject> smartAIInScene =  SpawnPrefab(1,smartAIPrefab,gameObjectToSpawnPoint);
+        // Mad AI
+        List<GameObject> madAIInScene = SpawnPrefab(1,madAIPrefab,gameObjectToSpawnPoint);
+        // Aggressive AI
+        List<GameObject> aggressiveAIInScene  = SpawnPrefab(1,aggressiveAIPrefab ,gameObjectToSpawnPoint);
+
+        // Now need to combine all three list in a single list 
+        enemiesInScene.AddRange(smartAIInScene);
+        enemiesInScene.AddRange(madAIInScene);
+        enemiesInScene.AddRange(aggressiveAIInScene);
+
+
+        // Traverse the list and set the target reference to the player and also enable them 
+        for(int i=0;i<enemiesInScene.Count;i++)
+        {
+            GameObject temp = enemiesInScene[i];
+            if (temp.TryGetComponent(out AIDrift aiDrift))
             {
-            DestroyImmediate(tileInCurrentScene[i]);
-            tileInCurrentScene.RemoveAt(i);
+                aiDrift.target = playerInScene.transform;
             }
+            temp.SetActive(true);
         }
-    }
-    // void SpawnCollectible()
-    // {
-    //     // Tranverse the count of collectible from the LevelSO and place it according to the spawning point 
-    //     // After spawning it , remove that spawn point from the list 
 
-    //     // When it gets collected then put back this spawn point to the list back
-    //     collectibleInScene = SpawnPrefab(5,gola,gameObjectToPosition);
-        
-    // }
-    void SpanwPowerUps()
+        Debug.Log("Spawn Enemy");
+        yield return null;
+    }
+
+    void AssignCameraTarget(Transform target)
     {
-        // From the updated list , spawn the power ups in the scene and after 
+        vCam.Follow = target;
+        vCam.LookAt = target;
     }
 
-    public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject,Transform> objToPosition)
+
+    #region  HELPER_METHOD
+   public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject,Transform> objToPosition)
     {
         Debug.Log(vacantTiles.Count);
         List<GameObject> objSpawnedInScene = new List<GameObject>();
@@ -149,116 +288,5 @@ private Dictionary<GameObject, Transform> collectibleToSpawnPoint = new Dictiona
         return objSpawnedInScene;
 
     }
-
-
-    IEnumerator SpawnScene()
-    {
-        yield return null;
-    }
-    IEnumerator SpawnEnviroment()
-    {
-        // This is Done 
-        yield return null;
-    }
-    IEnumerator SpawnCollectible()
-    {
-        // Spawn collectibles 
-        // in a spawn collectible, i will write it like this , that
-        // in a cycle , will spawn the  
-        // yield return null;
-        while (true)
-    {
-        yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
-
-        if (vacantTiles.Count == 0)
-            continue;
-
-        if (collectiblesInScene.Count >= maxCollectiblesInScene)
-            continue;
-
-        if (collectiblePool.Count == 0)
-            continue;
-
-        int index = Random.Range(0, vacantTiles.Count);
-        Transform spawnPoint = vacantTiles[index];
-
-        GameObject collectible = collectiblePool.Dequeue();
-
-        collectible.transform.position = spawnPoint.position;
-        collectible.transform.rotation = Quaternion.identity;
-        collectible.SetActive(true);
-
-        collectiblesInScene.Add(collectible);
-        collectibleToSpawnPoint[collectible] = spawnPoint;
-
-        vacantTiles.RemoveAt(index);
-
-        StartCoroutine(DespawnCollectibleAfterTime(collectible));
-    }
-    }
-    void InitCollectiblePool()
-    {
-        for (int i = 0; i < collectiblePoolSize; i++)
-        {
-            GameObject obj = Instantiate(collectiblePrefab);
-            obj.SetActive(false);
-            collectiblePool.Enqueue(obj);
-        }
-    }
-    IEnumerator DespawnCollectibleAfterTime(GameObject collectible)
-    {
-        yield return new WaitForSeconds(collectibleLifeTime);
-
-        if (collectible == null || !collectible.activeSelf)
-            yield break;
-        ReturnCollectibleToPool(collectible);
-    }
-    public void ReturnCollectibleToPool(GameObject collectible)
-    {
-        if (!collectibleToSpawnPoint.TryGetValue(collectible, out Transform spawnPoint))
-            return;
-
-        collectible.SetActive(false);
-
-        vacantTiles.Add(spawnPoint);
-
-        collectiblesInScene.Remove(collectible);
-        collectibleToSpawnPoint.Remove(collectible);
-
-        if (!collectiblePool.Contains(collectible))
-            collectiblePool.Enqueue(collectible);
-    }
-    IEnumerator SpawnPowerUps()
-    {
-        yield return null;
-    }
-    IEnumerator SpawnPlayer()
-    {
-        // Spawn player is just a single task ,
-        // Traverse all the player from the level so, and after that check which player is selected 
-        // From the vacant tiles array , spawn the player 
-        yield return null;
-    }
-    IEnumerator SpawnEnemy()
-    {
-        // Spawn different - different types of enemies according to the Count in LevelSO;
-        // Store all these enemies in the list 
-        // 
-        yield return null;
-    }
-}
-
-// Level SO pass houga 
-// First Generate the map 
-// Genrerate the collectible 
-// Generate the power ups 
-// Generate the player 
-// Generate the enemies and set the target as player
-
-
-/*
-    Logic for Collectible Spawner 
-
-    // First spawn all the collectible and store it in a list
-    
-*/
+    #endregion
+}   

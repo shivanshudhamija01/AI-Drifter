@@ -1,0 +1,301 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 499468296, guid: cab42632cbdacc94f9b261da366ec4c4, type: 3}
+  m_Name: Tile_33_comb
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.03125
+      y: 0.0625
+      width: 0.4375
+      height: 0.875
+    srcObjName: Visual
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -4951708384877969684, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.8125
+      y: 0.0625
+      width: 0.0625
+      height: 0.125
+    srcObjName: Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.42813736
+      y: 0.92416203
+      width: 0.015245169
+      height: 0.025220394
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 8884940142553567970, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.75
+      width: 0.0625
+      height: 0.125
+    srcObjName: Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.057059046
+      y: 0.30509818
+      width: 0.007362906
+      height: 0.012803853
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -535131839395333617, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.65625
+      y: 0.75
+      width: 0.0625
+      height: 0.125
+    srcObjName: Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.80705905
+      y: 0.6800982
+      width: 0
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -492108395051690996, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.0625
+      width: 0.21875
+      height: 0.3125
+    srcObjName: Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.43368676
+      y: 0.5550982
+      width: 0.4983723
+      height: 0.37344718
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 5029210610703319244, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.78125
+      y: 0.5
+      width: 0.0625
+      height: 0.125
+    srcObjName: Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.43205905
+      y: 0.9300982
+      width: 0
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 3055996272150503839, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.5
+      width: 0.1875
+      height: 0.125
+    srcObjName: Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.5573678
+      y: 0.9259952
+      width: 0.37538236
+      height: 0.0022699237
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -478035346441924844, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.90625
+      y: 0.5
+      width: 0.0625
+      height: 0.125
+    srcObjName: Truck wheel front left
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.93749994
+      y: 0.5675
+      width: 0.000000059604645
+      height: 0.000000059604645
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -1537582836906275740, guid: 6a2ed7fa538ed494ea26bcb7b50081e5,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.78125
+      y: 0.75
+      width: 0.0625
+      height: 0.125
+    srcObjName: Truck wheel front left
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.06324017
+      y: 0.17991665
+      width: 0.0095834285
+      height: 0.011102974
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: a215542ea6c874da0938197660884769, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    - {fileID: -4951708384877969684, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: 8884940142553567970, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: -535131839395333617, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: -492108395051690996, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: 5029210610703319244, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: 3055996272150503839, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: -478035346441924844, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+    - {fileID: -1537582836906275740, guid: 6a2ed7fa538ed494ea26bcb7b50081e5, type: 3}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 1

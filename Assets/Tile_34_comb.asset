@@ -1,0 +1,301 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 499468296, guid: cab42632cbdacc94f9b261da366ec4c4, type: 3}
+  m_Name: Tile_34_comb
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.03125
+      y: 0.0625
+      width: 0.4375
+      height: 0.875
+    srcObjName: Visual
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -761481245691617968, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.0625
+      width: 0.40625
+      height: 0.3125
+    srcObjName: Monster Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.062191043
+      y: 0.30878726
+      width: 0.869868
+      height: 0.37477157
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -492108395051690996, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.5
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.932059
+      y: 0.5545787
+      width: 0.015206277
+      height: 0.019803703
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 8884940142553567970, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.75
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.057059046
+      y: 0.30509818
+      width: 0.007362906
+      height: 0.012803853
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 3055996272150503839, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.65625
+      y: 0.5
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.55705905
+      y: 0.9300982
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 819159104913504081, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.65625
+      y: 0.75
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.058058918
+      y: 0.18113697
+      width: 0.0069601536
+      height: 0.002421856
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -535131839395333617, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.78125
+      y: 0.5
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.82226527
+      y: 0.6795788
+      width: 0
+      height: 0
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -478035346441924844, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.90625
+      y: 0.5
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck wheel front left
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.93749994
+      y: 0.5590588
+      width: 0.0005194545
+      height: 0.008441269
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -1537582836906275740, guid: 10381c2b7641948b8a3b784ece3701eb,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.78125
+      y: 0.75
+      width: 0.0625
+      height: 0.125
+    srcObjName: Monster Truck wheel front left
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.06249994
+      y: 0.17488486
+      width: 0.005772233
+      height: 0.017615259
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: 738cb0144fe2848c2bb52e1549e1c98c, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: d5cdc3e94967c4c52923a19f3b2bd6bd, type: 2}
+    - {fileID: -761481245691617968, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: -492108395051690996, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: 8884940142553567970, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: 3055996272150503839, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: 819159104913504081, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: -535131839395333617, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: -478035346441924844, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+    - {fileID: -1537582836906275740, guid: 10381c2b7641948b8a3b784ece3701eb, type: 3}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 1
