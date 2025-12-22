@@ -64,8 +64,9 @@ public class AIDrift : MonoBehaviour
                 chaosFreq = 10f;
                 chaosStrength = 3f;
 
-                agent.speed = 40f;
-                agent.acceleration = 50f;
+                agent.speed = 50f;
+                // agent.acceleration = 55f;
+                agent.acceleration = 45f;
                 agent.angularSpeed = 250f;
                 agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                 break;
@@ -80,24 +81,26 @@ public class AIDrift : MonoBehaviour
                 chaosFreq = 0f;
                 chaosStrength = 0f;
 
-                agent.speed = 35f;
-                agent.acceleration = 25f;
+                agent.speed = 42f;
+                // agent.acceleration = 35f;
+                agent.acceleration = 40f;
                 // agent.speed = 30f;
                 // agent.acceleration = 20f;
                 agent.angularSpeed = 150f;
                 agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                 break;
-            
+
 
             case EnemyType.Aggressive:
                 turnSpeed = 6f;
                 maxAngle = 40f; // IMPORTANT → disables drift
                 oversteerMultiplier = 1f;
-                chaosFreq = 0f;
-                chaosStrength = 0f;
+                chaosFreq = 15f;
+                chaosStrength = 1f;
 
-                agent.speed = 30f;
-                agent.acceleration = 30f;
+                agent.speed = 40f;
+                // agent.acceleration = 35f;
+                agent.acceleration = 40f;
                 // agent.speed = 30f;
                 // agent.acceleration = 20f;
                 agent.angularSpeed = 150f;
@@ -166,32 +169,46 @@ public class AIDrift : MonoBehaviour
             turnSpeed * Time.deltaTime
         );
 
-        if(isShootEnabled)
+        if (isShootEnabled)
         {
             ShootPlayer();
         }
-    }   
+    }
 
     void ShootPlayer()
     {
-        Vector3 targetPosition = new Vector3(target.transform.position.x,transform.position.y,target.transform.position.z);
+        Vector3 targetPosition = new Vector3(
+            target.position.x,
+            transform.position.y,
+            target.position.z
+        );
+
         Vector3 targetDirection = (targetPosition - transform.position).normalized;
-        
-        gunTank.transform.forward = Vector3.Lerp(gunTank.transform.forward,targetDirection,Time.deltaTime * 50f);
+
+        gunTank.transform.forward = Vector3.Lerp(
+            gunTank.transform.forward,
+            targetDirection,
+            Time.deltaTime * 50f
+        );
 
         previousShoot += Time.deltaTime;
-        Vector3 distance = transform.position - target.transform.position;
-        float distanceMagnitude = distance.magnitude;
-        // Debug.Log("Distance between target and enemy is : "+distanceMagnitude);
-        if(previousShoot > shootInterval && distanceMagnitude <= shootingDistance)  
+
+        float distanceMagnitude = Vector3.Distance(transform.position, target.position);
+
+        if (previousShoot > shootInterval && distanceMagnitude <= shootingDistance)
         {
-            previousShoot = 0;
-            // Shoot bullet here
-            GameObject bomb = Instantiate(gola,shootingPoint.position,quaternion.identity);
-            Rigidbody rb = bomb.GetComponent<Rigidbody>();
-            rb.AddForce(shootingPoint.forward * 50f, ForceMode.Impulse);
+            previousShoot = 0f;
+
+            GameObject bullet = BulletPool.Instance.GetBullet();
+            bullet.transform.position = shootingPoint.position;
+            bullet.transform.rotation = shootingPoint.rotation;
+
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bulletScript.Fire(shootingPoint.forward, 10f);
+            Debug.Log("Shoot player is called");
         }
     }
+
 
 #if UNITY_EDITOR
     // Auto-update when changing enum in Inspector

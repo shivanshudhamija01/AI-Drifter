@@ -10,7 +10,7 @@ public class LevelGenerator : MonoBehaviour
 {
     [Header("Virtual Camera")]
     [SerializeField] private CinemachineVirtualCamera vCam;
-    
+
     [Header("Level Generation")]
     [SerializeField] private List<GameObject> tile;
     [SerializeField] private List<LevelSO> levels;
@@ -40,7 +40,7 @@ public class LevelGenerator : MonoBehaviour
     private Dictionary<GameObject, Transform> gameObjectToSpawnPoint = new Dictionary<GameObject, Transform>();
     private List<GameObject> powerUpsInScene = new List<GameObject>();
     private int activePowerUpsCount;
-    
+
 
     //--------------- GameObjects Active In Scene--------------- //
     // Player
@@ -49,6 +49,9 @@ public class LevelGenerator : MonoBehaviour
     //-----------------------------------------------------------//
     // Enemy
     private List<GameObject> enemiesInScene = new List<GameObject>();
+
+    // Collectible Coins
+    private List<GameObject> coinsActiveInScene = new List<GameObject>();
 
     #region  Temp
     [SerializeField] private GameObject playerPrefab;
@@ -59,6 +62,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         InitPowerUpsPool();
+        GameManager.Instance.SetTotalCollectibles(10);
         // GetMapFromLevelLoader();
         StartCoroutine(SpawnScene());
         StartCoroutine(PowerUpsWaveLoop());
@@ -72,7 +76,7 @@ public class LevelGenerator : MonoBehaviour
         matrix = LevelDataLoader.Instance.GetLevel(levelNumber);
         GenerateGround();
     }
-    
+
     void GenerateGround()
     {
         for (int i = 0; i < matrix.Length; i++)
@@ -81,25 +85,26 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3 spawnPos = new Vector3(i * width, 0, j * height);
                 GameObject obj = Instantiate(tile[matrix[i][j]], spawnPos, Quaternion.identity);
-                if(i==0)
+                if (i == 0)
                 {
-                    obj.transform.rotation = Quaternion.Euler(0,-90,0);
+                    obj.transform.rotation = Quaternion.Euler(0, -90, 0);
                 }
-                else if(j==0)
+                else if (j == 0)
                 {
-                    obj.transform.rotation = Quaternion.Euler(0,-180,0);
+                    obj.transform.rotation = Quaternion.Euler(0, -180, 0);
                 }
-                else if(i==9)
+                else if (i == matrix.Length - 1)
                 {
-                    obj.transform.rotation = Quaternion.Euler(0,90,0);
+                    obj.transform.rotation = Quaternion.Euler(0, 90, 0);
                 }
                 Transform point = obj.transform.Find(spawnPoint);
                 if (point != null)
                 {
-                    if(i == (int)(matrix.Length / 2)  &&  j == (int)(matrix[i].Length/2))
+                    if (i == (int)(matrix.Length / 2) && j == (int)(matrix[i].Length / 2))
                     {
                         // This point represent the center tile in a matrix
                         playerSpawnPoint = point;
+                        playerSpawnPoint.position = new Vector3(playerSpawnPoint.position.x, 0, playerSpawnPoint.position.z);
                         // Dont need to add a spawn point in the list (Vacant tiles)
                     }
                     else
@@ -186,7 +191,7 @@ public class LevelGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
 
-        if (powerUp == null || !powerUp.activeSelf)
+        if (powerUp == null)
             yield break;
 
         ReturnPowerUpsToPool(powerUp);
@@ -213,6 +218,7 @@ public class LevelGenerator : MonoBehaviour
     IEnumerator SpawnScene()
     {
         yield return StartCoroutine(SpawnEnviroment());
+        yield return StartCoroutine(SpawnCollectibles());
         yield return StartCoroutine(SpawnPlayer());
         yield return StartCoroutine(SpawnEnemy());
     }
@@ -222,23 +228,30 @@ public class LevelGenerator : MonoBehaviour
         Debug.Log("Spawn Enviroment");
         yield return null;
     }
+    IEnumerator SpawnCollectibles()
+    {
+        coinsActiveInScene = SpawnPrefab(collectibleCount, collectible, gameObjectToSpawnPoint);
+        yield return null;
+    }
+
     IEnumerator SpawnPlayer()
     {
         // Take a center point and always try to spawn the player at the center of the enviroment 
-        playerInScene = Instantiate(playerPrefab,playerSpawnPoint.position, Quaternion.identity);
+
+        playerInScene = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
         AssignCameraTarget(playerInScene.transform);
         Debug.Log("Spawn Player");
-        yield return null;    
-    }   
+        yield return null;
+    }
     IEnumerator SpawnEnemy()
     {
         yield return new WaitForSeconds(10f);
         // Smart AI
-        List<GameObject> smartAIInScene =  SpawnPrefab(1,smartAIPrefab,gameObjectToSpawnPoint);
+        List<GameObject> smartAIInScene = SpawnPrefab(1, smartAIPrefab, gameObjectToSpawnPoint);
         // Mad AI
-        List<GameObject> madAIInScene = SpawnPrefab(1,madAIPrefab,gameObjectToSpawnPoint);
+        List<GameObject> madAIInScene = SpawnPrefab(1, madAIPrefab, gameObjectToSpawnPoint);
         // Aggressive AI
-        List<GameObject> aggressiveAIInScene  = SpawnPrefab(1,aggressiveAIPrefab ,gameObjectToSpawnPoint);
+        List<GameObject> aggressiveAIInScene = SpawnPrefab(1, aggressiveAIPrefab, gameObjectToSpawnPoint);
 
         // Now need to combine all three list in a single list 
         enemiesInScene.AddRange(smartAIInScene);
@@ -247,7 +260,7 @@ public class LevelGenerator : MonoBehaviour
 
 
         // Traverse the list and set the target reference to the player and also enable them 
-        for(int i=0;i<enemiesInScene.Count;i++)
+        for (int i = 0; i < enemiesInScene.Count; i++)
         {
             GameObject temp = enemiesInScene[i];
             if (temp.TryGetComponent(out AIDrift aiDrift))
@@ -269,14 +282,14 @@ public class LevelGenerator : MonoBehaviour
 
 
     #region  HELPER_METHOD
-   public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject,Transform> objToPosition)
+    public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject, Transform> objToPosition)
     {
         Debug.Log(vacantTiles.Count);
         List<GameObject> objSpawnedInScene = new List<GameObject>();
-        int gap = Random.Range(1,vacantTiles.Count);
-        int startingIndex = Random.Range(2,vacantTiles.Count);
+        int gap = Random.Range(1, vacantTiles.Count);
+        int startingIndex = Random.Range(2, vacantTiles.Count);
         int totalvacantTiles = vacantTiles.Count;
-        for(int i=0;i<Count;i++)
+        for (int i = 0; i < Count; i++)
         {
             int index = (startingIndex + i * gap) % totalvacantTiles;
             Vector3 spawnPosition = vacantTiles[index].position;
@@ -289,4 +302,4 @@ public class LevelGenerator : MonoBehaviour
 
     }
     #endregion
-}   
+}

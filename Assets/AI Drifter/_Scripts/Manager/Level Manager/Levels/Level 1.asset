@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   smartAI: 1
-  madAI: 2
+  madAI: 1
   aggressiveAI: 1
   SmartAI:
   - {fileID: 2911399452416526277, guid: 039fa516c56904cff9ce1a4fb71b92f2, type: 3}
@@ -25,11 +25,7 @@ MonoBehaviour:
   - {fileID: 3898602404200206295, guid: aeba045bf35b748b8adb116bd4614071, type: 3}
   CollectiblePrefab: {fileID: 7586022285698511698, guid: 73e7760fb1cc545ea9515a9f705bb5c7,
     type: 3}
-  CollectiblePoolSize: 10
-  CollectiblesPerWave: 4
-  MinLifeTime: 4
-  MaxLiftTime: 8
-  RespawnDelay: 10
+  CollectibleCount: 6
   PowerUps:
   - {fileID: 4717874703746937901, guid: 6039bfa960f25401c8956072bdeb258d, type: 3}
   - {fileID: 6391337312584212935, guid: 1c8d4c84ccd88473a815532d3ea44492, type: 3}
@@ -38,5 +34,9 @@ MonoBehaviour:
   - {fileID: 5366903953873038891, guid: 503313f5e04174301b40066d0489c6c2, type: 3}
   - {fileID: 5860308363100874628, guid: 82d7ec213c23d4476aec531ec6cdab7c, type: 3}
   - {fileID: 3799555257126428240, guid: 2297aa39690d345889c3423bf32ea10c, type: 3}
-  PowerUpsCount: 0
-  Timer: 0
+  PowerUpPoolSize: 0
+  PowerUpPerWave: 0
+  MinLifeTime: 4
+  MaxLiftTime: 8
+  RespawnDelay: 10
+  Timer: 180

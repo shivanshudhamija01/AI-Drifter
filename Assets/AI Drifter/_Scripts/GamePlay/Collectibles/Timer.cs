@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour, ICollectible
     public void OnCollected(GameObject collector)
     {
         Debug.Log("Timer Collected");
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        // Destroy(gameObject);
     }
 }

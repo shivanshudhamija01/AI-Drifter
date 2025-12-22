@@ -5,9 +5,9 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "LevelSO", menuName = "SO/LevelData")]
-public class LevelSO : ScriptableObject 
+public class LevelSO : ScriptableObject
 {
-    
+
     // Enemies and their different types
     // public List<GameObject> Enemies;
     [Header("Enemy")]
@@ -20,25 +20,27 @@ public class LevelSO : ScriptableObject
     public List<GameObject> SmartAI;
     public List<GameObject> MadAI;
     public List<GameObject> AggressiveAI;
-   
+
     [Header("Player")]
     // Player and their different types
     public List<GameObject> Player;
 
     // Collectible item and their count
-    [Header("Collectible Wave Settings")]
+    [Header("Collectible")]
     public GameObject CollectiblePrefab;
-    public int CollectiblePoolSize;
-    public int CollectiblesPerWave;
-    public int MinLifeTime;
-    public int MaxLiftTime;
-    public int RespawnDelay;
+    public int CollectibleCount;
 
 
     [Header("Power Ups")]
+
+    [Header("PowerUps Wave Settings")]
     // Types of power ups and their count
     public List<GameObject> PowerUps;
-    public int PowerUpsCount;
+    public int PowerUpPoolSize;
+    public int PowerUpPerWave;
+    public int MinLifeTime;
+    public int MaxLiftTime;
+    public int RespawnDelay;
 
     [Header("Timer Setting")]
     // Game Timer

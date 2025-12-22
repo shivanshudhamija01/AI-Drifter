@@ -7,7 +7,8 @@ public class TempLevelGenerator : MonoBehaviour
 {
     [SerializeField] private List<GameObject> tile;
     [SerializeField] private Transform Enviroment;
-     [SerializeField] private string spawnPoint = "SpawnPoint";
+    [SerializeField] private string spawnPoint = "SpawnPoint";
+    [SerializeField] private int levelNumber = 2;
     private int width = 30;
     private int height = 30;
     private int[][] matrix;
@@ -15,7 +16,7 @@ public class TempLevelGenerator : MonoBehaviour
     [ContextMenu("Generate Ground")]
    void GetMapFromLevelLoader()
     {
-        matrix = LevelDataLoader.Instance.GetLevel(2);
+        matrix = LevelDataLoader.Instance.GetLevel(levelNumber);
         Debug.Log(matrix.Length);
         Debug.Log(matrix[0].Length);
         GenerateGround();
@@ -26,7 +27,7 @@ public class TempLevelGenerator : MonoBehaviour
     {
         for (int i = 0; i < matrix.Length; i++)
         {
-            for (int j = 0; j < matrix[i].Length; j++)
+            for (int j = 0; j < matrix[0].Length; j++)
             {
                 Vector3 spawnPos = new Vector3(i * width, 0, j * height);
                 GameObject obj = Instantiate(tile[matrix[i][j]], spawnPos, Quaternion.identity);

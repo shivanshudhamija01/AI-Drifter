@@ -14,6 +14,7 @@ public class PowerAttack : MonoBehaviour, ICollectible
         PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.powerAttack);
         Debug.Log("Power Attack is performed Collected");
         Debug.Log("Fire's an event to the level manager class that will destroy all the enemies or free them and respawn it later");
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
 }

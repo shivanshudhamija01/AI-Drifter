@@ -13,21 +13,21 @@ public class Chemical : MonoBehaviour, ICollectible
 
     public void OnCollected(GameObject collector)
     {
-        
-        if(collector.TryGetComponent<PlayerHealth>(out PlayerHealth component))
+
+        if (collector.TryGetComponent<PlayerHealth>(out PlayerHealth component))
         {
-            PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.chemical);   
+            PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.chemical);
             component.StartCoroutine(ChemicalEffect(component));
         }
-
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
     }
     IEnumerator ChemicalEffect(PlayerHealth component)
     {
         float healthReducePerSecondIs = healthToBeReducedBy / impactTime;
         float elapsedTime = 0f;
 
-        while(elapsedTime < impactTime)
+        while (elapsedTime < impactTime)
         {
             float deltaHealth = -1 * healthReducePerSecondIs * Time.deltaTime;
             component.UpdateHealth(deltaHealth);
