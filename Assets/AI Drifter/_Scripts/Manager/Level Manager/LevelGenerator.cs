@@ -46,12 +46,15 @@ public class LevelGenerator : MonoBehaviour
     // Player
     private GameObject playerInScene;
     private Transform playerSpawnPoint;
+    private GameObject directionArrow;
+
     //-----------------------------------------------------------//
     // Enemy
     private List<GameObject> enemiesInScene = new List<GameObject>();
 
     // Collectible Coins
     private List<GameObject> coinsActiveInScene = new List<GameObject>();
+    private List<GameObject> coinsCollectedInScene = new List<GameObject>();
 
     #region  Temp
     [SerializeField] private GameObject playerPrefab;
@@ -59,6 +62,19 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject madAIPrefab;
     [SerializeField] private GameObject aggressiveAIPrefab;
     #endregion
+
+    void OnEnable()
+    {
+        PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
+        LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
+        LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
+    }
+    void OnDisable()
+    {
+        PlayerServices.Instance.OnCoinPickedUp.RemoveListener(DeactivateCoinFromScene);
+        LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
+        LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
+    }
     void Start()
     {
         InitPowerUpsPool();
@@ -66,7 +82,12 @@ public class LevelGenerator : MonoBehaviour
         // GetMapFromLevelLoader();
         StartCoroutine(SpawnScene());
         StartCoroutine(PowerUpsWaveLoop());
+    }
+    void Update()
+    {
+        if (directionArrow == null) return;
 
+        PointTowardsNearbyCoin();
     }
 
     #region Level Generation
@@ -75,6 +96,60 @@ public class LevelGenerator : MonoBehaviour
     {
         matrix = LevelDataLoader.Instance.GetLevel(levelNumber);
         GenerateGround();
+    }
+
+    private void PointTowardsNearbyCoin()
+    {
+        if (playerInScene == null || coinsActiveInScene == null || coinsActiveInScene.Count == 0)
+        {
+            directionArrow.SetActive(false);
+            return;
+        }
+
+        GameObject nearestCoin = null;
+        float shortestDistance = float.MaxValue;
+
+        Vector3 playerPos = playerInScene.transform.position;
+
+        // Find nearest active coin
+        for (int i = coinsActiveInScene.Count - 1; i >= 0; i--)
+        {
+            GameObject coin = coinsActiveInScene[i];
+
+            // Remove destroyed / inactive coins safely
+            if (coin == null || !coin.activeInHierarchy)
+            {
+                coinsActiveInScene.RemoveAt(i);
+                continue;
+            }
+
+            float distance = Vector3.SqrMagnitude(coin.transform.position - playerPos);
+
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                nearestCoin = coin;
+            }
+        }
+
+        if (nearestCoin == null)
+        {
+            directionArrow.SetActive(false);
+            return;
+        }
+
+        directionArrow.SetActive(true);
+
+        // Direction (ignore Y so arrow stays flat)
+        Vector3 dir = nearestCoin.transform.position - playerPos;
+        dir.y = 0f;
+
+        if (dir.sqrMagnitude < 0.001f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(dir.normalized);
+        directionArrow.transform.rotation =
+            Quaternion.Slerp(directionArrow.transform.rotation, targetRotation, Time.deltaTime * 8f);
     }
 
     void GenerateGround()
@@ -240,6 +315,11 @@ public class LevelGenerator : MonoBehaviour
 
         playerInScene = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
         AssignCameraTarget(playerInScene.transform);
+        DirectionArrow component = playerInScene.GetComponentInChildren<DirectionArrow>();
+        if (component != null)
+        {
+            directionArrow = component.gameObject;
+        }
         Debug.Log("Spawn Player");
         yield return null;
     }
@@ -280,26 +360,115 @@ public class LevelGenerator : MonoBehaviour
         vCam.LookAt = target;
     }
 
-
     #region  HELPER_METHOD
-    public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject, Transform> objToPosition)
+    // public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject, Transform> objToPosition)
+    // {
+    //     Debug.Log(vacantTiles.Count);
+    //     List<GameObject> objSpawnedInScene = new List<GameObject>();
+    //     int gap = Random.Range(1, vacantTiles.Count);
+    //     int startingIndex = Random.Range(2, vacantTiles.Count);
+    //     int totalvacantTiles = vacantTiles.Count;
+    //     for (int i = 0; i < Count; i++)
+    //     {
+    //         int index = (startingIndex + i * gap) % totalvacantTiles;
+    //         Vector3 spawnPosition = vacantTiles[index].position;
+    //         GameObject temp = Instantiate(prefab, spawnPosition, Quaternion.identity);
+    //         objSpawnedInScene.Add(temp);
+    //         vacantTiles.RemoveAt(index);
+    //     }
+    //     Debug.Log(vacantTiles.Count);
+    //     return objSpawnedInScene;
+
+    // }
+    public List<GameObject> SpawnPrefab(int count, GameObject prefab, Dictionary<GameObject, Transform> objToPosition)
     {
-        Debug.Log(vacantTiles.Count);
-        List<GameObject> objSpawnedInScene = new List<GameObject>();
-        int gap = Random.Range(1, vacantTiles.Count);
-        int startingIndex = Random.Range(2, vacantTiles.Count);
-        int totalvacantTiles = vacantTiles.Count;
-        for (int i = 0; i < Count; i++)
+        List<GameObject> spawned = new List<GameObject>();
+
+        if (vacantTiles.Count == 0)
+            return spawned;
+
+        count = Mathf.Min(count, vacantTiles.Count);
+
+        for (int i = 0; i < count; i++)
         {
-            int index = (startingIndex + i * gap) % totalvacantTiles;
-            Vector3 spawnPosition = vacantTiles[index].position;
-            GameObject temp = Instantiate(prefab, spawnPosition, Quaternion.identity);
-            objSpawnedInScene.Add(temp);
+            int index = Random.Range(0, vacantTiles.Count);
+
+            Transform spawnPoint = vacantTiles[index];
+            GameObject obj = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+
+            spawned.Add(obj);
             vacantTiles.RemoveAt(index);
         }
-        Debug.Log(vacantTiles.Count);
-        return objSpawnedInScene;
 
+        return spawned;
+    }
+
+    #endregion
+
+    void DeactivateCoinFromScene(GameObject targetObject)
+    {
+        int index = coinsActiveInScene.FindIndex(obj => obj == targetObject);
+        if (index != -1)
+        {
+            coinsCollectedInScene.Add(targetObject);
+            coinsActiveInScene.RemoveAt(index);
+            Debug.Log("Coin in active scene is : " + coinsActiveInScene.Count);
+        }
+    }
+
+    #region  RESETLEVEL
+    public void ResetLevel()
+    {
+        StartCoroutine(ResetLevelData());
+
+        // ----- Restart Level -----
+        // StartCoroutine(SpawnScene());
+        // StartCoroutine(PowerUpsWaveLoop());
+    }
+    IEnumerator ResetLevelData()
+    {
+        yield return new WaitForSeconds(1f);
+        StopAllCoroutines();
+
+        // ----- Clear Tiles -----
+        foreach (var tile in tileInCurrentScene)
+            Destroy(tile);
+        tileInCurrentScene.Clear();
+
+        vacantTiles.Clear();
+
+        // ----- Clear Enemies -----
+        foreach (var enemy in enemiesInScene)
+            Destroy(enemy);
+        enemiesInScene.Clear();
+
+        // ----- Clear Player -----
+        if (playerInScene != null)
+            Destroy(playerInScene);
+
+
+        // ----- Clear Coins -----
+        foreach (var coin in coinsCollectedInScene)
+            Destroy(coin);
+        coinsCollectedInScene.Clear();
+
+        // ----- Clear PowerUps -----
+        foreach (var powerUp in powerUpsInScene)
+            Destroy(powerUp);
+
+        foreach (var powerUp in powerUpsPool)
+            Destroy(powerUp);
+
+        powerUpsInScene.Clear();
+        powerUpsPool.Clear();
+
+        // ReturnPowerUpsToPool(powerUp);
+        // powerUpsInScene.Clear();
+        // gameObjectToSpawnPoint.Clear();
+        // activePowerUpsCount = 0; 
+
+        // ----- Reset GameManager -----
+        GameManager.Instance.ResetLevelData();
     }
     #endregion
 }

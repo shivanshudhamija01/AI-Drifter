@@ -205,10 +205,8 @@ public class AIDrift : MonoBehaviour
 
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.Fire(shootingPoint.forward, 10f);
-            Debug.Log("Shoot player is called");
         }
     }
-
 
 #if UNITY_EDITOR
     // Auto-update when changing enum in Inspector

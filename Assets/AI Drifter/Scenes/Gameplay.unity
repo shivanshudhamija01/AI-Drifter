@@ -778,12 +778,24 @@ MonoBehaviour:
   - {fileID: 5587428428570718050, guid: 0200ce684ff8e4ea6849709f30e70c35, type: 3}
   - {fileID: 1158600473881529629, guid: 4b6c991c55eb54dc5b373047eefcbd36, type: 3}
   - {fileID: 2442200584946741382, guid: 38526d983cd7b4308ae0d2fc156086b8, type: 3}
+  - {fileID: 6996972243822052831, guid: 8411505f4908a45578c24d078d773dc3, type: 3}
+  - {fileID: 919132149155446097, guid: e56c6af9c5bce45cdb042ae31d08e231, type: 3}
+  - {fileID: 919132149155446097, guid: 58bd74cb32d1249c1a3f0c851eda7db5, type: 3}
+  - {fileID: 919132149155446097, guid: c76d6f7cdd9ec4dee8580e9f7fe75039, type: 3}
+  - {fileID: 919132149155446097, guid: d06f34102f52c47de91690227230d5c1, type: 3}
+  - {fileID: 919132149155446097, guid: 407de57ae945e40bf82119cb6fff1d9d, type: 3}
+  - {fileID: 919132149155446097, guid: dd0634b085bf141b4939515ccb9909a3, type: 3}
+  - {fileID: 919132149155446097, guid: 55c5e1ef6c20e4329bed2f19e166c14a, type: 3}
+  - {fileID: 919132149155446097, guid: e4348454b00584b4b890f1f697ce8244, type: 3}
+  - {fileID: 919132149155446097, guid: 03e805f4c187d4b90bd3dc4b7da40118, type: 3}
+  - {fileID: 919132149155446097, guid: af4c779a7742a462ea42a5257c9dfc87, type: 3}
+  - {fileID: 919132149155446097, guid: abc63e34db3a74f659d5212105859499, type: 3}
   levels: []
   Enviroment: {fileID: 392161096}
   spawnPoint: SpawnPoint
   width: 30
   height: 30
-  levelNumber: 9
+  levelNumber: 0
   collectible: {fileID: 7586022285698511698, guid: 73e7760fb1cc545ea9515a9f705bb5c7,
     type: 3}
   collectibleCount: 10
@@ -795,7 +807,21 @@ MonoBehaviour:
   - {fileID: 5366903953873038891, guid: 503313f5e04174301b40066d0489c6c2, type: 3}
   - {fileID: 5860308363100874628, guid: 82d7ec213c23d4476aec531ec6cdab7c, type: 3}
   - {fileID: 3799555257126428240, guid: 2297aa39690d345889c3423bf32ea10c, type: 3}
-  powerUpsPerWave: 4
+  - {fileID: 4717874703746937901, guid: 6039bfa960f25401c8956072bdeb258d, type: 3}
+  - {fileID: 6391337312584212935, guid: 1c8d4c84ccd88473a815532d3ea44492, type: 3}
+  - {fileID: 3214436039173285575, guid: 1f57589742d1f4f57bfdfe31154324f7, type: 3}
+  - {fileID: 6102632413835062679, guid: 05712fc91270a4ddf9a42e5d41f472c0, type: 3}
+  - {fileID: 5366903953873038891, guid: 503313f5e04174301b40066d0489c6c2, type: 3}
+  - {fileID: 5860308363100874628, guid: 82d7ec213c23d4476aec531ec6cdab7c, type: 3}
+  - {fileID: 3799555257126428240, guid: 2297aa39690d345889c3423bf32ea10c, type: 3}
+  - {fileID: 4717874703746937901, guid: 6039bfa960f25401c8956072bdeb258d, type: 3}
+  - {fileID: 6391337312584212935, guid: 1c8d4c84ccd88473a815532d3ea44492, type: 3}
+  - {fileID: 3214436039173285575, guid: 1f57589742d1f4f57bfdfe31154324f7, type: 3}
+  - {fileID: 6102632413835062679, guid: 05712fc91270a4ddf9a42e5d41f472c0, type: 3}
+  - {fileID: 5366903953873038891, guid: 503313f5e04174301b40066d0489c6c2, type: 3}
+  - {fileID: 5860308363100874628, guid: 82d7ec213c23d4476aec531ec6cdab7c, type: 3}
+  - {fileID: 3799555257126428240, guid: 2297aa39690d345889c3423bf32ea10c, type: 3}
+  powerUpsPerWave: 8
   minLifeTime: 4
   maxLifeTime: 8
   respawnDelay: 10
@@ -877,6 +903,8 @@ GameObject:
   - component: {fileID: 1375267654}
   - component: {fileID: 1375267653}
   - component: {fileID: 1375267655}
+  - component: {fileID: 1375267656}
+  - component: {fileID: 1375267657}
   m_Layer: 0
   m_Name: EventServices
   m_TagString: Untagged
@@ -921,6 +949,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c753f018d7564a83b2df926c261f39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1375267656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375267652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5bf7e03e1774a89962af5a3b06e1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1375267657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375267652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648930545717843cbb1fa82ac930de97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1958635215

@@ -36,10 +36,12 @@ public class BulletPool : MonoBehaviour
             bullet.SetActive(true);
             return bullet;
         }
-
-        // Optional: expand pool
-        GameObject extraBullet = Instantiate(bulletPrefab);
-        return extraBullet;
+        else
+        {
+            // Optional: expand pool
+            GameObject extraBullet = Instantiate(bulletPrefab);
+            return extraBullet;
+        }
     }
 
     public void ReturnBullet(GameObject bullet)

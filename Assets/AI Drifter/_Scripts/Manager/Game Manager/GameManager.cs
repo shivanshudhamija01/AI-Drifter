@@ -34,12 +34,25 @@ public class GameManager : MonoBehaviour
 
         if (collected >= totalCollectibles)
         {
-            OnLevelComplete();
+            LevelClear();
         }
     }
 
-    void OnLevelComplete()
+    // ---------- RESET ----------
+    public void ResetLevelData()
     {
-        Debug.Log("LEVEL COMPLETE");
+        collected = 0;
+    }
+
+    void LevelClear()
+    {
+        ResetLevelData();
+        LevelServices.Instance.OnLevelCompleted?.Invoke();
+    }
+
+    public void RestartLevel()
+    {
+        ResetLevelData();
+        LevelServices.Instance.OnLevelRestarted?.Invoke();
     }
 }

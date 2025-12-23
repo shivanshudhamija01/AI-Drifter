@@ -29,6 +29,7 @@ public class Bullet : MonoBehaviour
         if (timer >= lifeTime)
         {
             gameObject.SetActive(false); // return to pool
+            BulletPool.Instance.ReturnBullet(gameObject);
         }
     }
 
