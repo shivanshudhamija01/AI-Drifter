@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 499468296, guid: cab42632cbdacc94f9b261da366ec4c4, type: 3}
+  m_Name: Mustand Comb
+  m_EditorClassIdentifier: 
+  version: 3252
+  resultType: 0
+  materialsAndUVRects:
+  - material: {fileID: -1221561137008478051, guid: 3708f9167acc1b441a8e7d5b4e9ff129,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.28125
+      y: 0.5
+      width: 0.109375
+      height: 0.1875
+    srcObjName: Car-2
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.348199
+      y: 0.38327456
+      width: 0.46789658
+      height: 0.426587
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -2315378818891012869, guid: 3708f9167acc1b441a8e7d5b4e9ff129,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.015625
+      y: 0.03125
+      width: 0.234375
+      height: 0.46875
+    srcObjName: Car-2
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.00000006027171
+      y: 0
+      width: 0.9994993
+      height: 0.98886937
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 215891008873764655, guid: 3708f9167acc1b441a8e7d5b4e9ff129,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.421875
+      y: 0.625
+      width: 0.03125
+      height: 0.0625
+    srcObjName: Car-2
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.3290051
+      y: 0.38351616
+      width: 0.14483261
+      height: 0.02833727
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 457912026489867743, guid: 3708f9167acc1b441a8e7d5b4e9ff129,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.015625
+      y: 0.5625
+      width: 0.234375
+      height: 0.40625
+    srcObjName: Car-2
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.00022765118
+      y: 0.1666565
+      width: 0.97605395
+      height: 0.8235772
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: -8021657893569150728, guid: 3708f9167acc1b441a8e7d5b4e9ff129,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.421875
+      y: 0.5
+      width: 0.046875
+      height: 0.0625
+    srcObjName: Car-2
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.75585365
+      y: 0.073084354
+      width: 0.23793817
+      height: 0.11626403
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 9069772949178138620, guid: 3708f9167acc1b441a8e7d5b4e9ff129,
+      type: 3}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.28125
+      y: 0.03125
+      width: 0.234375
+      height: 0.40625
+    srcObjName: Car-2
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.0030096516
+      y: 0.03463483
+      width: 0.99533296
+      height: 0.8571451
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: 0fa32ebafd70e489bb05c5d928d57bd6, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: -1221561137008478051, guid: 3708f9167acc1b441a8e7d5b4e9ff129, type: 3}
+    - {fileID: -2315378818891012869, guid: 3708f9167acc1b441a8e7d5b4e9ff129, type: 3}
+    - {fileID: 215891008873764655, guid: 3708f9167acc1b441a8e7d5b4e9ff129, type: 3}
+    - {fileID: 457912026489867743, guid: 3708f9167acc1b441a8e7d5b4e9ff129, type: 3}
+    - {fileID: -8021657893569150728, guid: 3708f9167acc1b441a8e7d5b4e9ff129, type: 3}
+    - {fileID: 9069772949178138620, guid: 3708f9167acc1b441a8e7d5b4e9ff129, type: 3}
+  resultMaterialsTexArray: []
+  doMultiMaterial: 1

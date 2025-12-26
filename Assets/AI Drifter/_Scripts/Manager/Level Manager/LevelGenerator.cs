@@ -66,12 +66,14 @@ public class LevelGenerator : MonoBehaviour
     void OnEnable()
     {
         PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
+        PlayerServices.Instance.OnGhostCollected.AddListener(MultiplyEnemiesInScene);
         LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
         LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
     }
     void OnDisable()
     {
         PlayerServices.Instance.OnCoinPickedUp.RemoveListener(DeactivateCoinFromScene);
+        PlayerServices.Instance.OnGhostCollected.RemoveListener(MultiplyEnemiesInScene);
         LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
         LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
     }
@@ -416,6 +418,59 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
+
+    void MultiplyEnemiesInScene()
+    {
+        int randomType = Random.Range(0, 3);
+        List<GameObject> temp;
+        if (randomType == 0)
+        {
+            temp = SpawnPrefab(1, smartAIPrefab, gameObjectToSpawnPoint);
+        }
+        else if (randomType == 1)
+        {
+            temp = SpawnPrefab(1, madAIPrefab, gameObjectToSpawnPoint);
+        }
+        else
+        {
+            temp = SpawnPrefab(1, aggressiveAIPrefab, gameObjectToSpawnPoint);
+        }
+        for (int i = 0; i < temp.Count; i++)
+        {
+            GameObject enemySpawned = temp[i];
+            if (enemySpawned.TryGetComponent(out AIDrift aiDrift))
+            {
+                aiDrift.target = playerInScene.transform;
+            }
+            enemySpawned.SetActive(true);
+        }
+        enemiesInScene.AddRange(temp);
+        return;
+    }
+
+    // Load Next Level 
+    public void LoadNextLevel()
+    {
+        StartCoroutine(LNL());
+    }
+    IEnumerator LNL()
+    {
+        yield return StartCoroutine(ResetLevelData());
+        levelNumber++;
+        yield return StartCoroutine(SpawnScene());
+        yield return StartCoroutine(PowerUpsWaveLoop());
+    }
+    // Restart Level 
+    public void RestartLevel()
+    {
+        StartCoroutine(RL());
+    }
+    IEnumerator RL()
+    {
+        yield return StartCoroutine(ResetLevelData());
+        yield return StartCoroutine(SpawnScene());
+        yield return StartCoroutine(PowerUpsWaveLoop());
+    }
     #region  RESETLEVEL
     public void ResetLevel()
     {

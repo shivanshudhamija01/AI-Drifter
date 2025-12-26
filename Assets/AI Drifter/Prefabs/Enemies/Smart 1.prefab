@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blastEffect: {fileID: 2118158944388650491}
+  visuals: {fileID: 5524126906214729152}
+  colliderField: {fileID: 1941326126}
 --- !u!1001 &2280314749641027539
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,6 +325,12 @@ PrefabInstance:
 --- !u!4 &5179830664625332090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 88a70dfd012274969b400c37cc2925b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4641185876059519121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5524126906214729152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 88a70dfd012274969b400c37cc2925b0,
     type: 3}
   m_PrefabInstance: {fileID: 4641185876059519121}
   m_PrefabAsset: {fileID: 0}

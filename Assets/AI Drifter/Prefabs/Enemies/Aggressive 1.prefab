@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2678418105173610963
 Transform:
   m_ObjectHideFlags: 0
@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blastEffect: {fileID: 6401509256344978028}
+  visuals: {fileID: 3312823308568012249}
+  colliderField: {fileID: 440252439}
 --- !u!1 &2678418105462384219
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +344,12 @@ PrefabInstance:
     - {fileID: 5421139377249538252, guid: bc2e0dcdeaea1034aa7db84bb15cd429, type: 3}
     - {fileID: 5421139377249538254, guid: bc2e0dcdeaea1034aa7db84bb15cd429, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bc2e0dcdeaea1034aa7db84bb15cd429, type: 3}
+--- !u!1 &3312823308568012249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3110377832017560899, guid: bc2e0dcdeaea1034aa7db84bb15cd429,
+    type: 3}
+  m_PrefabInstance: {fileID: 491960086583615642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3556009832278128928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4002212487662885306, guid: bc2e0dcdeaea1034aa7db84bb15cd429,

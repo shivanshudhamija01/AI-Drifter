@@ -13,9 +13,13 @@ public class PlayerHealth : MonoBehaviour
     public void UpdateHealth(float amount)
     {
         float updateHealth = health + amount;
-        updateHealth = Mathf.Clamp(updateHealth, 0 , 100);
+        updateHealth = Mathf.Clamp(updateHealth, 0, 100);
 
-        health = updateHealth;   
+        health = updateHealth;
         Debug.Log("Updated Player health of player is : " + health);
+        // if (health <= 0)
+        // {
+        //     Time.timeScale = 0;
+        // }
     }
 }

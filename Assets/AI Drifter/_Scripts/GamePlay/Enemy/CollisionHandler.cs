@@ -5,6 +5,8 @@ using UnityEngine;
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] private ParticleSystem blastEffect;
+    [SerializeField] private GameObject visuals;
+    [SerializeField] private Collider colliderField;
     private AIDrift aIDrift;
     private CollisionHandler collisionHandler;
     void Start()
@@ -14,6 +16,14 @@ public class CollisionHandler : MonoBehaviour
             aIDrift = component;
         }
         collisionHandler = GetComponent<CollisionHandler>();
+    }
+    void OnEnable()
+    {
+        PlayerServices.Instance.OnPowerAttack.AddListener(DeactivateEnemyForWhile);
+    }
+    void OnDisable()
+    {
+        PlayerServices.Instance.OnPowerAttack.RemoveListener(DeactivateEnemyForWhile);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -29,17 +39,26 @@ public class CollisionHandler : MonoBehaviour
             }
         }
     }
+
+    private void DeactivateEnemyForWhile()
+    {
+        StartCoroutine(DeactivateEnemy());
+    }
     IEnumerator DeactivateEnemy()
     {
         if (aIDrift != null)
         {
             aIDrift.enabled = false;
             collisionHandler.enabled = false;
+            colliderField.enabled = false;
+            visuals.SetActive(false);
             Debug.Log("Enemy Disabled");
             yield return new WaitForSeconds(6f);
             Debug.Log("Enemy Enabled");
             aIDrift.enabled = true;
             collisionHandler.enabled = true;
+            visuals.SetActive(true);
+            colliderField.enabled = true;
         }
         yield return null;
     }
