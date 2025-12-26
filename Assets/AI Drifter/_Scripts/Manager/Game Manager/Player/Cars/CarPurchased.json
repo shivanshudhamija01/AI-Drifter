@@ -1,0 +1,29 @@
+{
+    "car": [
+        {
+            "id": 1,
+            "purchased": 1,
+            "selected": 1
+        },
+        {
+            "id": 2,
+            "purchased": 0,
+            "selected": 0
+        },
+        {
+            "id": 3,
+            "purchased": 0,
+            "selected": 0
+        },
+        {
+            "id": 4,
+            "purchased": 0,
+            "selected": 0
+        },
+        {
+            "id": 5,
+            "purchased": 0,
+            "selected": 0
+        }
+    ]
+}

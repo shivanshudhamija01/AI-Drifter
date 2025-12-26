@@ -451,6 +451,7 @@ public class LevelGenerator : MonoBehaviour
     // Load Next Level 
     public void LoadNextLevel()
     {
+        StopAllCoroutines();
         StartCoroutine(LNL());
     }
     IEnumerator LNL()
@@ -463,6 +464,7 @@ public class LevelGenerator : MonoBehaviour
     // Restart Level 
     public void RestartLevel()
     {
+        StopAllCoroutines();
         StartCoroutine(RL());
     }
     IEnumerator RL()
