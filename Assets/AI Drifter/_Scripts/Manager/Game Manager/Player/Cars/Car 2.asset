@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Car 2
   m_EditorClassIdentifier: 
   carID: 2
-  CarName: Porsche 911
+  CarName: Vintage Car
   CarPrice: 200
   speed: 90
   acceleration: 80
   handling: 65
-  CarModel: {fileID: 3225874551983908691, guid: 25b10d78d8bcd8446a2e8a1a4987aebf,
-    type: 3}
+  CarModel: {fileID: 919132149155446097, guid: a4388d737c1979d4fba2fc79ce8a5454, type: 3}

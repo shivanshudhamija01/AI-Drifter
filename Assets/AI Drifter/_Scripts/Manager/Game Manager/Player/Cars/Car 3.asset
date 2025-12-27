@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Car 3
   m_EditorClassIdentifier: 
   carID: 3
-  CarName: Rubicon
+  CarName: Ford Endeavour
   CarPrice: 250
   speed: 80
   acceleration: 70
   handling: 85
-  CarModel: {fileID: 9025125847674791333, guid: 886bf31febc954b5b9dd3fa6ffaf3498,
+  CarModel: {fileID: 7738280560958622290, guid: d9280091cbdee454cad739267adbeb29,
     type: 3}

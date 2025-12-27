@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf906f7c65a549299149ba46de87664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 200
-  MaxSpeed: 2000
+  MoveSpeed: 230
+  MaxSpeed: 2400
   Drag: 0.98
   SteerAngle: 6
   Traction: 0.01
@@ -61,7 +61,7 @@ MonoBehaviour:
   rearLeftWheel: {fileID: 4059156204889046428}
   rearRightWheel: {fileID: 3894269140003041223}
   wheelRadius: 0.35
-  maxSteerAngle: 30
+  maxSteerAngle: 35
 --- !u!114 &1046336985829748039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +137,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sedan color 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143976150911545154, guid: 5a37d329df7ef5840aaa874d0d6711a6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217830049085755782, guid: 5a37d329df7ef5840aaa874d0d6711a6,
         type: 3}

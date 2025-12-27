@@ -1,54 +1,76 @@
-// using System.Collections;
-// using System.Collections.Generic;
 // using UnityEngine;
 
 // public class PlayerDrifter : MonoBehaviour
 // {
-//     public float MoveSpeed = 50;
-//     public float MaxSpeed = 15;
+//     [Header("Movement")]
+//     public float MoveSpeed = 50f;
+//     public float MaxSpeed = 15f;
 //     public float Drag = 0.98f;
-//     public float SteerAngle = 20;
-//     public float Traction = 1;
-    
+//     public float SteerAngle = 20f;
+//     public float Traction = 1f;
+
+//     [Header("Wheel Transforms")]
 //     [SerializeField] private Transform frontLeftWheel;
 //     [SerializeField] private Transform frontRightWheel;
 //     [SerializeField] private Transform rearLeftWheel;
 //     [SerializeField] private Transform rearRightWheel;
-//     // Variables
-//     [Header("Visual Settings")]
+
+//     [Header("Wheel Visual Settings")]
 //     [SerializeField] private float wheelRadius = 0.35f;
 //     [SerializeField] private float maxSteerAngle = 30f;
 
+
 //     private Vector3 MoveForce;
+//     private float steerInput;
+//     private float wheelRollAngle = 0f;
 
-//     // Update is called once per frame
-//     void Update() {
+//     void Update()
+//     {
+//         // =========================
+//         // INPUT
+//         // =========================
+//         steerInput = Input.GetAxis("Horizontal");
 
-//         // Moving
-//         MoveForce += transform.forward * MoveSpeed *  Time.deltaTime;
+//         // =========================
+//         // MOVEMENT
+//         // =========================
+//         MoveForce += transform.forward * MoveSpeed * Time.deltaTime;
 //         transform.position += MoveForce * Time.deltaTime;
 
-//         // Steering
-//         float steerInput = Input.GetAxis("Horizontal");
-//         transform.Rotate(Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime);
+//         // =========================
+//         // STEERING
+//         // =========================
+//         transform.Rotate(
+//             Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime
+//         );
 
-//         // Drag and max speed limit
+//         // =========================
+//         // DRAG & SPEED LIMIT
+//         // =========================
 //         MoveForce *= Drag;
 //         MoveForce = Vector3.ClampMagnitude(MoveForce, MaxSpeed);
 
-//         // Traction
-//         Debug.DrawRay(transform.position, MoveForce.normalized * 3);
-//         Debug.DrawRay(transform.position, transform.forward * 3, Color.blue);
-//         MoveForce = Vector3.Lerp(MoveForce.normalized, transform.forward, Traction * Time.deltaTime) * MoveForce.magnitude;
-
-//         WheelRotation();
-//     }
-//     void WheelRotation()
-//     {
-//          float speed = MoveSpeed;
+//         // =========================
+//         // TRACTION (DRIFT CONTROL)
+//         // =========================
+//         MoveForce = Vector3.Lerp(
+//             MoveForce.normalized,
+//             transform.forward,
+//             Traction * Time.deltaTime
+//         ) * MoveForce.magnitude;
 
 //         // =========================
-//         // ROLLING ROTATION
+//         // WHEEL VISUALS
+//         // =========================
+//         WheelRotation();
+//     }
+
+//     void WheelRotation()
+//     {
+//         float speed = MoveForce.magnitude;
+
+//         // =========================
+//         // WHEEL ROLLING
 //         // =========================
 //         float rotationAngle = (speed / wheelRadius) * Mathf.Rad2Deg * Time.deltaTime;
 
@@ -58,33 +80,72 @@
 //         RotateWheel(rearRightWheel, rotationAngle);
 
 //         // =========================
-//         // STEERING (Front Wheels)
+//         // FRONT WHEEL STEERING
 //         // =========================
-//         if (speed > 0.1f)
-//         {
-//             Vector3 localVel = transform.InverseTransformDirection(agent.velocity);
-//             float steer = Mathf.Clamp(localVel.x * maxSteerAngle, -maxSteerAngle, maxSteerAngle);
+//         float steerAngle = steerInput * maxSteerAngle;
 
-//             SetSteer(frontLeftWheel, steer);
-//             SetSteer(frontRightWheel, steer);
-//         }
+//         SetSteer(frontLeftWheel, steerAngle);
+//         SetSteer(frontRightWheel, steerAngle);
 //     }
 
-//     void RotateWheel(Transform wheel, float angle)
+//     // void RotateWheel(Transform wheel, float angle)
+//     // {
+//     //     if (!wheel) return;
+//     //     wheel.Rotate(Vector3.right, angle, Space.Self);
+//     // }
+
+//     // void SetSteer(Transform wheel, float steerAngle)
+//     // {
+//     //     if (!wheel) return;
+
+//     //     Vector3 euler = wheel.localEulerAngles;
+//     //     euler.y = steerAngle;
+//     //     wheel.localEulerAngles = euler;
+//     // }
+//     // void RotateWheel(Transform wheel, float rollAngle)
+//     // {
+//     //     if (!wheel) return;
+
+//     //     // Keep existing Y steering — only roll on X, force Z = 0
+//     //     Quaternion current = wheel.localRotation;
+
+//     //     float steerY = current.eulerAngles.y;  // keep steering
+//     //     float rollX = current.eulerAngles.x + rollAngle;
+
+//     //     wheel.localRotation = Quaternion.Euler(rollX, steerY, 0f);
+//     // }
+
+//     // void SetSteer(Transform wheel, float steerAngle)
+//     // {
+//     //     if (!wheel) return;
+
+//     //     // Only apply steering to Y axis — keep roll — force Z = 0
+//     //     Quaternion current = wheel.localRotation;
+
+//     //     float rollX = current.eulerAngles.x;
+
+//     //     wheel.localRotation = Quaternion.Euler(rollX, steerAngle, 0f);
+//     // }
+//     void RotateWheel(Transform wheel, float rollDelta)
 //     {
 //         if (!wheel) return;
-//         wheel.Rotate(Vector3.right, angle, Space.Self);
+
+//         // accumulate roll (never read from Unity's Euler)
+//         wheelRollAngle += rollDelta;
+
+//         // build rotation: X = roll, Y = steering, Z always 0
+//         wheel.localRotation = Quaternion.Euler(wheelRollAngle, steerInput * maxSteerAngle, 0f);
 //     }
 
 //     void SetSteer(Transform wheel, float steerAngle)
 //     {
 //         if (!wheel) return;
 
-//         Vector3 euler = wheel.localEulerAngles;
-//         euler.y = steerAngle;
-//         wheel.localEulerAngles = euler;
+//         // keep current roll, only change steering
+//         Vector3 e = wheel.localEulerAngles;
+//         wheel.localRotation = Quaternion.Euler(wheelRollAngle, steerAngle, 0f);
 //     }
-    
+
 // }
 using UnityEngine;
 
@@ -106,87 +167,68 @@ public class PlayerDrifter : MonoBehaviour
     [Header("Wheel Visual Settings")]
     [SerializeField] private float wheelRadius = 0.35f;
     [SerializeField] private float maxSteerAngle = 30f;
-  
 
     private Vector3 MoveForce;
     private float steerInput;
 
+    // independent roll angles (prevents flipping)
+    private float flRoll, frRoll, rlRoll, rrRoll;
+
     void Update()
     {
-        // =========================
-        // INPUT
-        // =========================
         steerInput = Input.GetAxis("Horizontal");
 
-        // =========================
-        // MOVEMENT
-        // =========================
+        // ---- MOVEMENT ----
         MoveForce += transform.forward * MoveSpeed * Time.deltaTime;
         transform.position += MoveForce * Time.deltaTime;
 
-        // =========================
-        // STEERING
-        // =========================
+        // ---- STEERING ----
         transform.Rotate(
             Vector3.up * steerInput * MoveForce.magnitude * SteerAngle * Time.deltaTime
         );
 
-        // =========================
-        // DRAG & SPEED LIMIT
-        // =========================
+        // ---- DRAG / LIMIT ----
         MoveForce *= Drag;
         MoveForce = Vector3.ClampMagnitude(MoveForce, MaxSpeed);
 
-        // =========================
-        // TRACTION (DRIFT CONTROL)
-        // =========================
+        // ---- TRACTION ----
         MoveForce = Vector3.Lerp(
             MoveForce.normalized,
             transform.forward,
             Traction * Time.deltaTime
         ) * MoveForce.magnitude;
 
-        // =========================
-        // WHEEL VISUALS
-        // =========================
+        // ---- WHEELS ----
         WheelRotation();
     }
 
     void WheelRotation()
     {
         float speed = MoveForce.magnitude;
+        float rollDelta = (speed / wheelRadius) * Mathf.Rad2Deg * Time.deltaTime;
 
-        // =========================
-        // WHEEL ROLLING
-        // =========================
-        float rotationAngle = (speed / wheelRadius) * Mathf.Rad2Deg * Time.deltaTime;
+        // accumulate roll separately for each wheel
+        flRoll += rollDelta;
+        frRoll += rollDelta;
+        rlRoll += rollDelta;
+        rrRoll += rollDelta;
 
-        RotateWheel(frontLeftWheel, rotationAngle);
-        RotateWheel(frontRightWheel, rotationAngle);
-        RotateWheel(rearLeftWheel, rotationAngle);
-        RotateWheel(rearRightWheel, rotationAngle);
-
-        // =========================
-        // FRONT WHEEL STEERING
-        // =========================
         float steerAngle = steerInput * maxSteerAngle;
 
-        SetSteer(frontLeftWheel, steerAngle);
-        SetSteer(frontRightWheel, steerAngle);
+        // ----- FRONT (roll + steer) -----
+        SetWheel(frontLeftWheel, flRoll, steerAngle);
+        SetWheel(frontRightWheel, frRoll, steerAngle);
+
+        // ----- REAR (roll only, NO steer) -----
+        SetWheel(rearLeftWheel, rlRoll, 0f);
+        SetWheel(rearRightWheel, rrRoll, 0f);
     }
 
-    void RotateWheel(Transform wheel, float angle)
-    {
-        if (!wheel) return;
-        wheel.Rotate(Vector3.right, angle, Space.Self);
-    }
-
-    void SetSteer(Transform wheel, float steerAngle)
+    void SetWheel(Transform wheel, float rollX, float steerY)
     {
         if (!wheel) return;
 
-        Vector3 euler = wheel.localEulerAngles;
-        euler.y = steerAngle;
-        wheel.localEulerAngles = euler;
+        // X = roll, Y = steering, Z locked to 0
+        wheel.localRotation = Quaternion.Euler(rollX, steerY, 0f);
     }
 }
