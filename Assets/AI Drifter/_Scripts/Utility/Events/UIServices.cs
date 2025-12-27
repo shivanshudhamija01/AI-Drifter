@@ -15,4 +15,15 @@ public class UIServices : GenericSingleton<UIServices>
     public EventController OnCityWorldSelected;
     public EventController OnIceWorldSelected;
     #endregion
+
+
+    public UIServices()
+    {
+        PlayButtonPressed = new EventController();
+        SettingButtonPressed = new EventController();
+        ShopButtonPressed = new EventController();
+        OnDesertWorldSelected = new EventController();
+        OnCityWorldSelected = new EventController();
+        OnIceWorldSelected = new EventController();
+    }
 }

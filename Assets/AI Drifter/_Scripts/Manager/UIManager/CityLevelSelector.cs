@@ -16,19 +16,24 @@ public class CityLevelSelector : MonoBehaviour
 
     void MakeInteractable()
     {
-        // Get the level number from the player pref
-        // then traverse the list and make the button interactable accodingly
-
-        for (int i = 0; i < levels.Count; i++)
+        int unlockedLevels = LevelProgressSaver.Instance.LoadData();
+        for (int i = 10; i < levels.Count; i++)
         {
-            if (i < 5)
+            if (i < unlockedLevels)
             {
                 levels[i].interactable = true;
+
+                int index = i; // avoid closure issue
+                levels[i].onClick.AddListener(() => LoadIthLevel(index));
             }
             else
             {
                 levels[i].interactable = false;
             }
         }
+    }
+    void LoadIthLevel(int level)
+    {
+        LevelServices.Instance.LoadLevel.Invoke(level);
     }
 }

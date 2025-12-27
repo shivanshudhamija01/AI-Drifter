@@ -2977,7 +2977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_CollectObjects: 0
+  m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -4747,7 +4747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &691884584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4906,11 +4906,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700907064}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5659d0fd67b82448dbd9d75f741f71dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  desertLevel: {fileID: 1759047340}
+  cityLevel: {fileID: 691884583}
+  iceWorld: {fileID: 877888541}
 --- !u!1 &725485467
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,7 +4977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &748630175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6261,6 +6264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c192b49c8f6634b09a056af6b0ee4f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseButton: {fileID: 1841819998}
+  healthBar: {fileID: 1520408418}
 --- !u!1 &874684976
 GameObject:
   m_ObjectHideFlags: 0
@@ -6399,7 +6404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &877888542
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6783,6 +6788,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897f9ae9f30a742d9aa961f40b1a2c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuPanel: {fileID: 1519916621}
+  settingPanel: {fileID: 1630234874}
+  worldSelectorPanel: {fileID: 817216398}
+  levelSelectorPanel: {fileID: 700907064}
+  desertLevels: {fileID: 1759047340}
+  iceLandLevels: {fileID: 877888541}
+  cityWorldLevels: {fileID: 691884583}
+  gamePlayPanel: {fileID: 868837491}
+  gameOverPanel: {fileID: 1860550319}
 --- !u!1001 &945418406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7435,6 +7449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 966049011}
   - component: {fileID: 966049012}
+  - component: {fileID: 966049013}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -7467,6 +7482,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf6eaaca5e7b647f3b7700231850066f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &966049013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966049010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15723a2d38863414699a16dcf69c9459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &997870043
@@ -12799,7 +12826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1759047341
 RectTransform:
   m_ObjectHideFlags: 0

@@ -63,6 +63,12 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject aggressiveAIPrefab;
     #endregion
 
+
+    // Track running coroutines
+    private Coroutine spawnSceneRoutine;
+    private Coroutine powerUpsLoopRoutine;
+
+
     void OnEnable()
     {
         PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
@@ -79,11 +85,11 @@ public class LevelGenerator : MonoBehaviour
     }
     void Start()
     {
-        InitPowerUpsPool();
         GameManager.Instance.SetTotalCollectibles(10);
         // GetMapFromLevelLoader();
-        StartCoroutine(SpawnScene());
-        StartCoroutine(PowerUpsWaveLoop());
+        spawnSceneRoutine = StartCoroutine(SpawnScene());
+        powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
+        InitPowerUpsPool();
     }
     void Update()
     {
@@ -363,25 +369,6 @@ public class LevelGenerator : MonoBehaviour
     }
 
     #region  HELPER_METHOD
-    // public List<GameObject> SpawnPrefab(int Count, GameObject prefab, Dictionary<GameObject, Transform> objToPosition)
-    // {
-    //     Debug.Log(vacantTiles.Count);
-    //     List<GameObject> objSpawnedInScene = new List<GameObject>();
-    //     int gap = Random.Range(1, vacantTiles.Count);
-    //     int startingIndex = Random.Range(2, vacantTiles.Count);
-    //     int totalvacantTiles = vacantTiles.Count;
-    //     for (int i = 0; i < Count; i++)
-    //     {
-    //         int index = (startingIndex + i * gap) % totalvacantTiles;
-    //         Vector3 spawnPosition = vacantTiles[index].position;
-    //         GameObject temp = Instantiate(prefab, spawnPosition, Quaternion.identity);
-    //         objSpawnedInScene.Add(temp);
-    //         vacantTiles.RemoveAt(index);
-    //     }
-    //     Debug.Log(vacantTiles.Count);
-    //     return objSpawnedInScene;
-
-    // }
     public List<GameObject> SpawnPrefab(int count, GameObject prefab, Dictionary<GameObject, Transform> objToPosition)
     {
         List<GameObject> spawned = new List<GameObject>();
@@ -404,6 +391,16 @@ public class LevelGenerator : MonoBehaviour
 
         return spawned;
     }
+
+    void StopActiveCoroutines()
+    {
+        if (spawnSceneRoutine != null)
+            StopCoroutine(spawnSceneRoutine);
+
+        if (powerUpsLoopRoutine != null)
+            StopCoroutine(powerUpsLoopRoutine);
+    }
+
 
     #endregion
 
@@ -451,11 +448,12 @@ public class LevelGenerator : MonoBehaviour
     // Load Next Level 
     public void LoadNextLevel()
     {
-        StopAllCoroutines();
+        // StopAllCoroutines();
         StartCoroutine(LNL());
     }
     IEnumerator LNL()
     {
+        StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
         levelNumber++;
         yield return StartCoroutine(SpawnScene());
@@ -464,11 +462,12 @@ public class LevelGenerator : MonoBehaviour
     // Restart Level 
     public void RestartLevel()
     {
-        StopAllCoroutines();
+        // StopAllCoroutines();
         StartCoroutine(RL());
     }
     IEnumerator RL()
     {
+        StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
         yield return StartCoroutine(SpawnScene());
         yield return StartCoroutine(PowerUpsWaveLoop());
@@ -485,7 +484,7 @@ public class LevelGenerator : MonoBehaviour
     IEnumerator ResetLevelData()
     {
         yield return new WaitForSeconds(1f);
-        StopAllCoroutines();
+        // StopAllCoroutines();
 
         // ----- Clear Tiles -----
         foreach (var tile in tileInCurrentScene)
@@ -509,6 +508,11 @@ public class LevelGenerator : MonoBehaviour
             Destroy(coin);
         coinsCollectedInScene.Clear();
 
+        // Need to add a loop that can clear all the coin whether collected or not 
+        foreach (var coin in coinsActiveInScene)
+            Destroy(coin);
+        coinsActiveInScene.Clear();
+
         // ----- Clear PowerUps -----
         foreach (var powerUp in powerUpsInScene)
             Destroy(powerUp);
@@ -525,6 +529,8 @@ public class LevelGenerator : MonoBehaviour
         // activePowerUpsCount = 0; 
 
         // ----- Reset GameManager -----
+        // InitPowerUpsPool();
+
         GameManager.Instance.ResetLevelData();
     }
     #endregion
