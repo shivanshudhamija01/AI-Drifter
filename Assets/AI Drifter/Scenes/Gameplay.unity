@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 102c3f2cfdcb3d64199f97f4f9aa3d46, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2fdc1726342f4a749a190a0a8677a1a2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -6691,7 +6691,7 @@ MonoBehaviour:
   spawnPoint: SpawnPoint
   width: 30
   height: 30
-  levelNumber: 0
+  levelNumber: 10
   collectible: {fileID: 7586022285698511698, guid: 73e7760fb1cc545ea9515a9f705bb5c7,
     type: 3}
   collectibleCount: 10
@@ -6721,7 +6721,7 @@ MonoBehaviour:
   minLifeTime: 4
   maxLifeTime: 8
   respawnDelay: 10
-  playerPrefab: {fileID: 1498396370199030161, guid: 6f9e54f0e828f438592edc5c14587eb9,
+  playerPrefab: {fileID: 3898602404200206295, guid: aeba045bf35b748b8adb116bd4614071,
     type: 3}
   smartAIPrefab: {fileID: 2911399452416526277, guid: 039fa516c56904cff9ce1a4fb71b92f2,
     type: 3}

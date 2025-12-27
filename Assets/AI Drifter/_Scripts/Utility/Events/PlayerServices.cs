@@ -9,6 +9,8 @@ public class PlayerServices : GenericSingleton<PlayerServices>
     public EventController<GameObject> OnCoinPickedUp;
     public EventController OnGhostCollected;
     public EventController OnPowerAttack;
+    public EventController OnPlayerDead;
+    public EventController<int> UpdatePlayerHealth;
 
     public PlayerServices()
     {
@@ -16,6 +18,8 @@ public class PlayerServices : GenericSingleton<PlayerServices>
         OnCoinPickedUp = new EventController<GameObject>();
         OnGhostCollected = new EventController();
         OnPowerAttack = new EventController();
+        OnPlayerDead = new EventController();
+        UpdatePlayerHealth = new EventController<int>();
     }
 }
 
