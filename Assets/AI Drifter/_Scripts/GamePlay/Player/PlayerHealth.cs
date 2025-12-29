@@ -17,9 +17,12 @@ public class PlayerHealth : MonoBehaviour
 
         health = updateHealth;
         Debug.Log("Updated Player health of player is : " + health);
-        // if (health <= 0)
-        // {
-        //     Time.timeScale = 0;
-        // }
+        // Here fires an event that will stop the stop the player and enemy and after some delay a restart panel will be poped out
+
+        if (health <= 0)
+        {
+            PlayerServices.Instance.OnPlayerDead.Invoke();
+            // Time.timeScale = 0;
+        }
     }
 }

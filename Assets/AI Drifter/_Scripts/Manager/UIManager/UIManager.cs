@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
         UIServices.Instance.OnCityWorldSelected.AddListener(ShowCityLevels);
         UIServices.Instance.OnIceWorldSelected.AddListener(ShowIceLandLevels);
         LevelServices.Instance.LoadLevel.AddListener(LoadLevel);
+        UIServices.Instance.goBackToWorldSelection.AddListener(ShowWorldMap);
     }
     void OnDisable()
     {
@@ -49,6 +50,7 @@ public class UIManager : MonoBehaviour
         UIServices.Instance.OnCityWorldSelected.RemoveListener(ShowCityLevels);
         UIServices.Instance.OnIceWorldSelected.RemoveListener(ShowIceLandLevels);
         LevelServices.Instance.LoadLevel.RemoveListener(LoadLevel);
+        UIServices.Instance.goBackToWorldSelection.RemoveListener(ShowWorldMap);
     }
 
     void PlayButtonPressed()
@@ -88,7 +90,14 @@ public class UIManager : MonoBehaviour
         cityWorldLevels.SetActive(false);
         iceLandLevels.SetActive(true);
     }
-
+    void ShowWorldMap()
+    {
+        worldSelectorPanel.SetActive(true);
+        levelSelectorPanel.SetActive(false);
+        desertLevels.SetActive(false);
+        cityWorldLevels.SetActive(false);
+        iceLandLevels.SetActive(false);
+    }
     void LoadLevel(int level)
     {
         levelSelectorPanel.SetActive(false);

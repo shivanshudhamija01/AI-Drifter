@@ -16,6 +16,7 @@ public class UIServices : GenericSingleton<UIServices>
     public EventController OnIceWorldSelected;
     #endregion
 
+    public EventController goBackToWorldSelection;
 
     public UIServices()
     {
@@ -25,5 +26,6 @@ public class UIServices : GenericSingleton<UIServices>
         OnDesertWorldSelected = new EventController();
         OnCityWorldSelected = new EventController();
         OnIceWorldSelected = new EventController();
+        goBackToWorldSelection = new EventController();
     }
 }

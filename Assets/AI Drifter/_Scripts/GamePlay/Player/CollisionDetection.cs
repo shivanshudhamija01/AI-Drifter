@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CollisionDetection : MonoBehaviour
 {
-  [Header("Capsule Settings")]
+    [Header("Capsule Settings")]
     [SerializeField] private float capsuleHeight = 1.8f;
     [SerializeField] private float capsuleRadius = 0.4f;
     [SerializeField] private float detectionDistance = 3f;
@@ -62,7 +62,7 @@ public class CollisionDetection : MonoBehaviour
     //         Debug.Log("col is null ");
     //         return ;
     //     }
-        
+
     //     if (hitCooldowns.TryGetValue(col, out float lastHitTime))
     //     {
     //         if (Time.time - lastHitTime < sameObjectCooldown)
@@ -70,7 +70,7 @@ public class CollisionDetection : MonoBehaviour
     //     }
     //     hitCooldowns[col] = Time.time;
     //     OnCapsuleCollisionEnter(hit);
-        
+
     //     // Runtime ray (Game view)
     //     if (drawDebug)
     //     {
@@ -79,53 +79,54 @@ public class CollisionDetection : MonoBehaviour
     //     }
     // }
     void DetectObstacle()
-{
-    Vector3 center = transform.position + Vector3.up * capsuleHeight * 0.5f;
-
-    Vector3 point1 = center + transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
-    Vector3 point2 = center - transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
-
-    Collider[] hits = Physics.OverlapCapsule(
-        point1,
-        point2,
-        capsuleRadius,
-        obstacleLayers,
-        QueryTriggerInteraction.Ignore
-    );
-
-    if (hits.Length == 0)
-        return;
-
-    foreach (Collider col in hits)
     {
-        if (col == null) 
-            continue;
+        Vector3 center = transform.position + Vector3.up * capsuleHeight * 0.5f;
 
-        // ✅ KEEP YOUR HIT COOLDOWN LOGIC (UNCHANGED)
-        if (hitCooldowns.TryGetValue(col, out float lastHitTime))
+        Vector3 point1 = center + transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
+        Vector3 point2 = center - transform.forward * (capsuleHeight * 0.2f - capsuleRadius);
+
+        Collider[] hits = Physics.OverlapCapsule(
+            point1,
+            point2,
+            capsuleRadius,
+            obstacleLayers,
+            QueryTriggerInteraction.Ignore
+        );
+
+        if (hits.Length == 0)
+            return;
+
+        foreach (Collider col in hits)
         {
-            if (Time.time - lastHitTime < sameObjectCooldown)
+            if (col == null)
                 continue;
+
+            // ✅ KEEP YOUR HIT COOLDOWN LOGIC (UNCHANGED)
+            if (hitCooldowns.TryGetValue(col, out float lastHitTime))
+            {
+                if (Time.time - lastHitTime < sameObjectCooldown)
+                    continue;
+            }
+
+            hitCooldowns[col] = Time.time;
+
+            // ✅ SAME HANDLER, SAME LOGIC
+            OnCapsuleCollisionEnter(col);
         }
-
-        hitCooldowns[col] = Time.time;
-
-        // ✅ SAME HANDLER, SAME LOGIC
-        OnCapsuleCollisionEnter(col);
     }
-}
 
     void OnCapsuleCollisionEnter(Collider hit)
     {
         Collider col = hit;
-        if(col.TryGetComponent<ICollectible>(out var collectible))
+        if (col.TryGetComponent<ICollectible>(out var collectible))
         {
             collectible.OnCollected(gameObject);
             return;
         }
-        if(col.TryGetComponent<IDamage>(out var obstacleHit))
+        if (col.TryGetComponent<IDamage>(out IDamage obstacleHit))
         {
             playerHealth.UpdateHealth(obstacleHit.GetDamage());
+            Debug.Log("Gola vajeya");
             return;
         }
 

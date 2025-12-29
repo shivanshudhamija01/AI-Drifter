@@ -20,10 +20,12 @@ public class CollisionHandler : MonoBehaviour
     void OnEnable()
     {
         PlayerServices.Instance.OnPowerAttack.AddListener(DeactivateEnemyForWhile);
+        PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDead);
     }
     void OnDisable()
     {
         PlayerServices.Instance.OnPowerAttack.RemoveListener(DeactivateEnemyForWhile);
+        PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDead);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -62,5 +64,11 @@ public class CollisionHandler : MonoBehaviour
             colliderField.enabled = true;
         }
         yield return null;
+    }
+
+    void PlayerDead()
+    {
+        StopAllCoroutines();
+        Debug.Log("Stop Coroutine");
     }
 }

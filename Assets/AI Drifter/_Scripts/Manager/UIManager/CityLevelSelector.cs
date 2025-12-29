@@ -7,6 +7,11 @@ public class CityLevelSelector : MonoBehaviour
 {
     [SerializeField] private List<Button> levels;
 
+    [SerializeField] private Button backButton;
+    void Awake()
+    {
+        backButton.onClick.AddListener(LoadWorldSelector);
+    }
     void OnEnable()
     {
         // call a method which make the level interactable 
@@ -35,5 +40,10 @@ public class CityLevelSelector : MonoBehaviour
     void LoadIthLevel(int level)
     {
         LevelServices.Instance.LoadLevel.Invoke(level);
+    }
+
+    private void LoadWorldSelector()
+    {
+        UIServices.Instance.goBackToWorldSelection.Invoke();
     }
 }

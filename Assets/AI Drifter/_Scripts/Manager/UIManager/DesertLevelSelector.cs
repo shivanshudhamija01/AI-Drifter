@@ -8,14 +8,19 @@ public class DesertLevelSelector : MonoBehaviour
     // In a list store all the button 
     // After store in a awake call a method 
     // That will traverse accordingly and unlock or make the button interactable
-
     [SerializeField] private List<Button> levels;
+    [SerializeField] private Button backButton;
 
+    void Awake()
+    {
+        backButton.onClick.AddListener(LoadWorldSelector);
+    }
     void OnEnable()
     {
         // call a method which make the level interactable 
         MakeInteractable();
     }
+
 
 
     void MakeInteractable()
@@ -40,5 +45,10 @@ public class DesertLevelSelector : MonoBehaviour
     {
         Debug.Log("Load the level number " + level);
         LevelServices.Instance.LoadLevel.Invoke(level);
+    }
+
+    private void LoadWorldSelector()
+    {
+        UIServices.Instance.goBackToWorldSelection.Invoke();
     }
 }

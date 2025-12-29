@@ -78,6 +78,7 @@ public class LevelGenerator : MonoBehaviour
         PlayerServices.Instance.OnGhostCollected.AddListener(MultiplyEnemiesInScene);
         LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
         LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
+        PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
     }
     void OnDisable()
     {
@@ -85,6 +86,7 @@ public class LevelGenerator : MonoBehaviour
         PlayerServices.Instance.OnGhostCollected.RemoveListener(MultiplyEnemiesInScene);
         LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
         LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
+        PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
     }
     void Start()
     {
@@ -324,7 +326,7 @@ public class LevelGenerator : MonoBehaviour
     {
         // Get the selected car from the save system
         GameObject selectedCarPrefab = GetSelectedCarPrefab();
-        
+
         if (selectedCarPrefab == null)
         {
             Debug.LogError("No car selected! Using default player prefab.");
@@ -333,23 +335,23 @@ public class LevelGenerator : MonoBehaviour
 
         playerInScene = Instantiate(selectedCarPrefab, playerSpawnPoint.position, Quaternion.identity);
         AssignCameraTarget(playerInScene.transform);
-        
+
         DirectionArrow component = playerInScene.GetComponentInChildren<DirectionArrow>();
         if (component != null)
         {
             directionArrow = component.gameObject;
         }
-        
+
         Debug.Log("Spawned Player with car: " + selectedCarPrefab.name);
         yield return null;
     }
 
-   private GameObject GetSelectedCarPrefab()
+    private GameObject GetSelectedCarPrefab()
     {
         if (allAvailableCars == null || allAvailableCars.Count == 0)
         {
             Debug.LogWarning("No available cars assigned in LevelGenerator!");
-            return playerPrefab; 
+            return playerPrefab;
         }
 
         // Get from player prefs
@@ -364,13 +366,13 @@ public class LevelGenerator : MonoBehaviour
                 return carSO.CarModel;
             }
         }
-        
+
         Debug.LogWarning($"Car ID {selectedCarID} not found in available cars. Using fallback.");
-        
+
         if (allAvailableCars.Count > 0 && allAvailableCars[0].CarModel != null)
             return allAvailableCars[0].CarModel;
-        
-        return playerPrefab; 
+
+        return playerPrefab;
     }
     IEnumerator SpawnEnemy()
     {
@@ -575,4 +577,23 @@ public class LevelGenerator : MonoBehaviour
         GameManager.Instance.ResetLevelData();
     }
     #endregion
+
+    void PlayerDeadAndStopGame()
+    {
+        // Here what i can do is that , stop the player in the scene from moving 
+        // Player car is burning and play a wood burn audio 
+        StopActiveCoroutines();
+        if (playerInScene.TryGetComponent<PlayerDrifter>(out PlayerDrifter playerDrifter))
+        {
+            playerDrifter.enabled = false;
+        }
+        if (playerInScene.TryGetComponent<CollisionDetection>(out CollisionDetection collisionDetection))
+        {
+            collisionDetection.enabled = false;
+        }
+        foreach (var enemy in enemiesInScene)
+            Destroy(enemy);
+        enemiesInScene.Clear();
+
+    }
 }

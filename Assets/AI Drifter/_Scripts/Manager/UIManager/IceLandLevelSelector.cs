@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,12 @@ using UnityEngine.UI;
 public class IceLandLevelSelector : MonoBehaviour
 {
     [SerializeField] private List<Button> levels;
+    [SerializeField] private Button backButton;
+
+    void Awake()
+    {
+        backButton.onClick.AddListener(LoadWorldSelector);
+    }
 
     void OnEnable()
     {
@@ -34,5 +41,10 @@ public class IceLandLevelSelector : MonoBehaviour
     void LoadIthLevel(int level)
     {
         LevelServices.Instance.LoadLevel.Invoke(level);
+    }
+
+    private void LoadWorldSelector()
+    {
+        UIServices.Instance.goBackToWorldSelection.Invoke();
     }
 }
