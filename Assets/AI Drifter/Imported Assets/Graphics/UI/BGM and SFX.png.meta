@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7e223a4fa39cc449585ca584c9a20181
+guid: 8aef70502018348cc9e574e094dc842f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Complete And Fail_0
+      name: BGM and SFX_0
       rect:
         serializedVersion: 2
-        x: 85
-        y: 347
-        width: 664
-        height: 398
+        x: 83
+        y: 391
+        width: 660
+        height: 269
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bf956fac31aa45e691a5b87fbeb7ec5
-      internalID: 1673708742
+      spriteID: 4c0f07029eb654cd78d1bb4b4758062f
+      internalID: 1118644498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Complete And Fail_1
+      name: BGM and SFX_1
       rect:
         serializedVersion: 2
-        x: 798
-        y: 350
-        width: 669
-        height: 399
+        x: 793
+        y: 391
+        width: 656
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46be03c1ffd204dcfb71b8acbf2a21a6
-      internalID: 1763496043
+      spriteID: c619cdb4ecff045a78cc867e20f96f61
+      internalID: -528059733
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b46f40ec7ff7f4e4ea57abd9a42f45cc
+    spriteID: 7a6337e48d7a74f2186d956dd5773293
     internalID: 0
     vertices: []
     indices: 
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Complete And Fail_0: 1673708742
-      Complete And Fail_1: 1763496043
+      BGM and SFX_0: 1118644498
+      BGM and SFX_1: -528059733
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
