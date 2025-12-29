@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip levelFailed;
     [SerializeField] private AudioClip healthUp;
     [SerializeField] private AudioClip chemicalEffect;
+    [SerializeField] private AudioClip powerAttack;
+    [SerializeField] private AudioClip shieldEffect;
     void OnEnable()
     {
         AudioServices.Instance.PlayAudio.AddListener(PlayAudioOnParticularEvent);
@@ -58,6 +60,16 @@ public class AudioManager : MonoBehaviour
 
             case Enums.Audios.healthUp:
                 sfx.clip = healthUp;
+                break;
+            case Enums.Audios.chemical:
+                sfx.clip = chemicalEffect;
+                break;
+
+            case Enums.Audios.shield:
+                sfx.clip = shieldEffect;
+                break;
+            case Enums.Audios.powerAttack:
+                sfx.clip = powerAttack;
                 break;
         }
         sfx.Play();

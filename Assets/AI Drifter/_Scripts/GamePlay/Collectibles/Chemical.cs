@@ -17,6 +17,7 @@ public class Chemical : MonoBehaviour, ICollectible
         if (collector.TryGetComponent<PlayerHealth>(out PlayerHealth component))
         {
             PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.chemical);
+            AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.chemical);
             component.StartCoroutine(ChemicalEffect(component));
         }
         gameObject.SetActive(false);

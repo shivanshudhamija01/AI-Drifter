@@ -17,6 +17,7 @@ public class Blast : MonoBehaviour, ICollectible
         if (health != null)
         {
             PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.blast);
+            AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.blast);
             health.UpdateHealth(-50);
         }
         gameObject.SetActive(false);

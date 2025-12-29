@@ -36,7 +36,7 @@ public class CarDisplay : MonoBehaviour
     public void UpdateCar(CarSO car)
     {
         carName.text = car.CarName;
-        carPrice.text = car.CarPrice + "$";
+        carPrice.text = car.CarPrice + " ";
 
         speed.fillAmount = car.speed / 100f;
         handling.fillAmount = car.handling / 100f;

@@ -14,6 +14,7 @@ public class Shield : MonoBehaviour, ICollectible
     {
         if (collector.TryGetComponent<CollisionDetection>(out CollisionDetection component))
         {
+            AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.shield);
             PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.shield);
             component.StartCoroutine(DisableCollisionDetection(component));
         }

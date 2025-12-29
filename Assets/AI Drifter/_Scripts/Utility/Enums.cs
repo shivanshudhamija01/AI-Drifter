@@ -28,6 +28,9 @@ public class Enums
         levelClear,
         levelFailed,
         carPoliceSiren,
-        healthUp
+        healthUp,
+        chemical,
+        shield,
+        powerAttack,
     }
 }
