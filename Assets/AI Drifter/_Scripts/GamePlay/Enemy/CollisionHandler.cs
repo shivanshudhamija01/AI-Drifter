@@ -34,6 +34,7 @@ public class CollisionHandler : MonoBehaviour
             if (distance < 30f && !other.collider.gameObject.CompareTag("Enemy"))
             {
                 blastEffect.Play();
+                AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.blast);
                 EnemyServices.Instance.OnObstacleHit.Invoke(this.gameObject);
                 StartCoroutine(DeactivateEnemy());
             }

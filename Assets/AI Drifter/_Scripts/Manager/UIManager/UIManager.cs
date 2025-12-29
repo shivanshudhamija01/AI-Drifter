@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuPanel;
@@ -14,7 +15,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject cityWorldLevels;
     [SerializeField] private GameObject gamePlayPanel;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private Button[] buttons;
 
+    void Awake()
+    {
+        foreach (Button btn in buttons)
+        {
+            btn.onClick.AddListener(ButtonClicked);
+        }
+    }
+
+    private void ButtonClicked()
+    {
+        AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.guiClicked);
+    }
 
     void OnEnable()
     {

@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AudioManager : MonoBehaviour
+{
+    [SerializeField] private AudioSource enemy;
+    [SerializeField] private AudioSource sfx;
+
+
+    [SerializeField] private AudioClip coinPickedUp;
+    [SerializeField] private AudioClip guiClicked;
+    [SerializeField] private AudioClip blast;
+    [SerializeField] private AudioClip collision;
+    [SerializeField] private AudioClip levelCleared;
+    [SerializeField] private AudioClip levelFailed;
+    [SerializeField] private AudioClip healthUp;
+    [SerializeField] private AudioClip chemicalEffect;
+    void OnEnable()
+    {
+        AudioServices.Instance.PlayAudio.AddListener(PlayAudioOnParticularEvent);
+    }
+    void OnDisable()
+    {
+        AudioServices.Instance.PlayAudio.RemoveListener(PlayAudioOnParticularEvent);
+    }
+
+
+
+    void PlayAudioOnParticularEvent(Enums.Audios audioClip)
+    {
+        sfx.Stop();
+        switch (audioClip)
+        {
+            case Enums.Audios.coinPickedUp:
+                sfx.clip = coinPickedUp;
+                break;
+
+            case Enums.Audios.blast:
+                sfx.clip = blast;
+                break;
+
+            case Enums.Audios.collision:
+                sfx.clip = collision;
+                break;
+
+            case Enums.Audios.guiClicked:
+                sfx.clip = guiClicked;
+                break;
+
+            case Enums.Audios.levelClear:
+                sfx.clip = levelCleared;
+                break;
+
+            case Enums.Audios.levelFailed:
+                sfx.clip = levelFailed;
+                break;
+
+            case Enums.Audios.healthUp:
+                sfx.clip = healthUp;
+                break;
+        }
+        sfx.Play();
+    }
+}

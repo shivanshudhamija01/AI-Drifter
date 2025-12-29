@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enums 
+public class Enums
 {
     public enum Collectibles
     {
@@ -15,5 +15,19 @@ public class Enums
         blast,
         ghost,
         chemical
+    }
+    public enum Audios
+    {
+        coinPickedUp,
+        collision,
+        blast,
+        skid,
+        guiClicked,
+        purchaseSuccess,
+        purchaseDeclined,
+        levelClear,
+        levelFailed,
+        carPoliceSiren,
+        healthUp
     }
 }

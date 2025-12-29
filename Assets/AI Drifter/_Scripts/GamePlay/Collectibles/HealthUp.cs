@@ -17,6 +17,7 @@ public class HealthUp : MonoBehaviour, ICollectible
         if (health != null)
         {
             PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.healthUp);
+            AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.healthUp);
             health.UpdateHealth(100);
         }
         gameObject.SetActive(false);
