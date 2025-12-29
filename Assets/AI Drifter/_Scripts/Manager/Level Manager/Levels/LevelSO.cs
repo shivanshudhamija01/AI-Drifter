@@ -23,7 +23,7 @@ public class LevelSO : ScriptableObject
 
     [Header("Player")]
     // Player and their different types
-    public List<GameObject> Player;
+    public List<CarSO> Player;
 
     // Collectible item and their count
     [Header("Collectible")]

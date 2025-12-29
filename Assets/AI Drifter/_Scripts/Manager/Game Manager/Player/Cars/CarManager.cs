@@ -3,6 +3,7 @@ using UnityEngine;
 public class CarManager : MonoBehaviour
 {
     private CarSO car;
+    
     public void PurchaseCar()
     {
         var state = CarSaveSystem.Instance.GetState(car.carID);
@@ -21,13 +22,19 @@ public class CarManager : MonoBehaviour
 
         var state = CarSaveSystem.Instance.GetState(car.carID);
         state.selected = true;
-
+        
         CarSaveSystem.Instance.Save();
+        
+        CarSaveSystem.Instance.SaveSelectedCarID(car.carID);
+        
+        Debug.Log($"Selected car: {car.CarName} (ID: {car.carID})");
     }
+    
     public void SetCarSO(CarSO carSO)
     {
         car = carSO;
     }
+    
     public bool IsPurchased(CarSO car)
         => CarSaveSystem.Instance.GetState(car.carID).purchased;
 

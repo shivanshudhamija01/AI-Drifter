@@ -20,6 +20,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private int height = 30;
     [SerializeField] private int levelNumber = 0;
 
+    [Header("Player Cars")]
+    [SerializeField] private List<CarSO> allAvailableCars;
+
     private int[][] matrix;
     private List<GameObject> tileInCurrentScene = new List<GameObject>();
     private List<Transform> vacantTiles = new List<Transform>();
@@ -319,17 +322,55 @@ public class LevelGenerator : MonoBehaviour
 
     IEnumerator SpawnPlayer()
     {
-        // Take a center point and always try to spawn the player at the center of the enviroment 
+        // Get the selected car from the save system
+        GameObject selectedCarPrefab = GetSelectedCarPrefab();
+        
+        if (selectedCarPrefab == null)
+        {
+            Debug.LogError("No car selected! Using default player prefab.");
+            selectedCarPrefab = playerPrefab; // Fallback to default
+        }
 
-        playerInScene = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+        playerInScene = Instantiate(selectedCarPrefab, playerSpawnPoint.position, Quaternion.identity);
         AssignCameraTarget(playerInScene.transform);
+        
         DirectionArrow component = playerInScene.GetComponentInChildren<DirectionArrow>();
         if (component != null)
         {
             directionArrow = component.gameObject;
         }
-        Debug.Log("Spawn Player");
+        
+        Debug.Log("Spawned Player with car: " + selectedCarPrefab.name);
         yield return null;
+    }
+
+   private GameObject GetSelectedCarPrefab()
+    {
+        if (allAvailableCars == null || allAvailableCars.Count == 0)
+        {
+            Debug.LogWarning("No available cars assigned in LevelGenerator!");
+            return playerPrefab; 
+        }
+
+        // Get from player prefs
+        int selectedCarID = PlayerPrefs.GetInt("SelectedCarID", 1); // Default to 1
+        Debug.Log($"Loading car with ID: {selectedCarID}");
+
+        foreach (var carSO in allAvailableCars)
+        {
+            if (carSO.carID == selectedCarID)
+            {
+                Debug.Log($"Found selected car: {carSO.CarName}");
+                return carSO.CarModel;
+            }
+        }
+        
+        Debug.LogWarning($"Car ID {selectedCarID} not found in available cars. Using fallback.");
+        
+        if (allAvailableCars.Count > 0 && allAvailableCars[0].CarModel != null)
+            return allAvailableCars[0].CarModel;
+        
+        return playerPrefab; 
     }
     IEnumerator SpawnEnemy()
     {

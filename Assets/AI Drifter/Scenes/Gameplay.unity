@@ -6791,6 +6791,12 @@ MonoBehaviour:
   width: 30
   height: 30
   levelNumber: 10
+  allAvailableCars:
+  - {fileID: 11400000, guid: 03cd9f00a4c1848a09613476dcff8f48, type: 2}
+  - {fileID: 11400000, guid: 9c7b5512af8f645fdb70072f0d2dd3f5, type: 2}
+  - {fileID: 11400000, guid: f916daba8880c4a3284f4c410b59805c, type: 2}
+  - {fileID: 11400000, guid: b2b24d09b446f41f694cfb6bbda39f75, type: 2}
+  - {fileID: 11400000, guid: 1b87e70f2c2614840bd2c1fef6750b58, type: 2}
   collectible: {fileID: 7586022285698511698, guid: 73e7760fb1cc545ea9515a9f705bb5c7,
     type: 3}
   collectibleCount: 10

@@ -7,6 +7,9 @@ public class CarSaveSystem : MonoBehaviour
 
     public CarStateList state = new();
     private string filePath;
+    
+    // PlayerPrefs key for selected car
+    private const string SELECTED_CAR_KEY = "SelectedCarID";
 
     private void Awake()
     {
@@ -52,4 +55,21 @@ public class CarSaveSystem : MonoBehaviour
         return car;
     }
 
+    // PlayerPrefs Methods
+    public void SaveSelectedCarID(int carID)
+    {
+        PlayerPrefs.SetInt(SELECTED_CAR_KEY, carID);
+        PlayerPrefs.Save();
+        Debug.Log($"Saved selected car ID: {carID}");
+    }
+
+    public int GetSelectedCarID()
+    {
+        return PlayerPrefs.GetInt(SELECTED_CAR_KEY, 1); 
+    }
+
+    public bool IsCarSelected(int carID)
+    {
+        return GetSelectedCarID() == carID;
+    }
 }
