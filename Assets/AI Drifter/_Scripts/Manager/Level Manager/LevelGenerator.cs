@@ -83,12 +83,8 @@ public class LevelGenerator : MonoBehaviour
     {
         PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.AddListener(MultiplyEnemiesInScene);
-<<<<<<< HEAD
         PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
-=======
         LevelServices.Instance.OnLevelCompleted.AddListener(PlayerDeadAndStopGame);
-        // LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
->>>>>>> 83dacc4f0dc2cdb0fa807864d1b94bcb1855f9e9
         LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
         PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadLevel.AddListener(LoadLevelBaseOnLevelNumber);
@@ -97,22 +93,16 @@ public class LevelGenerator : MonoBehaviour
     {
         PlayerServices.Instance.OnCoinPickedUp.RemoveListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.RemoveListener(MultiplyEnemiesInScene);
-<<<<<<< HEAD
         PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
-=======
         LevelServices.Instance.OnLevelCompleted.RemoveListener(PlayerDeadAndStopGame);
-        // LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
->>>>>>> 83dacc4f0dc2cdb0fa807864d1b94bcb1855f9e9
         LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
         PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadLevel.RemoveListener(LoadLevelBaseOnLevelNumber);
     }
     void Start()
     {
-<<<<<<< HEAD
         LoadLevelData();
         GameManager.Instance.SetTotalCollectibles(collectibleCount);
-=======
         GameManager.Instance.SetTotalCollectibles(10);
         // GetMapFromLevelLoader();
         // spawnSceneRoutine = StartCoroutine(SpawnScene());
@@ -122,7 +112,6 @@ public class LevelGenerator : MonoBehaviour
 
     void LoadLevelBaseOnLevelNumber(int lvlNumber)
     {
->>>>>>> 83dacc4f0dc2cdb0fa807864d1b94bcb1855f9e9
         spawnSceneRoutine = StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
         InitPowerUpsPool();
@@ -660,11 +649,11 @@ public class LevelGenerator : MonoBehaviour
     {
         StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
-        
+
         levelNumber++;
         LoadLevelData(); // Load new level data
         GameManager.Instance.SetTotalCollectibles(collectibleCount);
-        
+
         yield return StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
     }
@@ -682,10 +671,10 @@ public class LevelGenerator : MonoBehaviour
     {
         StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
-        
+
         LoadLevelData(); // Reload current level data
         GameManager.Instance.SetTotalCollectibles(collectibleCount);
-        
+
         yield return StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
 
