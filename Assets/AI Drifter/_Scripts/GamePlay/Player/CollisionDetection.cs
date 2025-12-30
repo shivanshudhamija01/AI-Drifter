@@ -126,7 +126,7 @@ public class CollisionDetection : MonoBehaviour
         if (col.TryGetComponent<IDamage>(out IDamage obstacleHit))
         {
             playerHealth.UpdateHealth(obstacleHit.GetDamage());
-            Debug.Log("Gola vajeya");
+            PlayerServices.Instance.OnCollectiblePicked.Invoke(Enums.Collectibles.blast);
             return;
         }
 

@@ -982,6 +982,7 @@ MonoBehaviour:
   bombBlastEffect: {fileID: 884162969812722660}
   powerAttackEffect: {fileID: 6132195345746946735}
   speedUpEffect: {fileID: 2982908639443961823}
+  burningEffect: {fileID: 883948667812561208}
 --- !u!82 &8345866076263926210
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1773,6 +1774,12 @@ PrefabInstance:
 --- !u!198 &883846722020357002 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 100806392328652039, guid: ddcac26358ed24f50b3d00805b090f50,
+    type: 3}
+  m_PrefabInstance: {fileID: 946370583514068621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &883948667812561208 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 100844635166472117, guid: ddcac26358ed24f50b3d00805b090f50,
     type: 3}
   m_PrefabInstance: {fileID: 946370583514068621}
   m_PrefabAsset: {fileID: 0}

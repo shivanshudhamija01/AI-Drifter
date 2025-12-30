@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuPanel : MonoBehaviour
@@ -32,6 +33,7 @@ public class MainMenuPanel : MonoBehaviour
     }
     void ShopButtonPressed()
     {
+        SceneManager.LoadScene("Shop");
         Debug.Log("Setting Button Pressed");
     }
 }

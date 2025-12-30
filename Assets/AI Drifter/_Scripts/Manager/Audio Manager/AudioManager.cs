@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -21,13 +23,27 @@ public class AudioManager : MonoBehaviour
     void OnEnable()
     {
         AudioServices.Instance.PlayAudio.AddListener(PlayAudioOnParticularEvent);
+        PlayerServices.Instance.OnPlayerDead.AddListener(BurningAudio);
+        LevelServices.Instance.LevelRestart.AddListener(ResetAudioSystem);
     }
     void OnDisable()
     {
         AudioServices.Instance.PlayAudio.RemoveListener(PlayAudioOnParticularEvent);
+        PlayerServices.Instance.OnPlayerDead.RemoveListener(BurningAudio);
+        LevelServices.Instance.LevelRestart.RemoveListener(ResetAudioSystem);
     }
 
+    private void ResetAudioSystem()
+    {
+        sfx.loop = false;
+    }
 
+    private void BurningAudio()
+    {
+        sfx.loop = true;
+        sfx.clip = chemicalEffect;
+        sfx.Play();
+    }
 
     void PlayAudioOnParticularEvent(Enums.Audios audioClip)
     {

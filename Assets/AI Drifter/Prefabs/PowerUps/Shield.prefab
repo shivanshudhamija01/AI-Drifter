@@ -87,6 +87,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e9820a790af8497409d7cab84e2403b4,
+        type: 3}
+      propertyPath: m_TagString
+      value: Collectible
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9820a790af8497409d7cab84e2403b4, type: 3}
 --- !u!1 &5366903953873038891 stripped
@@ -120,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abd51533e2f54d0d81412c14199f9b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 3
+  duration: 5
 --- !u!114 &3811104710500965497
 MonoBehaviour:
   m_ObjectHideFlags: 0

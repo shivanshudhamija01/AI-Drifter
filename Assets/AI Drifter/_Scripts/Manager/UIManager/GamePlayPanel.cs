@@ -8,6 +8,7 @@ public class GamePlayPanel : MonoBehaviour
     [SerializeField] private Button pauseButton;
     [SerializeField] private Image healthBar;
 
+
     void Awake()
     {
         pauseButton.onClick.AddListener(PauseButtonPressed);

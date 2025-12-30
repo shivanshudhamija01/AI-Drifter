@@ -128,6 +128,7 @@ MonoBehaviour:
   bombBlastEffect: {fileID: 884162969812722660}
   powerAttackEffect: {fileID: 6132195345746946735}
   speedUpEffect: {fileID: 2982908639443961823}
+  burningEffect: {fileID: 883948667812561208}
 --- !u!82 &1518455386782311248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -335,6 +336,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4332418098310542344}
     m_Modifications:
+    - target: {fileID: 100806392328652039, guid: ddcac26358ed24f50b3d00805b090f50,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5227013235304579778, guid: ddcac26358ed24f50b3d00805b090f50,
         type: 3}
       propertyPath: m_RootOrder
@@ -397,6 +403,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddcac26358ed24f50b3d00805b090f50, type: 3}
+--- !u!198 &883948667812561208 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 100844635166472117, guid: ddcac26358ed24f50b3d00805b090f50,
+    type: 3}
+  m_PrefabInstance: {fileID: 946370583514068621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &884162969812722660 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 101052270837355881, guid: ddcac26358ed24f50b3d00805b090f50,

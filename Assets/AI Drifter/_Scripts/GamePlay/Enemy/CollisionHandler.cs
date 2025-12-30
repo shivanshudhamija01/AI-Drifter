@@ -33,7 +33,7 @@ public class CollisionHandler : MonoBehaviour
         if (aIDrift.target != null)
         {
             float distance = Vector3.Distance(transform.position, aIDrift.target.position);
-            if (distance < 30f && !other.collider.gameObject.CompareTag("Enemy"))
+            if (distance < 30f && !other.collider.gameObject.CompareTag("Enemy") && !other.collider.gameObject.CompareTag("Collectible"))
             {
                 blastEffect.Play();
                 AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.blast);
@@ -49,26 +49,36 @@ public class CollisionHandler : MonoBehaviour
     }
     IEnumerator DeactivateEnemy()
     {
-        if (aIDrift != null)
-        {
-            aIDrift.enabled = false;
-            collisionHandler.enabled = false;
-            colliderField.enabled = false;
-            visuals.SetActive(false);
-            Debug.Log("Enemy Disabled");
-            yield return new WaitForSeconds(6f);
-            Debug.Log("Enemy Enabled");
-            aIDrift.enabled = true;
-            collisionHandler.enabled = true;
-            visuals.SetActive(true);
-            colliderField.enabled = true;
-        }
-        yield return null;
+        if (aIDrift == null) yield break;
+
+        aIDrift.enabled = false;
+        collisionHandler.enabled = false;
+        colliderField.enabled = false;
+        visuals.SetActive(false);
+        Debug.Log("Enemy Disabled");
+        yield return new WaitForSeconds(6f);
+        Debug.Log("Enemy Enabled");
+        aIDrift.enabled = true;
+        collisionHandler.enabled = true;
+        visuals.SetActive(true);
+        colliderField.enabled = true;
     }
 
     void PlayerDead()
     {
         StopAllCoroutines();
-        Debug.Log("Stop Coroutine");
+
+        if (aIDrift) aIDrift.enabled = false;
+        if (colliderField) colliderField.enabled = false;
+        if (collisionHandler) collisionHandler.enabled = false;
+
+        if (TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
+        Debug.Log("Enemy stopped due to player death");
     }
 }

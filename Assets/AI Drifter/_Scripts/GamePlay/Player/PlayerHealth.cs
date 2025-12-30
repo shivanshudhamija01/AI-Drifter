@@ -22,7 +22,6 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0)
         {
             PlayerServices.Instance.OnPlayerDead.Invoke();
-            // Time.timeScale = 0;
         }
     }
 }

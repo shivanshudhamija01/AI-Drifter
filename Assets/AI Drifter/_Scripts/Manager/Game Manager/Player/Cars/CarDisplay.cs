@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CarDisplay : MonoBehaviour
@@ -25,6 +27,7 @@ public class CarDisplay : MonoBehaviour
     [SerializeField] private GameObject selectButton;
     [SerializeField] private GameObject selectedTag;
     [SerializeField] private CarManager carManager;
+    [SerializeField] private Button exit;
 
     private CarSO previousCar;
 
@@ -32,7 +35,14 @@ public class CarDisplay : MonoBehaviour
     {
         selectButton.gameObject.GetComponent<Button>().onClick.AddListener(UpdateState);
         purchaseButton.onClick.AddListener(UpdateState);
+        exit.onClick.AddListener(LoadGamePlayScene);
     }
+
+    private void LoadGamePlayScene()
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
+
     public void UpdateCar(CarSO car)
     {
         carName.text = car.CarName;

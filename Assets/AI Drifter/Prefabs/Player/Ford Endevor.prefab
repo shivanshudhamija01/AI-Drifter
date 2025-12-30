@@ -95,6 +95,7 @@ MonoBehaviour:
   bombBlastEffect: {fileID: 1561725486016410801}
   powerAttackEffect: {fileID: 5544106694207847930}
   speedUpEffect: {fileID: 3498200822969471114}
+  burningEffect: {fileID: 1561933396500190829}
 --- !u!114 &1498396370199030160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +436,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1498396370199030172}
     m_Modifications:
+    - target: {fileID: 100806392328652039, guid: ddcac26358ed24f50b3d00805b090f50,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 261328852212336320, guid: ddcac26358ed24f50b3d00805b090f50,
         type: 3}
       propertyPath: m_Layer
@@ -643,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 263599802609401867, guid: ddcac26358ed24f50b3d00805b090f50,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.29
+      value: 0.705
       objectReference: {fileID: 0}
     - target: {fileID: 263789654493551504, guid: ddcac26358ed24f50b3d00805b090f50,
         type: 3}

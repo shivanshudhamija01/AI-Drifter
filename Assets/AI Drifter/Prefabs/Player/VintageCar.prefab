@@ -128,6 +128,7 @@ MonoBehaviour:
   bombBlastEffect: {fileID: 977430672738725009}
   powerAttackEffect: {fileID: 6110340848419382746}
   speedUpEffect: {fileID: 2932069957905942698}
+  burningEffect: {fileID: 977790385133817421}
 --- !u!82 &7997763391866079240
 AudioSource:
   m_ObjectHideFlags: 0
@@ -231,6 +232,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4452497366042393469}
     m_Modifications:
+    - target: {fileID: 100806392328652039, guid: ddcac26358ed24f50b3d00805b090f50,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 263314317380253249, guid: ddcac26358ed24f50b3d00805b090f50,
         type: 3}
       propertyPath: m_LocalPosition.y

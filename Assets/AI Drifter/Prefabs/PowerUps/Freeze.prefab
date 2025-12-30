@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Freeze
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7af490ac9513f2b4a88be930c89da620,
+        type: 3}
+      propertyPath: m_TagString
+      value: Collectible
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7af490ac9513f2b4a88be930c89da620, type: 3}
 --- !u!1 &7707380419604626259 stripped
@@ -80,6 +85,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7365483766268593666}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &3303307307032241495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707380419604626259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6764423, y: 1.4733696, z: 0.7540638}
+  m_Center: {x: -0.00000017881393, y: -0.06940317, z: 0}
 --- !u!114 &4688381711969602830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,16 +124,3 @@ MonoBehaviour:
   isScaling: 1
   useEasingForScaling: 1
   scaleLerpSpeed: 1.11
---- !u!65 &3303307307032241495
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7707380419604626259}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.6764423, y: 1.4733696, z: 0.7540638}
-  m_Center: {x: -0.00000017881393, y: -0.06940317, z: 0}

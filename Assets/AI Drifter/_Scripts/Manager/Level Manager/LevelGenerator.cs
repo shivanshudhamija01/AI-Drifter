@@ -45,6 +45,7 @@ public class LevelGenerator : MonoBehaviour
     private int activePowerUpsCount;
 
 
+
     //--------------- GameObjects Active In Scene--------------- //
     // Player
     private GameObject playerInScene;
@@ -67,26 +68,35 @@ public class LevelGenerator : MonoBehaviour
     #endregion
 
 
+    [SerializeField] private TMPro.TextMeshProUGUI countdownText;
+    [SerializeField] private float countdownStart = 3f;
+
     // Track running coroutines
     private Coroutine spawnSceneRoutine;
     private Coroutine powerUpsLoopRoutine;
+    private Coroutine enemySpawnRoutine;
+    private Coroutine countdownRoutine;
+    private bool isRestarting = false;
+
 
 
     void OnEnable()
     {
         PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.AddListener(MultiplyEnemiesInScene);
-        LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
-        LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
+        // LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
+        // LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
         PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
+        LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
     }
     void OnDisable()
     {
         PlayerServices.Instance.OnCoinPickedUp.RemoveListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.RemoveListener(MultiplyEnemiesInScene);
-        LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
-        LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
+        // LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
+        // LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
         PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
+        LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
     }
     void Start()
     {
@@ -308,7 +318,7 @@ public class LevelGenerator : MonoBehaviour
         yield return StartCoroutine(SpawnEnviroment());
         yield return StartCoroutine(SpawnCollectibles());
         yield return StartCoroutine(SpawnPlayer());
-        yield return StartCoroutine(SpawnEnemy());
+        enemySpawnRoutine = StartCoroutine(SpawnEnemy());
     }
     IEnumerator SpawnEnviroment()
     {
@@ -322,30 +332,63 @@ public class LevelGenerator : MonoBehaviour
         yield return null;
     }
 
+
     IEnumerator SpawnPlayer()
     {
-        // Get the selected car from the save system
         GameObject selectedCarPrefab = GetSelectedCarPrefab();
 
         if (selectedCarPrefab == null)
         {
             Debug.LogError("No car selected! Using default player prefab.");
-            selectedCarPrefab = playerPrefab; // Fallback to default
+            selectedCarPrefab = playerPrefab;
         }
 
         playerInScene = Instantiate(selectedCarPrefab, playerSpawnPoint.position, Quaternion.identity);
         AssignCameraTarget(playerInScene.transform);
 
+        // Disable movement until countdown finishes
+        if (playerInScene.TryGetComponent<PlayerDrifter>(out var drifter))
+            drifter.enabled = false;
+
         DirectionArrow component = playerInScene.GetComponentInChildren<DirectionArrow>();
         if (component != null)
-        {
             directionArrow = component.gameObject;
-        }
 
         Debug.Log("Spawned Player with car: " + selectedCarPrefab.name);
+
+        // ⏳ Start countdown after player spawn
+        if (countdownRoutine != null)
+            StopCoroutine(countdownRoutine);
+
+        countdownRoutine = StartCoroutine(StartLevelCountdown());
+
+
         yield return null;
     }
+    IEnumerator StartLevelCountdown()
+    {
+        float time = countdownStart;
 
+        while (time > 0)
+        {
+            countdownText.text = Mathf.Ceil(time).ToString();
+            countdownText.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(1f);
+            time--;
+        }
+
+        countdownText.text = "GO!";
+        yield return new WaitForSeconds(0.5f);
+        countdownText.gameObject.SetActive(false);
+
+        // ✅ Enable player movement now
+        if (playerInScene != null && playerInScene.TryGetComponent<PlayerDrifter>(out var drifter))
+            drifter.enabled = true;
+
+        countdownRoutine = null;
+
+    }
     private GameObject GetSelectedCarPrefab()
     {
         if (allAvailableCars == null || allAvailableCars.Count == 0)
@@ -434,14 +477,34 @@ public class LevelGenerator : MonoBehaviour
 
         return spawned;
     }
+    void DisableEnemy(GameObject enemy)
+    {
+        if (enemy == null) return;
+
+        if (enemy.TryGetComponent<AIDrift>(out var ai))
+            ai.enabled = false;
+
+        if (enemy.TryGetComponent<CollisionHandler>(out var col))
+            col.enabled = false;
+
+        if (enemy.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+    }
+
 
     void StopActiveCoroutines()
     {
-        if (spawnSceneRoutine != null)
-            StopCoroutine(spawnSceneRoutine);
+        if (spawnSceneRoutine != null) StopCoroutine(spawnSceneRoutine);
+        if (powerUpsLoopRoutine != null) StopCoroutine(powerUpsLoopRoutine);
+        if (enemySpawnRoutine != null) StopCoroutine(enemySpawnRoutine);
 
-        if (powerUpsLoopRoutine != null)
-            StopCoroutine(powerUpsLoopRoutine);
+        spawnSceneRoutine = null;
+        powerUpsLoopRoutine = null;
+        enemySpawnRoutine = null;
     }
 
 
@@ -500,35 +563,38 @@ public class LevelGenerator : MonoBehaviour
         yield return StartCoroutine(ResetLevelData());
         levelNumber++;
         yield return StartCoroutine(SpawnScene());
-        yield return StartCoroutine(PowerUpsWaveLoop());
+        // yield return StartCoroutine(PowerUpsWaveLoop());
+        powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
+
     }
     // Restart Level 
     public void RestartLevel()
     {
-        // StopAllCoroutines();
+        if (isRestarting) return;
+        isRestarting = true;
+
         StartCoroutine(RL());
     }
+
     IEnumerator RL()
     {
         StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
         yield return StartCoroutine(SpawnScene());
-        yield return StartCoroutine(PowerUpsWaveLoop());
+        // yield return StartCoroutine(PowerUpsWaveLoop());
+        powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
+
+        isRestarting = false;
+
     }
     #region  RESETLEVEL
     public void ResetLevel()
     {
         StartCoroutine(ResetLevelData());
-
-        // ----- Restart Level -----
-        // StartCoroutine(SpawnScene());
-        // StartCoroutine(PowerUpsWaveLoop());
     }
     IEnumerator ResetLevelData()
     {
-        yield return new WaitForSeconds(1f);
-        // StopAllCoroutines();
-
+        StopActiveCoroutines();
         // ----- Clear Tiles -----
         foreach (var tile in tileInCurrentScene)
             Destroy(tile);
@@ -568,32 +634,45 @@ public class LevelGenerator : MonoBehaviour
 
         // ReturnPowerUpsToPool(powerUp);
         // powerUpsInScene.Clear();
-        // gameObjectToSpawnPoint.Clear();
+        gameObjectToSpawnPoint.Clear();
         // activePowerUpsCount = 0; 
 
         // ----- Reset GameManager -----
-        // InitPowerUpsPool();
+        InitPowerUpsPool();
 
         GameManager.Instance.ResetLevelData();
+        yield return null;
     }
     #endregion
 
     void PlayerDeadAndStopGame()
     {
-        // Here what i can do is that , stop the player in the scene from moving 
-        // Player car is burning and play a wood burn audio 
+        // Stop environment + spawning loops
         StopActiveCoroutines();
-        if (playerInScene.TryGetComponent<PlayerDrifter>(out PlayerDrifter playerDrifter))
-        {
-            playerDrifter.enabled = false;
-        }
-        if (playerInScene.TryGetComponent<CollisionDetection>(out CollisionDetection collisionDetection))
-        {
-            collisionDetection.enabled = false;
-        }
-        foreach (var enemy in enemiesInScene)
-            Destroy(enemy);
-        enemiesInScene.Clear();
 
+        // ----- STOP PLAYER -----
+        if (playerInScene != null)
+        {
+            if (playerInScene.TryGetComponent<PlayerDrifter>(out var drifter))
+                drifter.enabled = false;
+
+            if (playerInScene.TryGetComponent<CollisionDetection>(out var detection))
+                detection.enabled = false;
+            if (playerInScene.TryGetComponent<Rigidbody>(out var rb))
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+                rb.isKinematic = true;
+            }
+            var audio = playerInScene.GetComponent<AudioSource>();
+            if (audio) audio.Stop();
+        }
+        // ----- REMOVE ALL ENEMIES FROM SCENE -----
+        foreach (var enemy in enemiesInScene)
+        {
+            if (enemy != null)
+                Destroy(enemy);
+        }
+        enemiesInScene.Clear();
     }
 }

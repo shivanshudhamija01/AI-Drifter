@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    // [SerializeField] private ParticleSystem firework;
     private int totalCollectibles;
     private int collected;
 
@@ -47,9 +47,18 @@ public class GameManager : MonoBehaviour
     void LevelClear()
     {
         ResetLevelData();
+        // HurrayLevelCompleted();
+        AudioServices.Instance.PlayAudio.Invoke(Enums.Audios.levelClear);
         LevelServices.Instance.OnLevelCompleted?.Invoke();
     }
-
+    // void HurrayLevelCompleted()
+    // {
+    //     float cameraSize = Camera.main.orthographicSize;
+    //     Vector3 initialPos = firework.transform.position;
+    //     firework.transform.position = new Vector3(Camera.main.transform.position.x, -1 * Camera.main.transform.position.y, initialPos.z);
+    //     firework.transform.localScale = new Vector3(cameraSize * 0.2f, cameraSize * 0.2f, cameraSize * 0.2f);
+    //     firework.Play();
+    // }
     public void RestartLevel()
     {
         ResetLevelData();

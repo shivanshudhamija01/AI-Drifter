@@ -14,7 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject iceLandLevels;
     [SerializeField] private GameObject cityWorldLevels;
     [SerializeField] private GameObject gamePlayPanel;
-    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameLostPanel;
+    [SerializeField] private GameObject gameWinPanel;
     [SerializeField] private Button[] buttons;
 
     void Awake()
@@ -38,8 +39,12 @@ public class UIManager : MonoBehaviour
         UIServices.Instance.OnDesertWorldSelected.AddListener(ShowDesertLevels);
         UIServices.Instance.OnCityWorldSelected.AddListener(ShowCityLevels);
         UIServices.Instance.OnIceWorldSelected.AddListener(ShowIceLandLevels);
-        LevelServices.Instance.LoadLevel.AddListener(LoadLevel);
         UIServices.Instance.goBackToWorldSelection.AddListener(ShowWorldMap);
+        PlayerServices.Instance.OnPlayerDead.AddListener(LoadGameLostPanel);
+        LevelServices.Instance.OnLevelCompleted.AddListener(LoadGameWinPanel);
+        LevelServices.Instance.LoadLevel.AddListener(LoadLevel);
+        // LevelServices.Instance.OnLevelRestarted.AddListener(LevelRestarted);
+        LevelServices.Instance.LevelRestart.AddListener(LevelRestarted);
     }
     void OnDisable()
     {
@@ -49,8 +54,12 @@ public class UIManager : MonoBehaviour
         UIServices.Instance.OnDesertWorldSelected.RemoveListener(ShowDesertLevels);
         UIServices.Instance.OnCityWorldSelected.RemoveListener(ShowCityLevels);
         UIServices.Instance.OnIceWorldSelected.RemoveListener(ShowIceLandLevels);
-        LevelServices.Instance.LoadLevel.RemoveListener(LoadLevel);
         UIServices.Instance.goBackToWorldSelection.RemoveListener(ShowWorldMap);
+        PlayerServices.Instance.OnPlayerDead.RemoveListener(LoadGameLostPanel);
+        LevelServices.Instance.LoadLevel.RemoveListener(LoadLevel);
+        LevelServices.Instance.OnLevelCompleted.RemoveListener(LoadGameWinPanel);
+        // LevelServices.Instance.OnLevelRestarted.RemoveListener(LevelRestarted);
+        LevelServices.Instance.LevelRestart.RemoveListener(LevelRestarted);
     }
 
     void PlayButtonPressed()
@@ -105,4 +114,33 @@ public class UIManager : MonoBehaviour
         // for playing the game , and all set 
         gamePlayPanel.SetActive(true);
     }
+    void LoadGameWinPanel()
+    {
+        gamePlayPanel.SetActive(false);
+        gameWinPanel.SetActive(true);
+    }
+    IEnumerator LoadLevelWinPanelAfterDelay()
+    {
+        yield return new WaitForSeconds(1);
+    }
+    void LoadGameLostPanel()
+    {
+        StartCoroutine(LoadLostPanelAfterADelay());
+    }
+    IEnumerator LoadLostPanelAfterADelay()
+    {
+        yield return new WaitForSeconds(3f);
+        gamePlayPanel.SetActive(false);
+        gameLostPanel.SetActive(true);
+    }
+    void LevelRestarted()
+    {
+        StopAllCoroutines();
+        Debug.Log("Level Restart Kro ");
+        gameLostPanel.SetActive(false);
+        gamePlayPanel.SetActive(true);
+    }
+
+    // On level completed and load next level are two different event remember it 
+
 }

@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkullBones
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 38b748d1e57621f469300f3e96dea280,
+        type: 3}
+      propertyPath: m_TagString
+      value: Collectible
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38b748d1e57621f469300f3e96dea280, type: 3}
 --- !u!1 &5860308363100874628 stripped
@@ -80,6 +85,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6742617317012527829}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &5882746345305184034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5860308363100874628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0427399, y: 2.279547, z: 0.808627}
+  m_Center: {x: 0.008868277, y: -0.032944918, z: 0.018616825}
 --- !u!114 &1854605293087311180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,16 +136,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bb2e14a23c34c7ca29499eff52b302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &5882746345305184034
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5860308363100874628}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.0427399, y: 2.279547, z: 0.808627}
-  m_Center: {x: 0.008868277, y: -0.032944918, z: 0.018616825}
