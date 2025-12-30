@@ -21,9 +21,8 @@ public class LevelSO : ScriptableObject
     public List<GameObject> MadAI;
     public List<GameObject> AggressiveAI;
 
-    [Header("Player")]
-    // Player and their different types
-    public List<CarSO> Player;
+    [Header("Reward")]
+    public int RewardValue;
 
     // Collectible item and their count
     [Header("Collectible")]
@@ -42,8 +41,5 @@ public class LevelSO : ScriptableObject
     public int MaxLiftTime;
     public int RespawnDelay;
 
-    [Header("Timer Setting")]
-    // Game Timer
-    public int Timer;
 
 }

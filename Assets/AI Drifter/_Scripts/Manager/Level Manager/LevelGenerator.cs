@@ -27,24 +27,31 @@ public class LevelGenerator : MonoBehaviour
     private List<GameObject> tileInCurrentScene = new List<GameObject>();
     private List<Transform> vacantTiles = new List<Transform>();
 
-    [Header("Collectible")]
-    [SerializeField] private GameObject collectible;
-    [SerializeField] private int collectibleCount;
+    // THESE WILL NOW BE LOADED FROM LevelSO :)
+    private GameObject collectible;
+    private int collectibleCount;
+    private List<GameObject> powerUpsList;
+    private int powerUpsPerWave = 5;
+    private float minLifeTime = 4f;
+    private float maxLifeTime = 8f;
+    private float respawnDelay = 10f;
+    private int powerUpPoolSize = 0;
 
-    [Header("PowerUps Wave Settings")]
-    [SerializeField] private List<GameObject> powerUpsList;
-    [SerializeField] private int powerUpsPerWave = 5;
-    [SerializeField] private float minLifeTime = 4f;
-    [SerializeField] private float maxLifeTime = 8f;
-    [SerializeField] private float respawnDelay = 10f;
+    // Enemy counts from LevelSO
+    private int smartAICount;
+    private int madAICount;
+    private int aggressiveAICount;
+
+    // Enemy prefabs from LevelSO
+    private List<GameObject> smartAIPrefabs;
+    private List<GameObject> madAIPrefabs;
+    private List<GameObject> aggressiveAIPrefabs;
 
     // Pooling
     private Queue<GameObject> powerUpsPool = new Queue<GameObject>();
     private Dictionary<GameObject, Transform> gameObjectToSpawnPoint = new Dictionary<GameObject, Transform>();
     private List<GameObject> powerUpsInScene = new List<GameObject>();
     private int activePowerUpsCount;
-
-
 
     //--------------- GameObjects Active In Scene--------------- //
     // Player
@@ -59,14 +66,6 @@ public class LevelGenerator : MonoBehaviour
     // Collectible Coins
     private List<GameObject> coinsActiveInScene = new List<GameObject>();
     private List<GameObject> coinsCollectedInScene = new List<GameObject>();
-
-    #region  Temp
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject smartAIPrefab;
-    [SerializeField] private GameObject madAIPrefab;
-    [SerializeField] private GameObject aggressiveAIPrefab;
-    #endregion
-
 
     [SerializeField] private TMPro.TextMeshProUGUI countdownText;
     [SerializeField] private float countdownStart = 3f;
@@ -84,8 +83,6 @@ public class LevelGenerator : MonoBehaviour
     {
         PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.AddListener(MultiplyEnemiesInScene);
-        // LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
-        // LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
         PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
     }
@@ -93,15 +90,13 @@ public class LevelGenerator : MonoBehaviour
     {
         PlayerServices.Instance.OnCoinPickedUp.RemoveListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.RemoveListener(MultiplyEnemiesInScene);
-        // LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
-        // LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
         PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
     }
     void Start()
     {
-        GameManager.Instance.SetTotalCollectibles(10);
-        // GetMapFromLevelLoader();
+        LoadLevelData();
+        GameManager.Instance.SetTotalCollectibles(collectibleCount);
         spawnSceneRoutine = StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
         InitPowerUpsPool();
@@ -112,6 +107,51 @@ public class LevelGenerator : MonoBehaviour
 
         PointTowardsNearbyCoin();
     }
+
+    #region Load Level Data from LevelSO
+
+    void LoadLevelData()
+    {
+        if (levels == null || levels.Count == 0)
+        {
+            Debug.LogError("No levels assigned in LevelGenerator!");
+            return;
+        }
+
+        if (levelNumber >= levels.Count)
+        {
+            Debug.LogWarning($"Level {levelNumber} doesn't exist! Loading last level.");
+            levelNumber = levels.Count - 1;
+        }
+
+        LevelSO currentLevel = levels[levelNumber];
+
+        // Load Enemy Data
+        smartAICount = currentLevel.smartAI;
+        madAICount = currentLevel.madAI;
+        aggressiveAICount = currentLevel.aggressiveAI;
+
+        smartAIPrefabs = currentLevel.SmartAI;
+        madAIPrefabs = currentLevel.MadAI;
+        aggressiveAIPrefabs = currentLevel.AggressiveAI;
+
+        // Load Collectible Data
+        collectible = currentLevel.CollectiblePrefab;
+        collectibleCount = currentLevel.CollectibleCount;
+
+        // Load PowerUp Data
+        powerUpsList = currentLevel.PowerUps;
+        powerUpPoolSize = currentLevel.PowerUpPoolSize;
+        powerUpsPerWave = currentLevel.PowerUpPerWave;
+        minLifeTime = currentLevel.MinLifeTime;
+        maxLifeTime = currentLevel.MaxLiftTime;
+        respawnDelay = currentLevel.RespawnDelay;
+
+        Debug.Log($"Loaded Level {levelNumber} Data - Enemies: Smart({smartAICount}), Mad({madAICount}), Aggressive({aggressiveAICount})");
+        Debug.Log($"Collectibles: {collectibleCount}, PowerUps per Wave: {powerUpsPerWave}");
+    }
+
+    #endregion
 
     #region Level Generation
 
@@ -230,6 +270,12 @@ public class LevelGenerator : MonoBehaviour
 
     void InitPowerUpsPool()
     {
+        if (powerUpsList == null || powerUpsList.Count == 0)
+        {
+            Debug.LogWarning("No PowerUps assigned in current level!");
+            return;
+        }
+
         for (int i = 0; i < powerUpsList.Count; i++)
         {
             GameObject obj = Instantiate(powerUpsList[i]);
@@ -244,6 +290,13 @@ public class LevelGenerator : MonoBehaviour
 
     IEnumerator PowerUpsWaveLoop()
     {
+        // Don't spawn powerups if powerUpsPerWave is 0
+        if (powerUpsPerWave <= 0)
+        {
+            Debug.Log("PowerUps disabled for this level (PowerUpPerWave = 0)");
+            yield break;
+        }
+
         while (true)
         {
             yield return new WaitUntil(() => vacantTiles.Count >= powerUpsPerWave);
@@ -339,8 +392,8 @@ public class LevelGenerator : MonoBehaviour
 
         if (selectedCarPrefab == null)
         {
-            Debug.LogError("No car selected! Using default player prefab.");
-            selectedCarPrefab = playerPrefab;
+            Debug.LogError("No car selected!");
+            yield break;
         }
 
         playerInScene = Instantiate(selectedCarPrefab, playerSpawnPoint.position, Quaternion.identity);
@@ -362,9 +415,9 @@ public class LevelGenerator : MonoBehaviour
 
         countdownRoutine = StartCoroutine(StartLevelCountdown());
 
-
         yield return null;
     }
+
     IEnumerator StartLevelCountdown()
     {
         float time = countdownStart;
@@ -387,18 +440,17 @@ public class LevelGenerator : MonoBehaviour
             drifter.enabled = true;
 
         countdownRoutine = null;
-
     }
+
     private GameObject GetSelectedCarPrefab()
     {
         if (allAvailableCars == null || allAvailableCars.Count == 0)
         {
             Debug.LogWarning("No available cars assigned in LevelGenerator!");
-            return playerPrefab;
+            return null;
         }
 
-        // Get from player prefs
-        int selectedCarID = PlayerPrefs.GetInt("SelectedCarID", 1); // Default to 1
+        int selectedCarID = PlayerPrefs.GetInt("SelectedCarID", 1);
         Debug.Log($"Loading car with ID: {selectedCarID}");
 
         foreach (var carSO in allAvailableCars)
@@ -410,42 +462,64 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        Debug.LogWarning($"Car ID {selectedCarID} not found in available cars. Using fallback.");
+        Debug.LogWarning($"Car ID {selectedCarID} not found. Using fallback.");
 
         if (allAvailableCars.Count > 0 && allAvailableCars[0].CarModel != null)
             return allAvailableCars[0].CarModel;
 
-        return playerPrefab;
+        return null;
     }
+
     IEnumerator SpawnEnemy()
     {
         yield return new WaitForSeconds(10f);
-        // Smart AI
-        List<GameObject> smartAIInScene = SpawnPrefab(1, smartAIPrefab, gameObjectToSpawnPoint);
-        // Mad AI
-        List<GameObject> madAIInScene = SpawnPrefab(1, madAIPrefab, gameObjectToSpawnPoint);
-        // Aggressive AI
-        List<GameObject> aggressiveAIInScene = SpawnPrefab(1, aggressiveAIPrefab, gameObjectToSpawnPoint);
 
-        // Now need to combine all three list in a single list 
+        // Smart AI
+        List<GameObject> smartAIInScene = SpawnMultipleEnemyTypes(smartAICount, smartAIPrefabs);
+
+        // Mad AI
+        List<GameObject> madAIInScene = SpawnMultipleEnemyTypes(madAICount, madAIPrefabs);
+
+        // Aggressive AI
+        List<GameObject> aggressiveAIInScene = SpawnMultipleEnemyTypes(aggressiveAICount, aggressiveAIPrefabs);
+
+        // Combine all into one list
         enemiesInScene.AddRange(smartAIInScene);
         enemiesInScene.AddRange(madAIInScene);
         enemiesInScene.AddRange(aggressiveAIInScene);
 
-
-        // Traverse the list and set the target reference to the player and also enable them 
-        for (int i = 0; i < enemiesInScene.Count; i++)
+        // Set target and enable
+        foreach (var enemy in enemiesInScene)
         {
-            GameObject temp = enemiesInScene[i];
-            if (temp.TryGetComponent(out AIDrift aiDrift))
+            if (enemy.TryGetComponent(out AIDrift aiDrift))
             {
                 aiDrift.target = playerInScene.transform;
             }
-            temp.SetActive(true);
+            enemy.SetActive(true);
         }
 
-        Debug.Log("Spawn Enemy");
+        Debug.Log($"Spawned {enemiesInScene.Count} Enemies");
         yield return null;
+    }
+
+    List<GameObject> SpawnMultipleEnemyTypes(int count, List<GameObject> prefabList)
+    {
+        List<GameObject> spawned = new List<GameObject>();
+
+        if (prefabList == null || prefabList.Count == 0)
+        {
+            Debug.LogWarning("Enemy prefab list is empty!");
+            return spawned;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            GameObject randomPrefab = prefabList[Random.Range(0, prefabList.Count)];
+            List<GameObject> temp = SpawnPrefab(1, randomPrefab, gameObjectToSpawnPoint);
+            spawned.AddRange(temp);
+        }
+
+        return spawned;
     }
 
     void AssignCameraTarget(Transform target)
@@ -477,6 +551,7 @@ public class LevelGenerator : MonoBehaviour
 
         return spawned;
     }
+
     void DisableEnemy(GameObject enemy)
     {
         if (enemy == null) return;
@@ -495,7 +570,6 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-
     void StopActiveCoroutines()
     {
         if (spawnSceneRoutine != null) StopCoroutine(spawnSceneRoutine);
@@ -506,7 +580,6 @@ public class LevelGenerator : MonoBehaviour
         powerUpsLoopRoutine = null;
         enemySpawnRoutine = null;
     }
-
 
     #endregion
 
@@ -521,52 +594,55 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-
     void MultiplyEnemiesInScene()
     {
         int randomType = Random.Range(0, 3);
-        List<GameObject> temp;
-        if (randomType == 0)
+        List<GameObject> temp = new List<GameObject>();
+
+        if (randomType == 0 && smartAIPrefabs != null && smartAIPrefabs.Count > 0)
         {
-            temp = SpawnPrefab(1, smartAIPrefab, gameObjectToSpawnPoint);
+            temp = SpawnMultipleEnemyTypes(1, smartAIPrefabs);
         }
-        else if (randomType == 1)
+        else if (randomType == 1 && madAIPrefabs != null && madAIPrefabs.Count > 0)
         {
-            temp = SpawnPrefab(1, madAIPrefab, gameObjectToSpawnPoint);
+            temp = SpawnMultipleEnemyTypes(1, madAIPrefabs);
         }
-        else
+        else if (aggressiveAIPrefabs != null && aggressiveAIPrefabs.Count > 0)
         {
-            temp = SpawnPrefab(1, aggressiveAIPrefab, gameObjectToSpawnPoint);
+            temp = SpawnMultipleEnemyTypes(1, aggressiveAIPrefabs);
         }
-        for (int i = 0; i < temp.Count; i++)
+
+        foreach (var enemySpawned in temp)
         {
-            GameObject enemySpawned = temp[i];
             if (enemySpawned.TryGetComponent(out AIDrift aiDrift))
             {
                 aiDrift.target = playerInScene.transform;
             }
             enemySpawned.SetActive(true);
         }
+
         enemiesInScene.AddRange(temp);
-        return;
     }
 
     // Load Next Level 
     public void LoadNextLevel()
     {
-        // StopAllCoroutines();
         StartCoroutine(LNL());
     }
+
     IEnumerator LNL()
     {
         StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
+        
         levelNumber++;
+        LoadLevelData(); // Load new level data
+        GameManager.Instance.SetTotalCollectibles(collectibleCount);
+        
         yield return StartCoroutine(SpawnScene());
-        // yield return StartCoroutine(PowerUpsWaveLoop());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
-
     }
+
     // Restart Level 
     public void RestartLevel()
     {
@@ -580,21 +656,26 @@ public class LevelGenerator : MonoBehaviour
     {
         StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
+        
+        LoadLevelData(); // Reload current level data
+        GameManager.Instance.SetTotalCollectibles(collectibleCount);
+        
         yield return StartCoroutine(SpawnScene());
-        // yield return StartCoroutine(PowerUpsWaveLoop());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
 
         isRestarting = false;
-
     }
+
     #region  RESETLEVEL
     public void ResetLevel()
     {
         StartCoroutine(ResetLevelData());
     }
+
     IEnumerator ResetLevelData()
     {
         StopActiveCoroutines();
+
         // ----- Clear Tiles -----
         foreach (var tile in tileInCurrentScene)
             Destroy(tile);
@@ -611,13 +692,11 @@ public class LevelGenerator : MonoBehaviour
         if (playerInScene != null)
             Destroy(playerInScene);
 
-
         // ----- Clear Coins -----
         foreach (var coin in coinsCollectedInScene)
             Destroy(coin);
         coinsCollectedInScene.Clear();
 
-        // Need to add a loop that can clear all the coin whether collected or not 
         foreach (var coin in coinsActiveInScene)
             Destroy(coin);
         coinsActiveInScene.Clear();
@@ -632,10 +711,7 @@ public class LevelGenerator : MonoBehaviour
         powerUpsInScene.Clear();
         powerUpsPool.Clear();
 
-        // ReturnPowerUpsToPool(powerUp);
-        // powerUpsInScene.Clear();
         gameObjectToSpawnPoint.Clear();
-        // activePowerUpsCount = 0; 
 
         // ----- Reset GameManager -----
         InitPowerUpsPool();
@@ -647,7 +723,6 @@ public class LevelGenerator : MonoBehaviour
 
     void PlayerDeadAndStopGame()
     {
-        // Stop environment + spawning loops
         StopActiveCoroutines();
 
         // ----- STOP PLAYER -----
@@ -658,15 +733,18 @@ public class LevelGenerator : MonoBehaviour
 
             if (playerInScene.TryGetComponent<CollisionDetection>(out var detection))
                 detection.enabled = false;
+
             if (playerInScene.TryGetComponent<Rigidbody>(out var rb))
             {
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 rb.isKinematic = true;
             }
+
             var audio = playerInScene.GetComponent<AudioSource>();
             if (audio) audio.Stop();
         }
+
         // ----- REMOVE ALL ENEMIES FROM SCENE -----
         foreach (var enemy in enemiesInScene)
         {
