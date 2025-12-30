@@ -14,7 +14,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 3252
   resultType: 0
-  materialsAndUVRects: []
-  resultMaterials: []
+  materialsAndUVRects:
+  - material: {fileID: 2100000, guid: 393811f263f384751bf41cb42212b150, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.03125
+      y: 0.0625
+      width: 0.4375
+      height: 0.875
+    srcObjName: Visuals
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  - material: {fileID: 2100000, guid: 3df5d7d2592485548871553f2e2c8d57, type: 2}
+    atlasRect:
+      serializedVersion: 2
+      x: 0.53125
+      y: 0.0625
+      width: 0.0625
+      height: 0.125
+    srcObjName: IcePlatform_02
+    textureArraySliceIdx: -1
+    allPropsUseSameTiling: 1
+    allPropsUseSameTiling_sourceMaterialTiling:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    allPropsUseSameTiling_samplingEncapsulatinRect:
+      serializedVersion: 2
+      x: 0.030240243
+      y: 0.67372286
+      width: 0.13070737
+      height: 0.14455444
+    propsUseDifferntTiling_srcUVsamplingRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    tilingTreatment: 1
+  resultMaterials:
+  - combinedMaterial: {fileID: 2100000, guid: 9e2a4e7d481974946849c515b9a81815, type: 2}
+    considerMeshUVs: 1
+    sourceMaterials:
+    - {fileID: 2100000, guid: 393811f263f384751bf41cb42212b150, type: 2}
+    - {fileID: 2100000, guid: 3df5d7d2592485548871553f2e2c8d57, type: 2}
   resultMaterialsTexArray: []
-  doMultiMaterial: 0
+  doMultiMaterial: 1

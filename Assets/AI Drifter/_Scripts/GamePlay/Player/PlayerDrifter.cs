@@ -29,11 +29,11 @@ public class PlayerDrifter : MonoBehaviour
     private float flRoll, frRoll, rlRoll, rrRoll;
     private float previousInput = 0;
 
-    void Update()
+    void FixedUpdate()
     {
         // Get input from keyboard OR touch
         steerInput = GetSteerInput();
-        
+
         if (steerInput != previousInput)
         {
             if (steerInput == 0)
@@ -46,7 +46,7 @@ public class PlayerDrifter : MonoBehaviour
                 audioSource.Play();
             }
         }
-        
+
         // ---- MOVEMENT ----
         MoveForce += transform.forward * MoveSpeed * Time.deltaTime;
         transform.position += MoveForce * Time.deltaTime;
@@ -80,10 +80,10 @@ public class PlayerDrifter : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            
+
             // Get screen half width
             float halfScreenWidth = Screen.width / 2f;
-            
+
             // Check which side of screen is being touched
             if (touch.position.x < halfScreenWidth)
             {
@@ -100,7 +100,7 @@ public class PlayerDrifter : MonoBehaviour
         else if (Input.GetMouseButton(0))
         {
             float halfScreenWidth = Screen.width / 2f;
-            
+
             if (Input.mousePosition.x < halfScreenWidth)
             {
                 input = -1f;
