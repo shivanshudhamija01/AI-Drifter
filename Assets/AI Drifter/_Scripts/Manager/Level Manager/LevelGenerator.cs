@@ -84,24 +84,33 @@ public class LevelGenerator : MonoBehaviour
     {
         PlayerServices.Instance.OnCoinPickedUp.AddListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.AddListener(MultiplyEnemiesInScene);
-        // LevelServices.Instance.OnLevelCompleted.AddListener(ResetLevel);
+        LevelServices.Instance.OnLevelCompleted.AddListener(PlayerDeadAndStopGame);
         // LevelServices.Instance.OnLevelRestarted.AddListener(ResetLevel);
-        PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
+        PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
+        LevelServices.Instance.LoadLevel.AddListener(LoadLevelBaseOnLevelNumber);
     }
     void OnDisable()
     {
         PlayerServices.Instance.OnCoinPickedUp.RemoveListener(DeactivateCoinFromScene);
         PlayerServices.Instance.OnGhostCollected.RemoveListener(MultiplyEnemiesInScene);
-        // LevelServices.Instance.OnLevelCompleted.RemoveListener(ResetLevel);
+        LevelServices.Instance.OnLevelCompleted.RemoveListener(PlayerDeadAndStopGame);
         // LevelServices.Instance.OnLevelRestarted.RemoveListener(ResetLevel);
-        PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
+        PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
+        LevelServices.Instance.LoadLevel.RemoveListener(LoadLevelBaseOnLevelNumber);
     }
     void Start()
     {
         GameManager.Instance.SetTotalCollectibles(10);
         // GetMapFromLevelLoader();
+        // spawnSceneRoutine = StartCoroutine(SpawnScene());
+        // powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
+        // InitPowerUpsPool();
+    }
+
+    void LoadLevelBaseOnLevelNumber(int lvlNumber)
+    {
         spawnSceneRoutine = StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
         InitPowerUpsPool();

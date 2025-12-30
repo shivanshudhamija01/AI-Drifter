@@ -21,12 +21,14 @@ public class PlayerParticleHandler : MonoBehaviour
         PlayerServices.Instance.OnCollectiblePicked.AddListener(HandleSpecificCollectibleCollected);
         PlayerServices.Instance.OnPlayerDead.AddListener(BurnCar);
         LevelServices.Instance.LevelRestart.AddListener(ResetBurnEffect);
+        LevelServices.Instance.LoadNextLevel.AddListener(ResetBurnEffect);
     }
     void OnDisable()
     {
         PlayerServices.Instance.OnCollectiblePicked.RemoveListener(HandleSpecificCollectibleCollected);
         PlayerServices.Instance.OnPlayerDead.RemoveListener(BurnCar);
         LevelServices.Instance.LevelRestart.RemoveListener(ResetBurnEffect);
+        LevelServices.Instance.LoadNextLevel.RemoveListener(ResetBurnEffect);
     }
 
     private void BurnCar()

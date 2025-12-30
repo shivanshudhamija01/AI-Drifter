@@ -13,7 +13,20 @@ public class GamePlayPanel : MonoBehaviour
     {
         pauseButton.onClick.AddListener(PauseButtonPressed);
     }
+    void OnEnable()
+    {
+        UIServices.Instance.updateHealthBar.AddListener(ModifyHealthBar);
+    }
+    void OnDisable()
+    {
+        UIServices.Instance.updateHealthBar.RemoveListener(ModifyHealthBar);
+    }
 
+    void ModifyHealthBar(float health)
+    {
+        float fillAmount = health / 100f;
+        healthBar.fillAmount = fillAmount;
+    }
     void PauseButtonPressed()
     {
         Time.timeScale = 0;
