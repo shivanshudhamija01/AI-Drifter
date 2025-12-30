@@ -9,7 +9,10 @@ public class PlayerHealth : MonoBehaviour
     {
         health = 100;
     }
-
+    void OnEnable()
+    {
+        UIServices.Instance.updateHealthBar.Invoke(100f);
+    }
     public void UpdateHealth(float amount)
     {
         float updateHealth = health + amount;
@@ -17,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
 
         health = updateHealth;
         Debug.Log("Updated Player health of player is : " + health);
+        UIServices.Instance.updateHealthBar.Invoke(health);
         // Here fires an event that will stop the stop the player and enemy and after some delay a restart panel will be poped out
 
         if (health <= 0)

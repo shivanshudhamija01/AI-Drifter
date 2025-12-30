@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
         LevelServices.Instance.LoadLevel.AddListener(LoadLevel);
         // LevelServices.Instance.OnLevelRestarted.AddListener(LevelRestarted);
         LevelServices.Instance.LevelRestart.AddListener(LevelRestarted);
+        LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
     }
     void OnDisable()
     {
@@ -60,6 +61,7 @@ public class UIManager : MonoBehaviour
         LevelServices.Instance.OnLevelCompleted.RemoveListener(LoadGameWinPanel);
         // LevelServices.Instance.OnLevelRestarted.RemoveListener(LevelRestarted);
         LevelServices.Instance.LevelRestart.RemoveListener(LevelRestarted);
+        LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
     }
 
     void PlayButtonPressed()
@@ -116,12 +118,14 @@ public class UIManager : MonoBehaviour
     }
     void LoadGameWinPanel()
     {
-        gamePlayPanel.SetActive(false);
-        gameWinPanel.SetActive(true);
+        StartCoroutine(LoadLevelWinPanelAfterDelay());
     }
     IEnumerator LoadLevelWinPanelAfterDelay()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2f);
+        gamePlayPanel.SetActive(false);
+        gameWinPanel.SetActive(true);
+
     }
     void LoadGameLostPanel()
     {
@@ -140,7 +144,11 @@ public class UIManager : MonoBehaviour
         gameLostPanel.SetActive(false);
         gamePlayPanel.SetActive(true);
     }
-
+    void LoadNextLevel()
+    {
+        gamePlayPanel.SetActive(true);
+        gameWinPanel.SetActive(false);
+    }
     // On level completed and load next level are two different event remember it 
 
 }

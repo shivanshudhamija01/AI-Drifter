@@ -10,7 +10,7 @@ public class GameOverLosePanel : MonoBehaviour
     [SerializeField] private Button homeButton;
 
 
-    void Start()
+    void Awake()
     {
         restartButton.onClick.AddListener(LevelRestart);
     }

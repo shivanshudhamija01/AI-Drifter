@@ -25,12 +25,14 @@ public class AudioManager : MonoBehaviour
         AudioServices.Instance.PlayAudio.AddListener(PlayAudioOnParticularEvent);
         PlayerServices.Instance.OnPlayerDead.AddListener(BurningAudio);
         LevelServices.Instance.LevelRestart.AddListener(ResetAudioSystem);
+        LevelServices.Instance.LoadNextLevel.AddListener(ResetAudioSystem);
     }
     void OnDisable()
     {
         AudioServices.Instance.PlayAudio.RemoveListener(PlayAudioOnParticularEvent);
         PlayerServices.Instance.OnPlayerDead.RemoveListener(BurningAudio);
         LevelServices.Instance.LevelRestart.RemoveListener(ResetAudioSystem);
+        LevelServices.Instance.LoadNextLevel.RemoveListener(ResetAudioSystem);
     }
 
     private void ResetAudioSystem()

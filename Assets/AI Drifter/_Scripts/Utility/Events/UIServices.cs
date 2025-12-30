@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIServices : GenericSingleton<UIServices>
@@ -17,6 +18,7 @@ public class UIServices : GenericSingleton<UIServices>
     #endregion
 
     public EventController goBackToWorldSelection;
+    public EventController<float> updateHealthBar;
 
     public UIServices()
     {
@@ -27,5 +29,6 @@ public class UIServices : GenericSingleton<UIServices>
         OnCityWorldSelected = new EventController();
         OnIceWorldSelected = new EventController();
         goBackToWorldSelection = new EventController();
+        updateHealthBar = new EventController<float>();
     }
 }
