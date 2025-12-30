@@ -19,7 +19,7 @@ public class PlayerDrifter : MonoBehaviour
     [SerializeField] private float wheelRadius = 0.35f;
     [SerializeField] private float maxSteerAngle = 30f;
 
-    [Header("Audio ")]
+    [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
 
     private Vector3 MoveForce;
@@ -31,7 +31,9 @@ public class PlayerDrifter : MonoBehaviour
 
     void Update()
     {
-        steerInput = Input.GetAxis("Horizontal");
+        // Get input from keyboard OR touch
+        steerInput = GetSteerInput();
+        
         if (steerInput != previousInput)
         {
             if (steerInput == 0)
@@ -44,6 +46,7 @@ public class PlayerDrifter : MonoBehaviour
                 audioSource.Play();
             }
         }
+        
         // ---- MOVEMENT ----
         MoveForce += transform.forward * MoveSpeed * Time.deltaTime;
         transform.position += MoveForce * Time.deltaTime;
@@ -66,6 +69,49 @@ public class PlayerDrifter : MonoBehaviour
 
         // ---- WHEELS ----
         WheelRotation();
+    }
+
+    float GetSteerInput()
+    {
+        // Default to keyboard input
+        float input = Input.GetAxis("Horizontal");
+
+        // Check for touch input (mobile)
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            
+            // Get screen half width
+            float halfScreenWidth = Screen.width / 2f;
+            
+            // Check which side of screen is being touched
+            if (touch.position.x < halfScreenWidth)
+            {
+                // Left side - steer left (like A key)
+                input = -1f;
+            }
+            else
+            {
+                // Right side - steer right (like D key)
+                input = 1f;
+            }
+        }
+        // Also support mouse clicks for testing in editor
+        else if (Input.GetMouseButton(0))
+        {
+            float halfScreenWidth = Screen.width / 2f;
+            
+            if (Input.mousePosition.x < halfScreenWidth)
+            {
+                input = -1f;
+            }
+            else
+            {
+                input = 1f;
+            }
+        }
+
+        return input;
     }
 
     void WheelRotation()

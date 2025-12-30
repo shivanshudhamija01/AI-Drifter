@@ -7216,7 +7216,8 @@ MonoBehaviour:
   - {fileID: 2652314494838981073, guid: 6c3aebfa2a6e941a790a3719e055e85b, type: 3}
   - {fileID: 5050347271266944819, guid: 72764474f2b284b92b1bada74c6f6c1c, type: 3}
   - {fileID: 1975853849050676326, guid: 2421d2d0bff2f4d1597a6024e17043eb, type: 3}
-  levels: []
+  levels:
+  - {fileID: 11400000, guid: c1d1c8b6ce83b48bbacb2b39531a14c1, type: 2}
   Enviroment: {fileID: 392161096}
   spawnPoint: SpawnPoint
   width: 30
@@ -12615,7 +12616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1519916622
 MonoBehaviour:
   m_ObjectHideFlags: 0
