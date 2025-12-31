@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
         PlayerServices.Instance.OnPlayerDead.AddListener(BurningAudio);
         LevelServices.Instance.LevelRestart.AddListener(ResetAudioSystem);
         LevelServices.Instance.LoadNextLevel.AddListener(ResetAudioSystem);
+        UIServices.Instance.onHomeButtonClicked.AddListener(ResetAudioSystem);
     }
     void OnDisable()
     {
@@ -34,6 +35,7 @@ public class AudioManager : MonoBehaviour
         PlayerServices.Instance.OnPlayerDead.RemoveListener(BurningAudio);
         LevelServices.Instance.LevelRestart.RemoveListener(ResetAudioSystem);
         LevelServices.Instance.LoadNextLevel.RemoveListener(ResetAudioSystem);
+        UIServices.Instance.onHomeButtonClicked.RemoveListener(ResetAudioSystem);
     }
 
     private void ResetAudioSystem()

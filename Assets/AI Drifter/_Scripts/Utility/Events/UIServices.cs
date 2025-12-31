@@ -20,6 +20,7 @@ public class UIServices : GenericSingleton<UIServices>
     public EventController goBackToWorldSelection;
     public EventController<float> updateHealthBar;
     public EventController goBackToMainFromWorld;
+    public EventController onHomeButtonClicked;
 
     public UIServices()
     {
@@ -32,5 +33,6 @@ public class UIServices : GenericSingleton<UIServices>
         goBackToWorldSelection = new EventController();
         updateHealthBar = new EventController<float>();
         goBackToMainFromWorld = new EventController();
+        onHomeButtonClicked = new EventController();
     }
 }

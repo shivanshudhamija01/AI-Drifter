@@ -89,6 +89,7 @@ public class LevelGenerator : MonoBehaviour
         PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadLevel.AddListener(LoadLevelBaseOnLevelNumber);
         LevelServices.Instance.LevelRestart.AddListener(RestartLevel);
+        LevelServices.Instance.ResetLevel.AddListener(ResetLevel);
     }
     void OnDisable()
     {
@@ -100,6 +101,7 @@ public class LevelGenerator : MonoBehaviour
         PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadLevel.RemoveListener(LoadLevelBaseOnLevelNumber);
         LevelServices.Instance.LevelRestart.RemoveListener(RestartLevel);
+        LevelServices.Instance.ResetLevel.RemoveListener(ResetLevel);
     }
     void Start()
     {
@@ -686,56 +688,124 @@ public class LevelGenerator : MonoBehaviour
     #region  RESETLEVEL
     public void ResetLevel()
     {
+        StopActiveCoroutines();
         StartCoroutine(ResetLevelData());
     }
 
+    // IEnumerator ResetLevelData()
+    // {
+    //     StopActiveCoroutines();
+
+    //     // ----- Clear Tiles -----
+    //     foreach (var tile in tileInCurrentScene)
+    //         Destroy(tile);
+    //     tileInCurrentScene.Clear();
+
+    //     vacantTiles.Clear();
+
+    //     // ----- Clear Enemies -----
+    //     foreach (var enemy in enemiesInScene)
+    //         Destroy(enemy);
+    //     enemiesInScene.Clear();
+
+    //     // ----- Clear Player -----
+    //     if (playerInScene != null)
+    //         Destroy(playerInScene);
+
+    //     // ----- Clear Coins -----
+    //     foreach (var coin in coinsCollectedInScene)
+    //         Destroy(coin);
+    //     coinsCollectedInScene.Clear();
+
+    //     foreach (var coin in coinsActiveInScene)
+    //         Destroy(coin);
+    //     coinsActiveInScene.Clear();
+
+    //     // ----- Clear PowerUps -----
+    //     foreach (var powerUp in powerUpsInScene)
+    //         Destroy(powerUp);
+
+    //     foreach (var powerUp in powerUpsPool)
+    //         Destroy(powerUp);
+
+    //     powerUpsInScene.Clear();
+    //     powerUpsPool.Clear();
+
+    //     gameObjectToSpawnPoint.Clear();
+
+    //     // ----- Reset GameManager -----
+    //     InitPowerUpsPool();
+
+    //     GameManager.Instance.ResetLevelData();
+    //     yield return null;
+    // }
     IEnumerator ResetLevelData()
     {
+        // 🔹 Stop anything that may still be spawning or despawning objects
         StopActiveCoroutines();
 
-        // ----- Clear Tiles -----
-        foreach (var tile in tileInCurrentScene)
-            Destroy(tile);
+        Debug.Log("RESET LEVEL — Clearing scene...");
+
+        // ---------- TILES ----------
+        foreach (var t in tileInCurrentScene)
+            if (t != null) Destroy(t);
         tileInCurrentScene.Clear();
 
         vacantTiles.Clear();
 
-        // ----- Clear Enemies -----
-        foreach (var enemy in enemiesInScene)
-            Destroy(enemy);
+
+        // ---------- ENEMIES ----------
+        foreach (var e in enemiesInScene)
+            if (e != null) Destroy(e);
         enemiesInScene.Clear();
 
-        // ----- Clear Player -----
+
+        // ---------- PLAYER ----------
         if (playerInScene != null)
             Destroy(playerInScene);
+        playerInScene = null;
+        playerSpawnPoint = null;
+        directionArrow = null;
 
-        // ----- Clear Coins -----
-        foreach (var coin in coinsCollectedInScene)
-            Destroy(coin);
-        coinsCollectedInScene.Clear();
 
-        foreach (var coin in coinsActiveInScene)
-            Destroy(coin);
+        // ---------- COINS ----------
+        foreach (var c in coinsActiveInScene)
+            if (c != null) Destroy(c);
         coinsActiveInScene.Clear();
 
-        // ----- Clear PowerUps -----
-        foreach (var powerUp in powerUpsInScene)
-            Destroy(powerUp);
+        foreach (var c in coinsCollectedInScene)
+            if (c != null) Destroy(c);
+        coinsCollectedInScene.Clear();
 
-        foreach (var powerUp in powerUpsPool)
-            Destroy(powerUp);
 
+        // ---------- POWERUPS IN SCENE ----------
+        foreach (var p in powerUpsInScene)
+            if (p != null) Destroy(p);
         powerUpsInScene.Clear();
+
+
+        // ---------- POWERUP POOL ----------
+        while (powerUpsPool.Count > 0)
+        {
+            var pooled = powerUpsPool.Dequeue();
+            if (pooled != null) Destroy(pooled);
+        }
         powerUpsPool.Clear();
 
         gameObjectToSpawnPoint.Clear();
+        activePowerUpsCount = 0;
 
-        // ----- Reset GameManager -----
-        InitPowerUpsPool();
 
+        // ---------- GAME MANAGER / STATE ----------
         GameManager.Instance.ResetLevelData();
+
+        // ⚠️ Do NOT auto-spawn here — Restart / LoadNextLevel will handle spawning
+        // If you WANT reset to also rebuild level, call SpawnScene() AFTER this coroutine externally.
+
+        Debug.Log("RESET LEVEL — Done");
         yield return null;
     }
+
     #endregion
 
     void PlayerDeadAndStopGame()

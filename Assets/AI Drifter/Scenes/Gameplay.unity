@@ -5147,7 +5147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &622342697
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5184,8 +5184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitButton: {fileID: 131169951}
-  restartButton: {fileID: 0}
-  homeButton: {fileID: 0}
+  restartButton: {fileID: 742489025}
+  homeButton: {fileID: 2029744121}
 --- !u!1 &625187745
 GameObject:
   m_ObjectHideFlags: 0
@@ -7513,7 +7513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &868837492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13400,7 +13400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1519916622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20040,6 +20040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tile 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5093424569518816139, guid: a18c2b9c0e14647f49896127aab99617,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18c2b9c0e14647f49896127aab99617, type: 3}

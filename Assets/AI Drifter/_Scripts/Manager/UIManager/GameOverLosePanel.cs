@@ -13,6 +13,7 @@ public class GameOverLosePanel : MonoBehaviour
     void Awake()
     {
         restartButton.onClick.AddListener(LevelRestart);
+        homeButton.onClick.AddListener(BackToMain);
     }
     void LevelRestart()
     {
@@ -21,5 +22,11 @@ public class GameOverLosePanel : MonoBehaviour
     void OnEnable()
     {
         animator.SetTrigger("GameLost");
+    }
+    void BackToMain()
+    {
+        this.gameObject.SetActive(false);
+        LevelServices.Instance.ResetLevel.Invoke();
+        UIServices.Instance.onHomeButtonClicked.Invoke();
     }
 }

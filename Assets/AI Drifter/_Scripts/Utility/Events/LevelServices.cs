@@ -9,6 +9,7 @@ public class LevelServices : GenericSingleton<LevelServices>
     public EventController<int> LoadLevel;
     public EventController LevelRestart;
     public EventController LoadNextLevel;
+    public EventController ResetLevel;
 
     public LevelServices()
     {
@@ -17,5 +18,6 @@ public class LevelServices : GenericSingleton<LevelServices>
         LoadLevel = new EventController<int>();
         LevelRestart = new EventController();
         LoadNextLevel = new EventController();
+        ResetLevel = new EventController();
     }
 }

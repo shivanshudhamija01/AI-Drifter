@@ -29,7 +29,7 @@ public class PlayerDrifter : MonoBehaviour
     private float flRoll, frRoll, rlRoll, rrRoll;
     private float previousInput = 0;
 
-    void FixedUpdate()
+    void Update()
     {
         // Get input from keyboard OR touch
         steerInput = GetSteerInput();
