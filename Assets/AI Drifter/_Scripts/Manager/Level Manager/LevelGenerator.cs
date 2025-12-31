@@ -88,6 +88,7 @@ public class LevelGenerator : MonoBehaviour
         LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
         PlayerServices.Instance.OnPlayerDead.AddListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadLevel.AddListener(LoadLevelBaseOnLevelNumber);
+        LevelServices.Instance.LevelRestart.AddListener(RestartLevel);
     }
     void OnDisable()
     {
@@ -98,6 +99,7 @@ public class LevelGenerator : MonoBehaviour
         LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
         PlayerServices.Instance.OnPlayerDead.RemoveListener(PlayerDeadAndStopGame);
         LevelServices.Instance.LoadLevel.RemoveListener(LoadLevelBaseOnLevelNumber);
+        LevelServices.Instance.LevelRestart.RemoveListener(RestartLevel);
     }
     void Start()
     {

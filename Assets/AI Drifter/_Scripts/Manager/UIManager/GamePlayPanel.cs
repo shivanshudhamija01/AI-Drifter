@@ -7,6 +7,7 @@ public class GamePlayPanel : MonoBehaviour
 {
     [SerializeField] private Button pauseButton;
     [SerializeField] private Image healthBar;
+    [SerializeField] private GameObject gamePlayPopUp;
 
 
     void Awake()
@@ -30,5 +31,6 @@ public class GamePlayPanel : MonoBehaviour
     void PauseButtonPressed()
     {
         Time.timeScale = 0;
+        gamePlayPopUp.SetActive(true);
     }
 }
