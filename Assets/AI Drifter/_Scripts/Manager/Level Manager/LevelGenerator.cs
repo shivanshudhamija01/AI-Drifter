@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 using Cinemachine;
+using TMPro;
 
 
 public class LevelGenerator : MonoBehaviour
@@ -36,6 +37,7 @@ public class LevelGenerator : MonoBehaviour
     private float maxLifeTime = 8f;
     private float respawnDelay = 10f;
     private int powerUpPoolSize = 0;
+    private int rewardValue = 0;
 
     // Enemy counts from LevelSO
     private int smartAICount;
@@ -69,7 +71,7 @@ public class LevelGenerator : MonoBehaviour
 
     [SerializeField] private TMPro.TextMeshProUGUI countdownText;
     [SerializeField] private float countdownStart = 3f;
-
+    [SerializeField] private TextMeshProUGUI levelRewardValue;
     // Track running coroutines
     private Coroutine spawnSceneRoutine;
     private Coroutine powerUpsLoopRoutine;
@@ -105,9 +107,8 @@ public class LevelGenerator : MonoBehaviour
     }
     void Start()
     {
-        LoadLevelData();
-        GameManager.Instance.SetTotalCollectibles(collectibleCount);
-        GameManager.Instance.SetTotalCollectibles(10);
+        // LoadLevelData();
+        // GameManager.Instance.SetTotalCollectibles(10);
         // GetMapFromLevelLoader();
         // spawnSceneRoutine = StartCoroutine(SpawnScene());
         // powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
@@ -116,6 +117,8 @@ public class LevelGenerator : MonoBehaviour
 
     void LoadLevelBaseOnLevelNumber(int lvlNumber)
     {
+        levelNumber = lvlNumber;
+        LoadLevelData();
         spawnSceneRoutine = StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
         InitPowerUpsPool();
@@ -165,6 +168,15 @@ public class LevelGenerator : MonoBehaviour
         minLifeTime = currentLevel.MinLifeTime;
         maxLifeTime = currentLevel.MaxLiftTime;
         respawnDelay = currentLevel.RespawnDelay;
+
+        // Reward Value 
+        rewardValue = currentLevel.RewardValue;
+        levelRewardValue.text = rewardValue.ToString();
+
+        GameManager.Instance.SetTotalCollectibles(collectibleCount);
+        GameManager.Instance.SetLevelNumber(levelNumber);
+        GameManager.Instance.SetRewardValue(rewardValue);
+        // Update the game manager with the reward value and level number
 
         Debug.Log($"Loaded Level {levelNumber} Data - Enemies: Smart({smartAICount}), Mad({madAICount}), Aggressive({aggressiveAICount})");
         Debug.Log($"Collectibles: {collectibleCount}, PowerUps per Wave: {powerUpsPerWave}");
@@ -294,7 +306,7 @@ public class LevelGenerator : MonoBehaviour
             Debug.LogWarning("No PowerUps assigned in current level!");
             return;
         }
-
+        powerUpsPool.Clear();
         for (int i = 0; i < powerUpsList.Count; i++)
         {
             GameObject obj = Instantiate(powerUpsList[i]);
@@ -565,6 +577,7 @@ public class LevelGenerator : MonoBehaviour
             GameObject obj = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
 
             spawned.Add(obj);
+            objToPosition.Add(obj, spawnPoint);
             vacantTiles.RemoveAt(index);
         }
 
@@ -655,6 +668,12 @@ public class LevelGenerator : MonoBehaviour
         yield return StartCoroutine(ResetLevelData());
 
         levelNumber++;
+        // int currentLevel = LevelProgressSaver.Instance.LoadData();
+        // if (levelNumber > currentLevel)
+        // {
+        //     LevelProgressSaver.Instance.SaveData(levelNumber);
+        //     LevelProgressSaver.Instance.SaveCoin(rewardValue);
+        // }
         LoadLevelData(); // Load new level data
         GameManager.Instance.SetTotalCollectibles(collectibleCount);
 

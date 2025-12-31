@@ -26,9 +26,9 @@ public class LevelProgressSaver : MonoBehaviour
         {
             PlayerPrefs.SetInt(LEVEL_SAVE_KEY, 1);
         }
-        if(!PlayerPrefs.HasKey(COIN_SAVE_KEY))
+        if (!PlayerPrefs.HasKey(COIN_SAVE_KEY))
         {
-            PlayerPrefs.SetInt(COIN_SAVE_KEY,500);
+            PlayerPrefs.SetInt(COIN_SAVE_KEY, 500);
         }
     }
 
@@ -51,17 +51,19 @@ public class LevelProgressSaver : MonoBehaviour
     public int GetCoin()
     {
         int coinAvailable = 0;
-        if(PlayerPrefs.HasKey(COIN_SAVE_KEY))
+        if (PlayerPrefs.HasKey(COIN_SAVE_KEY))
         {
-            coinAvailable = PlayerPrefs.GetInt(COIN_SAVE_KEY,0);
+            coinAvailable = PlayerPrefs.GetInt(COIN_SAVE_KEY, 0);
         }
         return coinAvailable;
     }
     public void SaveCoin(int newCoinAmount)
     {
-         if (PlayerPrefs.HasKey(COIN_SAVE_KEY))
+        int currentCoinCount = GetCoin();
+        int totalCoin = newCoinAmount + currentCoinCount;
+        if (PlayerPrefs.HasKey(COIN_SAVE_KEY))
         {
-            PlayerPrefs.SetInt(COIN_SAVE_KEY, newCoinAmount);
+            PlayerPrefs.SetInt(COIN_SAVE_KEY, totalCoin);
         }
     }
 

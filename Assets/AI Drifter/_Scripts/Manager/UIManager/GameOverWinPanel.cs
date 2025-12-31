@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameOverWinPanel : MonoBehaviour
@@ -7,6 +9,7 @@ public class GameOverWinPanel : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private Button homeButton;
     [SerializeField] private Animator animator;
+    [SerializeField] private TextMeshProUGUI totalCoins;
 
     void Awake()
     {
@@ -20,6 +23,8 @@ public class GameOverWinPanel : MonoBehaviour
     void OnEnable()
     {
         animator.SetTrigger("GameWin");
+        int updatedTotalCoins = LevelProgressSaver.Instance.GetCoin();
+        totalCoins.text = updatedTotalCoins.ToString();
     }
     void BackToMain()
     {

@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf906f7c65a549299149ba46de87664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 300
-  MaxSpeed: 2500
+  MoveSpeed: 50
+  MaxSpeed: 65
   Drag: 0.98
-  SteerAngle: 7
-  Traction: 0.05
+  SteerAngle: 5
+  Traction: 0.01
   frontLeftWheel: {fileID: 1650237312553019777}
   frontRightWheel: {fileID: 3415376722631430065}
   rearLeftWheel: {fileID: 6757702475696604845}
