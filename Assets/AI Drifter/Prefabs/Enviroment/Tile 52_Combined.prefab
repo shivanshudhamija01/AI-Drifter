@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3580164785576597584}
+  - component: {fileID: 3632857790224660855}
   m_Layer: 0
   m_Name: Tile 52_Combined
   m_TagString: Untagged
@@ -64,6 +65,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3632857790224660855
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4243688598904734442}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.981199, y: 6.4158134, z: 5.2573833}
+  m_Center: {x: -0.74549675, y: 3.2122135, z: -0.28257847}
 --- !u!1 &8553323066263949503
 GameObject:
   m_ObjectHideFlags: 0

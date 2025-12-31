@@ -307,9 +307,11 @@ public class LevelGenerator : MonoBehaviour
             return;
         }
         powerUpsPool.Clear();
-        for (int i = 0; i < powerUpsList.Count; i++)
+        int totalTypesOfPowerUps = powerUpsList.Count;
+        for (int i = 0; i < powerUpPoolSize; i++)
         {
-            GameObject obj = Instantiate(powerUpsList[i]);
+            int index = i % totalTypesOfPowerUps;
+            GameObject obj = Instantiate(powerUpsList[index]);
             obj.SetActive(false);
             powerUpsPool.Enqueue(obj);
         }
@@ -666,16 +668,11 @@ public class LevelGenerator : MonoBehaviour
     {
         StopActiveCoroutines();
         yield return StartCoroutine(ResetLevelData());
-
         levelNumber++;
-        // int currentLevel = LevelProgressSaver.Instance.LoadData();
-        // if (levelNumber > currentLevel)
-        // {
-        //     LevelProgressSaver.Instance.SaveData(levelNumber);
-        //     LevelProgressSaver.Instance.SaveCoin(rewardValue);
-        // }
-        LoadLevelData(); // Load new level data
+        LoadLevelData();
         GameManager.Instance.SetTotalCollectibles(collectibleCount);
+
+        InitPowerUpsPool();
 
         yield return StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
@@ -697,6 +694,8 @@ public class LevelGenerator : MonoBehaviour
 
         LoadLevelData(); // Reload current level data
         GameManager.Instance.SetTotalCollectibles(collectibleCount);
+
+        InitPowerUpsPool();
 
         yield return StartCoroutine(SpawnScene());
         powerUpsLoopRoutine = StartCoroutine(PowerUpsWaveLoop());
