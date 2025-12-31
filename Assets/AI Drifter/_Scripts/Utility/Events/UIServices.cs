@@ -19,6 +19,7 @@ public class UIServices : GenericSingleton<UIServices>
 
     public EventController goBackToWorldSelection;
     public EventController<float> updateHealthBar;
+    public EventController goBackToMainFromWorld;
 
     public UIServices()
     {
@@ -30,5 +31,6 @@ public class UIServices : GenericSingleton<UIServices>
         OnIceWorldSelected = new EventController();
         goBackToWorldSelection = new EventController();
         updateHealthBar = new EventController<float>();
+        goBackToMainFromWorld = new EventController();
     }
 }

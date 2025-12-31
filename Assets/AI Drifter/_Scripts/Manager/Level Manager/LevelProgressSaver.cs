@@ -6,6 +6,7 @@ public class LevelProgressSaver : MonoBehaviour
 {
     public static LevelProgressSaver Instance;
     private string LEVEL_SAVE_KEY = "completedLevel";
+    private string COIN_SAVE_KEY = "coins";
     void Awake()
     {
         if (Instance == null)
@@ -25,6 +26,10 @@ public class LevelProgressSaver : MonoBehaviour
         {
             PlayerPrefs.SetInt(LEVEL_SAVE_KEY, 1);
         }
+        if(!PlayerPrefs.HasKey(COIN_SAVE_KEY))
+        {
+            PlayerPrefs.SetInt(COIN_SAVE_KEY,500);
+        }
     }
 
     public int LoadData()
@@ -43,4 +48,21 @@ public class LevelProgressSaver : MonoBehaviour
             PlayerPrefs.SetInt(LEVEL_SAVE_KEY, newCompletedLevel);
         }
     }
+    public int GetCoin()
+    {
+        int coinAvailable = 0;
+        if(PlayerPrefs.HasKey(COIN_SAVE_KEY))
+        {
+            coinAvailable = PlayerPrefs.GetInt(COIN_SAVE_KEY,0);
+        }
+        return coinAvailable;
+    }
+    public void SaveCoin(int newCoinAmount)
+    {
+         if (PlayerPrefs.HasKey(COIN_SAVE_KEY))
+        {
+            PlayerPrefs.SetInt(COIN_SAVE_KEY, newCoinAmount);
+        }
+    }
+
 }

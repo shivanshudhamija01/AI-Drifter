@@ -7,10 +7,14 @@ public class ShopAudioManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip guiClick;
     [SerializeField] private AudioClip negativeGuiClick;
+    [SerializeField] private AudioClip purchaseSuccess;
+    [SerializeField] private AudioClip purchaseFail;
     void OnEnable()
     {
         ShopUIManager.OnButtonClicked += ButtonClicked;
         ShopUIManager.OnSelectedButtonClicked += SelectedButtonClicked;
+        CarManager.OnPurchaseSuccessed += PurchaseSuccessed;
+        CarManager.OnPurchaseFail += PurchaseFailed;
     }
     void OnDisable()
     {
@@ -33,6 +37,18 @@ public class ShopAudioManager : MonoBehaviour
             audioSource.Stop();
         }
         audioSource.clip = negativeGuiClick;
+        audioSource.Play();
+    }
+    void PurchaseSuccessed()
+    {
+        audioSource.Stop();
+        audioSource.clip = purchaseSuccess;
+        audioSource.Play();
+    }
+    void PurchaseFailed()
+    {
+        audioSource.Stop();
+        audioSource.clip = purchaseFail;
         audioSource.Play();
     }
 }

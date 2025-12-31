@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 public class CarManager : MonoBehaviour
 {
     private CarSO car;
-    
+    public static event Action OnPurchaseSuccessed;
+    public static event Action OnPurchaseFail;
     public void PurchaseCar()
     {
         var state = CarSaveSystem.Instance.GetState(car.carID);
@@ -11,8 +13,28 @@ public class CarManager : MonoBehaviour
         if (state.purchased) return;
 
         // TODO: deduct coins / currency check
-        state.purchased = true;
-        CarSaveSystem.Instance.Save();
+        int availableCoin = 0;
+        if(PlayerPrefs.HasKey("coins"))
+        {
+            availableCoin = PlayerPrefs.GetInt("coins",0);
+        }
+
+        int priceOfCar = car.CarPrice;
+        //
+        if(availableCoin>= priceOfCar)
+        {
+            availableCoin-=priceOfCar;
+            PlayerPrefs.SetInt("coins",availableCoin);
+            PlayerPrefs.Save();
+            state.purchased = true;
+            CarSaveSystem.Instance.Save();
+            OnPurchaseSuccessed?.Invoke();
+        }
+        else
+        {
+            OnPurchaseFail?.Invoke();
+            return;
+        } 
     }
 
     public void SelectCar()

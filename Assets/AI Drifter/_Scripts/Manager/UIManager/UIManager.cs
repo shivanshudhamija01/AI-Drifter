@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
         // LevelServices.Instance.OnLevelRestarted.AddListener(LevelRestarted);
         LevelServices.Instance.LevelRestart.AddListener(LevelRestarted);
         LevelServices.Instance.LoadNextLevel.AddListener(LoadNextLevel);
+        UIServices.Instance.goBackToMainFromWorld.AddListener(OpenUpMainFromWorld);
     }
     void OnDisable()
     {
@@ -62,6 +63,7 @@ public class UIManager : MonoBehaviour
         // LevelServices.Instance.OnLevelRestarted.RemoveListener(LevelRestarted);
         LevelServices.Instance.LevelRestart.RemoveListener(LevelRestarted);
         LevelServices.Instance.LoadNextLevel.RemoveListener(LoadNextLevel);
+        UIServices.Instance.goBackToMainFromWorld.RemoveListener(OpenUpMainFromWorld);
     }
 
     void PlayButtonPressed()
@@ -148,6 +150,12 @@ public class UIManager : MonoBehaviour
     {
         gamePlayPanel.SetActive(true);
         gameWinPanel.SetActive(false);
+    }
+
+    void OpenUpMainFromWorld()
+    {
+        worldSelectorPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
     // On level completed and load next level are two different event remember it 
 

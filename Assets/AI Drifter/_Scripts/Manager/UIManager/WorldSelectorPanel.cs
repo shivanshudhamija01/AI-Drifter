@@ -8,6 +8,7 @@ public class WorldSelectorPanel : MonoBehaviour
     [SerializeField] private Button desertWorld;
     [SerializeField] private Button cityWorld;
     [SerializeField] private Button iceWorld;
+    [SerializeField] private Button previousButtonClicked;
 
     void Awake()
     {
@@ -15,6 +16,7 @@ public class WorldSelectorPanel : MonoBehaviour
         desertWorld.onClick.AddListener(DesertWorldSelected);
         cityWorld.onClick.AddListener(CityWorldSelected);
         iceWorld.onClick.AddListener(IceWorldSelected);
+        previousButtonClicked.onClick.AddListener(OpenMainMenuPanel);
         // Update the world interactablilty according to the data stored in the player pref
     }
 
@@ -33,7 +35,10 @@ public class WorldSelectorPanel : MonoBehaviour
         UIServices.Instance.OnIceWorldSelected.Invoke();
         Debug.Log("Ice World is selected");
     }
-
+    void OpenMainMenuPanel()
+    {
+        UIServices.Instance.goBackToMainFromWorld.Invoke();
+    }
     void ModifyWorldInteractablity()
     {
         // Get the level number from the player pref and after that 

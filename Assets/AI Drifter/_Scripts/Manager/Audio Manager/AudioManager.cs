@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip chemicalEffect;
     [SerializeField] private AudioClip powerAttack;
     [SerializeField] private AudioClip shieldEffect;
+    [SerializeField] private AudioClip policeSiren;
     void OnEnable()
     {
         AudioServices.Instance.PlayAudio.AddListener(PlayAudioOnParticularEvent);
