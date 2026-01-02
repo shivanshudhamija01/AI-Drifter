@@ -79,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
     private Coroutine countdownRoutine;
     private bool isRestarting = false;
 
-
+    [SerializeField] private int levelModifier = 0;
 
     void OnEnable()
     {
@@ -188,7 +188,7 @@ public class LevelGenerator : MonoBehaviour
 
     void GetMapFromLevelLoader()
     {
-        matrix = LevelDataLoader.Instance.GetLevel(levelNumber);
+        matrix = LevelDataLoader.Instance.GetLevel(levelNumber + levelModifier);
         GenerateGround();
     }
 
@@ -670,7 +670,7 @@ public class LevelGenerator : MonoBehaviour
         yield return StartCoroutine(ResetLevelData());
         levelNumber++;
         LoadLevelData();
-        GameManager.Instance.SetTotalCollectibles(collectibleCount);
+        // GameManager.Instance.SetTotalCollectibles(collectibleCount);
 
         InitPowerUpsPool();
 
@@ -693,7 +693,7 @@ public class LevelGenerator : MonoBehaviour
         yield return StartCoroutine(ResetLevelData());
 
         LoadLevelData(); // Reload current level data
-        GameManager.Instance.SetTotalCollectibles(collectibleCount);
+        // GameManager.Instance.SetTotalCollectibles(collectibleCount);
 
         InitPowerUpsPool();
 

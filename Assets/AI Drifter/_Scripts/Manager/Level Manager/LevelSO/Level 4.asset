@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fa0eaa2ed924abfadfcc419bef4104, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  smartAI: 2
+  smartAI: 1
   madAI: 1
   aggressiveAI: 1
   SmartAI:
@@ -33,9 +33,8 @@ MonoBehaviour:
   - {fileID: 5366903953873038891, guid: 503313f5e04174301b40066d0489c6c2, type: 3}
   - {fileID: 5860308363100874628, guid: 82d7ec213c23d4476aec531ec6cdab7c, type: 3}
   - {fileID: 3799555257126428240, guid: 2297aa39690d345889c3423bf32ea10c, type: 3}
-  PowerUpPoolSize: 0
-  PowerUpPerWave: 0
+  PowerUpPoolSize: 20
+  PowerUpPerWave: 8
   MinLifeTime: 4
   MaxLiftTime: 8
   RespawnDelay: 10
-  Timer: 180

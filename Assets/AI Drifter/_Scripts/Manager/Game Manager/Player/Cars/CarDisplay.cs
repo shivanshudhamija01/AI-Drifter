@@ -40,7 +40,7 @@ public class CarDisplay : MonoBehaviour
 
     private void LoadGamePlayScene()
     {
-        SceneManager.LoadScene("Gameplay");
+        // SceneManager.LoadScene("Gameplay");
     }
 
     public void UpdateCar(CarSO car)

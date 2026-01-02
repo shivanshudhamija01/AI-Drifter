@@ -53,17 +53,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 50
-  MaxSpeed: 65
+  MaxSpeed: 70
   Drag: 0.98
   SteerAngle: 5
-  Traction: 0.01
+  Traction: 0.5
   frontLeftWheel: {fileID: 7996153908323538991}
   frontRightWheel: {fileID: 9106420924124122154}
   rearLeftWheel: {fileID: 4059156204889046428}
   rearRightWheel: {fileID: 3894269140003041223}
-  wheelRadius: 0.35
-  maxSteerAngle: 35
+  wheelRadius: 0.5
+  maxSteerAngle: 30
   audioSource: {fileID: 1518455386782311248}
+  driftLeanAngle: 15
+  leanSpeed: 5
+  carBodyTransform: {fileID: 0}
 --- !u!114 &1046336985829748039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7279549069174355981
 Transform:
   m_ObjectHideFlags: 0
@@ -372,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6080950600572416025
 Transform:
   m_ObjectHideFlags: 0

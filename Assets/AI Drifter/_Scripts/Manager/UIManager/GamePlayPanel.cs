@@ -30,6 +30,7 @@ public class GamePlayPanel : MonoBehaviour
     }
     void PauseButtonPressed()
     {
+        UIServices.Instance.resetAudioOnPauseButton.Invoke();
         Time.timeScale = 0;
         gamePlayPopUp.SetActive(true);
     }

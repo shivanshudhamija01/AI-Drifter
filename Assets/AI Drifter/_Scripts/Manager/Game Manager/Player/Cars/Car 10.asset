@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carID: 5
   CarName: Mustang
-  CarPrice: 100
+  CarPrice: 1000
   speed: 85
   acceleration: 50
   handling: 75

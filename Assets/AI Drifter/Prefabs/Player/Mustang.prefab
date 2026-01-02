@@ -53,17 +53,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 50
-  MaxSpeed: 65
+  MaxSpeed: 75
   Drag: 0.98
-  SteerAngle: 5
-  Traction: 0.01
+  SteerAngle: 6
+  Traction: 5
   frontLeftWheel: {fileID: 1650237312553019777}
   frontRightWheel: {fileID: 3415376722631430065}
   rearLeftWheel: {fileID: 6757702475696604845}
   rearRightWheel: {fileID: 2461515979868793230}
-  wheelRadius: 0.35
-  maxSteerAngle: 45
+  wheelRadius: 0.5
+  maxSteerAngle: 30
   audioSource: {fileID: 4377833007305281005}
+  driftLeanAngle: 15
+  leanSpeed: 5
+  carBodyTransform: {fileID: 0}
 --- !u!114 &1103646324368630322
 MonoBehaviour:
   m_ObjectHideFlags: 0

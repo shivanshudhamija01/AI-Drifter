@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carID: 3
   CarName: Ford Endeavour
-  CarPrice: 250
+  CarPrice: 300
   speed: 80
   acceleration: 70
   handling: 85

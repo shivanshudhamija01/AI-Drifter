@@ -64,9 +64,9 @@ public class AIDrift : MonoBehaviour
                 chaosFreq = 10f;
                 chaosStrength = 3f;
 
-                agent.speed = 50f;
+                agent.speed = 45f;
                 // agent.acceleration = 55f;
-                agent.acceleration = 45f;
+                agent.acceleration = 30f;
                 agent.angularSpeed = 250f;
                 agent.obstacleAvoidanceType = ObstacleAvoidanceType.MedQualityObstacleAvoidance;
                 break;
@@ -81,9 +81,9 @@ public class AIDrift : MonoBehaviour
                 chaosFreq = 0f;
                 chaosStrength = 0f;
 
-                agent.speed = 42f;
+                agent.speed = 37f;
                 // agent.acceleration = 35f;
-                agent.acceleration = 40f;
+                agent.acceleration = 28f;
                 // agent.speed = 30f;
                 // agent.acceleration = 20f;
                 agent.angularSpeed = 150f;
@@ -100,7 +100,7 @@ public class AIDrift : MonoBehaviour
 
                 agent.speed = 40f;
                 // agent.acceleration = 35f;
-                agent.acceleration = 40f;
+                agent.acceleration = 30f;
                 // agent.speed = 30f;
                 // agent.acceleration = 20f;
                 agent.angularSpeed = 150f;

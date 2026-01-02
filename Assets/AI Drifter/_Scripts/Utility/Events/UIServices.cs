@@ -21,6 +21,7 @@ public class UIServices : GenericSingleton<UIServices>
     public EventController<float> updateHealthBar;
     public EventController goBackToMainFromWorld;
     public EventController onHomeButtonClicked;
+    public EventController resetAudioOnPauseButton;
 
     public UIServices()
     {
@@ -34,5 +35,7 @@ public class UIServices : GenericSingleton<UIServices>
         updateHealthBar = new EventController<float>();
         goBackToMainFromWorld = new EventController();
         onHomeButtonClicked = new EventController();
+        resetAudioOnPauseButton = new EventController();
+
     }
 }

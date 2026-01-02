@@ -53,17 +53,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 50
-  MaxSpeed: 60
-  Drag: 0.99
-  SteerAngle: 5
+  MaxSpeed: 70
+  Drag: 0.98
+  SteerAngle: 4
   Traction: 0.01
   frontLeftWheel: {fileID: 3994369991431924121}
   frontRightWheel: {fileID: 7754967463934007336}
   rearLeftWheel: {fileID: 1341489527266443017}
   rearRightWheel: {fileID: 4835896060158924251}
-  wheelRadius: 0.35
+  wheelRadius: 0.5
   maxSteerAngle: 30
   audioSource: {fileID: 327657912637141318}
+  driftLeanAngle: 15
+  leanSpeed: 5
+  carBodyTransform: {fileID: 0}
 --- !u!114 &1498396370199030162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352fa154539f34fda9f272ca329e6efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  capsuleHeight: 3
-  capsuleRadius: 1.5
-  detectionDistance: 2.5
+  capsuleHeight: 3.4
+  capsuleRadius: 1.6
+  detectionDistance: 2.8
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 119

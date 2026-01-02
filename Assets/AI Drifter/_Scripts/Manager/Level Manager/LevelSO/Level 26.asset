@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fa0eaa2ed924abfadfcc419bef4104, type: 3}
   m_Name: Level 26
   m_EditorClassIdentifier: 
-  smartAI: 2
-  madAI: 2
+  smartAI: 1
+  madAI: 1
   aggressiveAI: 1
   SmartAI:
   - {fileID: 2911399452416526277, guid: 039fa516c56904cff9ce1a4fb71b92f2, type: 3}
@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 1018706167306408033, guid: 19825eee172b7483dab916777f2cba7b, type: 3}
   AggressiveAI:
   - {fileID: 2678418105173610968, guid: 9da895b8c4ebd42e487a0acab0dbc0bf, type: 3}
-  RewardValue: 375
+  RewardValue: 275
   CollectiblePrefab: {fileID: 7586022285698511698, guid: 73e7760fb1cc545ea9515a9f705bb5c7,
     type: 3}
   CollectibleCount: 10
@@ -33,9 +33,8 @@ MonoBehaviour:
   - {fileID: 5366903953873038891, guid: 503313f5e04174301b40066d0489c6c2, type: 3}
   - {fileID: 5860308363100874628, guid: 82d7ec213c23d4476aec531ec6cdab7c, type: 3}
   - {fileID: 3799555257126428240, guid: 2297aa39690d345889c3423bf32ea10c, type: 3}
-  PowerUpPoolSize: 0
-  PowerUpPerWave: 0
+  PowerUpPoolSize: 20
+  PowerUpPerWave: 8
   MinLifeTime: 4
   MaxLiftTime: 8
   RespawnDelay: 10
-  Timer: 180

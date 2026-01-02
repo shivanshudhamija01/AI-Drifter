@@ -28,7 +28,7 @@ public class LevelProgressSaver : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey(COIN_SAVE_KEY))
         {
-            PlayerPrefs.SetInt(COIN_SAVE_KEY, 500);
+            PlayerPrefs.SetInt(COIN_SAVE_KEY, 0);
         }
     }
 

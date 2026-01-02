@@ -41,7 +41,7 @@ public class MainMenuPanel : MonoBehaviour
     }
     void ShopButtonPressed()
     {
-        SceneManager.LoadScene("Shop");
-        Debug.Log("Setting Button Pressed");
+        // SceneManager.LoadScene("Shop");
+        // Debug.Log("Setting Button Pressed");
     }
 }
